@@ -1,0 +1,47 @@
+---
+name: National Tsing Hua University
+description: National Tsing Hua University public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/nthu/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      NTHU has no official institution-wide developer portal, but a real, live
+      community-maintained public API exists: the NTHU Data API (NTHU-SA),
+      version 2.0.0, built with FastAPI and serving Swagger docs at /docs plus a
+      machine-readable openapi.json with 22 confirmed paths (announcements,
+      buses, courses, departments, dining, energy, libraries, locations,
+      newsletters). All endpoints below were probed live. The institutional
+      repository host (nthur.lib.nthu.edu.tw) did not resolve over TLS during
+      review and could not be confirmed as an API. No endpoints were fabricated;
+      only verified URLs are recorded.
+    endpoints:
+      - url: https://api.nthusa.tw/docs
+        status: 200
+        note: Live FastAPI Swagger UI documentation.
+      - url: https://api.nthusa.tw/openapi.json
+        status: 200
+        note: Machine-readable OpenAPI spec, title "NTHU Data API" v2.0.0, 22 paths.
+      - url: https://api.nthusa.tw/
+        status: 404
+        note: Root returns 404; service is mounted under documented paths.
+      - url: https://github.com/NTHU-SA/NTHU-Data-API
+        status: 200
+        note: MIT-licensed source repository for the NTHU Data API.
+      - url: https://github.com/NTHU-SA
+        status: 200
+        note: NTHU-SA GitHub organization hosting the data API project.
+      - url: https://github.com/nthumodifications
+        status: 200
+        note: NTHUMods student org (courseweb) — related open-source, not a separate documented API.
+      - url: https://www.nthu.edu.tw/
+        status: 200
+        note: Official university website.
+      - url: https://nthu-en.site.nthu.edu.tw/
+        status: 200
+        note: Official English-language site.
+      - url: https://nthur.lib.nthu.edu.tw/
+        status: 0
+        note: Institutional repository host did not resolve over TLS; API not confirmed.

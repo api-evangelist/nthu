@@ -1,0 +1,70 @@
+---
+aid: nthu
+name: National Tsing Hua University
+description: >-
+  National Tsing Hua University (NTHU) is a national public research university
+  in Hsinchu, Taiwan, originally founded in 1911 and re-established in Taiwan in
+  1956. It is ranked #210 in the QS World University Rankings 2025 and is one of
+  Taiwan's premier research institutions across science, engineering, humanities,
+  and management. NTHU does not operate an official institution-wide developer
+  portal, but its public developer footprint centers on the community-maintained
+  NTHU Data API (NTHU-SA), a live FastAPI/OpenAPI service that aggregates public
+  campus data such as courses, buses, dining, library spaces, announcements, and
+  energy usage. Related open-source work lives across student and lab GitHub
+  organizations.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/nthu/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Taiwan
+  - Open Data
+  - Campus
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: nthu:data-api
+    name: NTHU Data API
+    description: >-
+      A public, community-maintained REST API (NTHU-SA, "NTHUSA 32nd") that
+      aggregates public data from National Tsing Hua University campus units.
+      Version 2.0.0, built with FastAPI and exposing interactive Swagger/OpenAPI
+      docs. Confirmed endpoint groups include announcements, buses (routes,
+      stops, schedules), courses (search, lists), departments, dining,
+      energy/electricity usage, libraries (space, lost and found, RSS),
+      locations, and newsletters.
+    humanURL: https://api.nthusa.tw/docs
+    baseURL: https://api.nthusa.tw
+    tags: [ Open Data, Campus, Courses, Transit, Library, Education ]
+    properties:
+      - type: Documentation
+        url: https://api.nthusa.tw/docs
+      - type: OpenAPI
+        url: https://api.nthusa.tw/openapi.json
+      - type: GitHub
+        url: https://github.com/NTHU-SA/NTHU-Data-API
+      - type: SourceCode
+        url: https://github.com/NTHU-SA/NTHU-Data-API
+common:
+  - type: Website
+    url: https://www.nthu.edu.tw/
+  - type: GitHub
+    url: https://github.com/NTHU-SA
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/national-tsing-hua-university/
+  - type: Plans
+    url: plans/nthu-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/nthu-rate-limits.yml
+  - type: FinOps
+    url: finops/nthu-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
