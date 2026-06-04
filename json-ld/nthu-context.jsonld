@@ -1,0 +1,78 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "nthu": "https://api.nthusa.tw/vocab#",
+    "schema": "https://schema.org/",
+    "geo": "http://www.opengis.net/ont/geosparql#",
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "University": "schema:CollegeOrUniversity",
+    "Course": {
+      "@id": "schema:Course"
+    },
+    "courseCode": "schema:courseCode",
+    "id": {
+      "@id": "schema:courseCode"
+    },
+    "chinese_title": {
+      "@id": "schema:name",
+      "@language": "zh-Hant"
+    },
+    "english_title": {
+      "@id": "schema:name",
+      "@language": "en"
+    },
+    "credit": "schema:numberOfCredits",
+    "teacher": {
+      "@id": "schema:instructor",
+      "@type": "schema:Person"
+    },
+    "language": "schema:inLanguage",
+    "Department": {
+      "@id": "schema:Organization"
+    },
+    "parent_name": "schema:parentOrganization",
+    "Location": {
+      "@id": "schema:Place"
+    },
+    "latitude": "schema:latitude",
+    "longitude": "schema:longitude",
+    "Restaurant": {
+      "@id": "schema:Restaurant"
+    },
+    "phone": "schema:telephone",
+    "image": {
+      "@id": "schema:image",
+      "@type": "@id"
+    },
+    "schedule": "schema:openingHours",
+    "Announcement": {
+      "@id": "schema:CreativeWork"
+    },
+    "link": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "articles": "schema:hasPart",
+    "EnergyUsage": "nthu:EnergyUsage",
+    "data": "nthu:electricityUsage",
+    "capacity": "nthu:electricityCapacity",
+    "unit": "schema:unitText",
+    "last_updated": {
+      "@id": "schema:dateModified",
+      "@type": "schema:DateTime"
+    },
+    "LibrarySpace": "nthu:LibrarySpace",
+    "zonename": "schema:name",
+    "count": "nthu:availableCount"
+  },
+  "@type": "CollegeOrUniversity",
+  "name": "National Tsing Hua University",
+  "url": "https://www.nthu.edu.tw/",
+  "description": "National public research university in Hsinchu, Taiwan. Public campus data exposed via the community-maintained NTHU Data API.",
+  "sameAs": [
+    "https://github.com/NTHU-SA",
+    "https://www.linkedin.com/school/national-tsing-hua-university/"
+  ]
+}

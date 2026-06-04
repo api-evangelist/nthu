@@ -1,0 +1,1875 @@
+openapi: 3.0.3
+info:
+  title: NTHU Data API
+  description: 由國立清華大學校內各單位資料所組成的公共資料 API。
+  version: 2.0.0
+paths:
+  /announcements/:
+    get:
+      tags:
+      - Announcements
+      summary: Get Announcements
+      description: '取得校內每個處室的所有公告資訊。
+
+        資料來源：各處室網站'
+      operationId: getAnnouncements
+      parameters:
+      - name: department
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 部門名稱。請透過 `/announcements/lists/departments` 取得完整列表。
+          title: Department
+        description: 部門名稱。請透過 `/announcements/lists/departments` 取得完整列表。
+      - name: title
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 公告標題關鍵字
+          title: Title
+        description: 公告標題關鍵字
+      - name: language
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/AnnouncementLanguageOption'
+          description: 語言篩選
+        description: 語言篩選
+      - name: fuzzy
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: 是否進行模糊搜尋，若不啟用則必須完全符合（不建議）
+          default: true
+          title: Fuzzy
+        description: 是否進行模糊搜尋，若不啟用則必須完全符合（不建議）
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnnouncementDetail'
+                title: Response Getannouncements
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /announcements/sources:
+    get:
+      tags:
+      - Announcements
+      summary: Get Announcements List
+      description: '取得公告列表（不包含文章內容）。
+
+        資料來源：各處室網站'
+      operationId: getAnnouncementsList
+      parameters:
+      - name: department
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 部門名稱
+          title: Department
+        description: 部門名稱
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+                title: Response Getannouncementslist
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /announcements/lists/departments:
+    get:
+      tags:
+      - Announcements
+      summary: List Announcement Departments
+      description: 取得所有有公告的部門列表。
+      operationId: listAnnouncementDepartments
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+                title: Response Listannouncementdepartments
+  /buses/routes:
+    get:
+      tags:
+      - Buses
+      summary: Get Bus Route Metadata
+      description: '取得校園公車資訊。
+
+        - 校本部來自[總務處事務組](https://affairs.site.nthu.edu.tw/p/412-1165-20978.php?Lang=zh-tw)
+
+        - 南大來自[總務處事務組](https://affairs.site.nthu.edu.tw/p/412-1165-20979.php?Lang=zh-tw)'
+      operationId: getBusRouteData
+      parameters:
+      - name: bus_type
+        in: query
+        required: false
+        schema:
+          enum:
+          - main
+          - nanda
+          type: string
+          description: 車種選擇
+          title: Bus Type
+        description: 車種選擇
+      - name: direction
+        in: query
+        required: false
+        schema:
+          enum:
+          - up
+          - down
+          type: string
+          description: 方向選擇
+          title: Direction
+        description: 方向選擇
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BusInfo'
+                title: Response Getbusroutedata
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /buses/info/stops:
+    get:
+      tags:
+      - Buses
+      summary: Get Bus Stops Information
+      description: 取得所有公車站牌的經緯度與資訊。
+      operationId: getBusStopsInformation
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusStopsInfo'
+                type: array
+                title: Response Getbusstopsinformation
+  /buses/schedules:
+    get:
+      tags:
+      - Buses
+      summary: Get Bus Schedules
+      description: '取得指定條件的公車時刻表。
+
+        - **details=False**: 回傳簡易時刻表（僅發車時間）。
+
+        - **details=True**: 回傳詳細時刻表（包含每站預估到達時間）。'
+      operationId: getBusSchedules
+      parameters:
+      - name: bus_type
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusRouteType'
+          description: 車種選擇
+        description: 車種選擇
+      - name: day
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusDayWithCurrent'
+          description: 平日、假日或目前時刻
+        description: 平日、假日或目前時刻
+      - name: direction
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusDirection'
+          description: 上山或下山
+        description: 上山或下山
+      - name: details
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: 是否包含詳細站點時間資訊
+          default: false
+          title: Details
+        description: 是否包含詳細站點時間資訊
+      - name: time
+        in: query
+        required: false
+        schema:
+          description: 時間。若搜尋 day 選擇 current 時失效。
+          title: Time
+          nullable: true
+          type: string
+        description: 時間。若搜尋 day 選擇 current 時失效。
+      - name: limits
+        in: query
+        required: false
+        schema:
+          description: 最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。
+          default: 5
+          title: Limits
+          nullable: true
+          type: integer
+          minimum: 1
+        description: 最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。
+      responses:
+        '200':
+          description: 取得公車時刻表信息。
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  anyOf:
+                  - $ref: '#/components/schemas/BusDetailedSchedule'
+                  - $ref: '#/components/schemas/BusSchedule'
+                  nullable: true
+                title: Response Getbusschedules
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /buses/stops/{stop_name}:
+    get:
+      tags:
+      - Buses
+      summary: Get Stop Bus Information By Stop
+      description: 取得指定公車站牌的資訊和即將停靠公車。
+      operationId: getStopBusInformationByStop
+      parameters:
+      - name: stop_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusStopsName'
+      - name: bus_type
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusRouteType'
+          description: 車種選擇
+        description: 車種選擇
+      - name: day
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusDayWithCurrent'
+          description: 平日、假日或目前時刻
+        description: 平日、假日或目前時刻
+      - name: direction
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusDirection'
+          description: 上山或下山
+        description: 上山或下山
+      - name: time
+        in: query
+        required: false
+        schema:
+          description: 時間。若搜尋 day 選擇 current 時失效。
+          title: Time
+          nullable: true
+          type: string
+        description: 時間。若搜尋 day 選擇 current 時失效。
+      - name: limits
+        in: query
+        required: false
+        schema:
+          description: 最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。
+          default: 5
+          title: Limits
+          nullable: true
+          type: integer
+          minimum: 1
+        description: 最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  nullable: true
+                  $ref: '#/components/schemas/BusStopsQueryResult'
+                title: Response Getstopbusinformationbystop
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /courses/:
+    get:
+      tags:
+      - Courses
+      summary: Get All Courses
+      description: '取得所有課程。
+
+        資料來源：[教務處課務組/JSON格式下載](https://curricul.site.nthu.edu.tw/p/406-1208-111356,r7883.php?Lang=zh-tw)'
+      operationId: getAllCourses
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CourseData'
+                type: array
+                title: Response Getallcourses
+  /courses/search:
+    get:
+      tags:
+      - Courses
+      summary: Search Courses By Field And Value
+      description: '根據提供的欄位和值搜尋課程。
+
+        - 使用欄位名稱作為查詢參數
+
+        - 例如：/search?chinese_title=產業.+&english_title=...'
+      operationId: searchCoursesByFieldAndValue
+      parameters:
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 課號
+          title: Id
+        description: 課號
+      - name: chinese_title
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 課程中文名稱
+          title: Chinese Title
+        description: 課程中文名稱
+      - name: english_title
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 課程英文名稱
+          title: English Title
+        description: 課程英文名稱
+      - name: credit
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 學分數
+          title: Credit
+        description: 學分數
+      - name: size_limit
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 人限
+          title: Size Limit
+        description: 人限
+      - name: freshman_reservation
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 新生保留人數
+          title: Freshman Reservation
+        description: 新生保留人數
+      - name: object
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 通識對象
+          title: Object
+        description: 通識對象
+      - name: ge_type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 通識類別
+          title: Ge Type
+        description: 通識類別
+      - name: language
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CourseLanguage'
+          description: 授課語言
+        description: 授課語言
+      - name: note
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 備註
+          title: Note
+        description: 備註
+      - name: suspend
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 停開註記
+          title: Suspend
+        description: 停開註記
+      - name: class_room_and_time
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 教室與上課時間
+          title: Class Room And Time
+        description: 教室與上課時間
+      - name: teacher
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 授課教師
+          title: Teacher
+        description: 授課教師
+      - name: prerequisite
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 擋修說明
+          title: Prerequisite
+        description: 擋修說明
+      - name: limit_note
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 課程限制說明
+          title: Limit Note
+        description: 課程限制說明
+      - name: expertise
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 第一二專長對應
+          title: Expertise
+        description: 第一二專長對應
+      - name: program
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 學分學程對應
+          title: Program
+        description: 學分學程對應
+      - name: no_extra_selection
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 不可加簽說明
+          title: No Extra Selection
+        description: 不可加簽說明
+      - name: required_optional_note
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 必選修說明
+          title: Required Optional Note
+        description: 必選修說明
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseData'
+                title: Response Searchcoursesbyfieldandvalue
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Courses
+      summary: Search Courses By Condition
+      description: 進階搜尋，根據條件取得課程。可以使用巢狀條件。
+      operationId: searchCoursesByCondition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/CourseQueryCondition'
+              - $ref: '#/components/schemas/CourseCondition'
+              title: Query Condition
+            examples:
+              normal_1:
+                summary: 單一搜尋條件
+                value:
+                  row_field: chinese_title
+                  matcher: 數統導論
+                  regex_match: true
+              normal_2:
+                summary: 兩個搜尋條件
+                value:
+                - row_field: teacher
+                  matcher: 黃
+                  regex_match: true
+                - or
+                - row_field: teacher
+                  matcher: 孫
+                  regex_match: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseData'
+                title: Response Searchcoursesbycondition
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /courses/lists/{list_name}:
+    get:
+      tags:
+      - Courses
+      summary: List Courses By Type
+      description: 取得指定類型的課程列表。
+      operationId: listCoursesByType
+      parameters:
+      - name: list_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/CourseListName'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseData'
+                title: Response Listcoursesbytype
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /departments/:
+    get:
+      tags:
+      - Departments
+      summary: Get All Departments
+      description: '取得所有部門與人員資料。
+
+        資料來源：[清華通訊錄](https://tel.net.nthu.edu.tw/nthusearch/)'
+      operationId: getAllDepartments
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Department'
+                type: array
+                title: Response Getalldepartments
+  /departments/search:
+    get:
+      tags:
+      - Departments
+      summary: Fuzzy Search Departments And People
+      description: 模糊搜尋全校部門與人員名稱。
+      operationId: searchDepartmentsAndPeople
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+          description: 要查詢的部門或人員名稱
+          title: Query
+        description: 要查詢的部門或人員名稱
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  anyOf:
+                  - type: array
+                    items:
+                      $ref: '#/components/schemas/Department'
+                  - type: array
+                    items:
+                      $ref: '#/components/schemas/DepartmentPerson'
+                title: Response Searchdepartmentsandpeople
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /dining/:
+    get:
+      tags:
+      - Dining
+      summary: Get Dining Data
+      description: '取得所有餐廳及廠商資料。
+
+        資料來源：[總務處經營管理組](https://ddfm.site.nthu.edu.tw/p/404-1494-256455.php?Lang=zh-tw)'
+      operationId: getDiningData
+      parameters:
+      - name: building_name
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/DiningBuildingName'
+          description: 餐廳建築名稱（可選）
+        description: 餐廳建築名稱（可選）
+      - name: restaurant_name
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 餐廳名稱（可選）
+          title: Restaurant Name
+        description: 餐廳名稱（可選）
+      - name: fuzzy
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: 是否進行模糊搜尋，若不啟用則必須完全符合（不建議）
+          default: true
+          title: Fuzzy
+        description: 是否進行模糊搜尋，若不啟用則必須完全符合（不建議）
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiningBuilding'
+                title: Response Getdiningdata
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /dining/open:
+    get:
+      tags:
+      - Dining
+      summary: Get Open Restaurants
+      description: 取得指定營業日的餐廳資料。
+      operationId: getOpenRestaurants
+      parameters:
+      - name: schedule
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/DiningScheduleName'
+          description: 營業時間查詢
+        description: 營業時間查詢
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiningRestaurant'
+                title: Response Getopenrestaurants
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /energy/electricity_usage:
+    get:
+      tags:
+      - Energy
+      summary: Get Realtime Electricity Usage
+      description: '取得校園電力即時使用量。
+
+        資料來源：[校園能源查詢管理系統](http://140.114.188.86/powermanage/index.aspx)'
+      operationId: getRealtimeElectricityUsage
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/EnergyElectricityInfo'
+                type: array
+                title: Response Getrealtimeelectricityusage
+  /libraries/space:
+    get:
+      tags:
+      - Libraries
+      summary: Get Library Space Availability
+      description: '取得圖書館空間使用資訊。
+
+        資料來源：[圖書館空間預約系統](https://libsms.lib.nthu.edu.tw/RWDAPI_New/GetDevUseStatus.aspx)'
+      operationId: getLibrarySpaceAvailability
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LibrarySpace'
+                type: array
+                title: Response Getlibraryspaceavailability
+  /libraries/lost_and_found:
+    get:
+      tags:
+      - Libraries
+      summary: Get Library Lost And Found Items
+      description: '取得圖書館失物招領資訊。
+
+        資料來源：[圖書館失物招領系統](https://adage.lib.nthu.edu.tw/find)'
+      operationId: getLibraryLostAndFoundItems
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LibraryLostAndFound'
+                type: array
+                title: Response Getlibrarylostandfounditems
+  /libraries/rss/{rss_type}:
+    get:
+      tags:
+      - Libraries
+      summary: Get Library Rss Data
+      description: '取得指定圖書館的 RSS 資料。
+
+        資料來源：[圖書館官網展覽與活動](https://www.lib.nthu.edu.tw/events/index.html)'
+      operationId: getLibraryRssData
+      parameters:
+      - name: rss_type
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/LibraryRssType'
+          description: RSS 類型：最新消息(news)、電子資源(eresources)、展覽及活動(exhibit)、南大與人社分館(branches)
+        description: RSS 類型：最新消息(news)、電子資源(eresources)、展覽及活動(exhibit)、南大與人社分館(branches)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LibraryRssItem'
+                title: Response Getlibraryrssdata
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /locations/:
+    get:
+      tags:
+      - Locations
+      summary: Get All Locations
+      description: '取得校內所有地點資訊。
+
+        資料來源：[國立清華大學校園地圖](https://www.nthu.edu.tw/campusmap)'
+      operationId: getAllLocations
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LocationDetail'
+                type: array
+                title: Response Getalllocations
+  /locations/search:
+    get:
+      tags:
+      - Locations
+      summary: Fuzzy Search Locations
+      description: 使用名稱模糊搜尋地點資訊。
+      operationId: fuzzySearchLocations
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+          description: 要查詢的地點
+          title: Query
+        description: 要查詢的地點
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LocationDetail'
+                title: Response Fuzzysearchlocations
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /newsletters/:
+    get:
+      tags:
+      - Newsletters
+      summary: Get All Newsletters
+      description: '取得所有的電子報。
+
+        資料來源：[國立清華大學電子報系統](https://newsletter.cc.nthu.edu.tw/nthu-list/index.php/zh/)'
+      operationId: getAllNewsletters
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/NewsletterInfo'
+                type: array
+                title: Response Getallnewsletters
+  /newsletters/{newsletter_name}:
+    get:
+      tags:
+      - Newsletters
+      summary: Get Newsletter By Name
+      description: 取得指定電子報的資訊。
+      operationId: getNewsletterByName
+      parameters:
+      - name: newsletter_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NewsletterName'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsletterInfo'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AnnouncementArticle:
+      properties:
+        title:
+          title: Title
+          description: 公告標題
+          nullable: true
+          type: string
+        link:
+          title: Link
+          description: 公告連結
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        date:
+          title: Date
+          description: 公告日期 (YYYY-MM-DD)
+          nullable: true
+          type: string
+      type: object
+      required:
+      - title
+      - link
+      title: AnnouncementArticle
+      description: Individual announcement article.
+    AnnouncementDetail:
+      properties:
+        title:
+          type: string
+          title: Title
+          description: 佈告欄標題
+        link:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Link
+          description: 佈告欄連結
+        language:
+          type: string
+          title: Language
+          description: 佈告欄語言
+        department:
+          type: string
+          title: Department
+          description: 發布部門
+        articles:
+          items:
+            $ref: '#/components/schemas/AnnouncementArticle'
+          type: array
+          title: Articles
+          description: 公告列表
+      type: object
+      required:
+      - title
+      - link
+      - language
+      - department
+      - articles
+      title: AnnouncementDetail
+      description: Announcement detail with articles list.
+    AnnouncementLanguageOption:
+      type: string
+      enum:
+      - zh-tw
+      - en
+      title: AnnouncementLanguageOption
+    BusArriveTime:
+      properties:
+        stop:
+          type: string
+          title: Stop
+          description: 公車站牌名稱
+        arrive_time:
+          type: string
+          title: Arrive Time
+          description: 預計到達時間
+      type: object
+      required:
+      - stop
+      - arrive_time
+      title: BusArriveTime
+      description: Bus arrival time at a stop.
+    BusDayWithCurrent:
+      type: string
+      enum:
+      - weekday
+      - weekend
+      - current
+      title: BusDayWithCurrent
+      description: Day type including current day option.
+    BusDetailedSchedule:
+      properties:
+        dep_info:
+          $ref: '#/components/schemas/BusSchedule'
+          description: 發車資訊
+        stops_time:
+          items:
+            $ref: '#/components/schemas/BusArriveTime'
+          type: array
+          title: Stops Time
+          description: 各站發車時間
+      type: object
+      required:
+      - dep_info
+      - stops_time
+      title: BusDetailedSchedule
+      description: Unified detailed bus schedule for both Main and Nanda campus.
+    BusDirection:
+      type: string
+      enum:
+      - all
+      - up
+      - down
+      title: BusDirection
+      description: Bus direction.
+    BusInfo:
+      properties:
+        direction:
+          type: string
+          title: Direction
+          description: 方向
+        duration:
+          type: string
+          title: Duration
+          description: 時刻表有效期間
+        route:
+          type: string
+          title: Route
+          description: 路線
+        routeEN:
+          type: string
+          title: Routeen
+          description: 英文路線
+      type: object
+      required:
+      - direction
+      - duration
+      - route
+      - routeEN
+      title: BusInfo
+      description: Bus route information.
+    BusRouteType:
+      type: string
+      enum:
+      - all
+      - main
+      - nanda
+      title: BusRouteType
+      description: Bus route type.
+    BusSchedule:
+      properties:
+        time:
+          type: string
+          title: Time
+          description: 發車時間
+        description:
+          type: string
+          title: Description
+          description: 備註
+        dep_stop:
+          type: string
+          title: Dep Stop
+          description: 發車地點
+        line:
+          type: string
+          title: Line
+          description: '路線 (主校區: red/green, 南大: route_1/route_2)'
+          default: ''
+        bus_type:
+          $ref: '#/components/schemas/BusType'
+          description: 營運車輛類型
+      type: object
+      required:
+      - time
+      - description
+      - dep_stop
+      - bus_type
+      title: BusSchedule
+      description: Unified bus schedule entry for both Main and Nanda campus.
+    BusStopsInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 站牌中文名稱
+        name_en:
+          type: string
+          title: Name En
+          description: 站牌英文名稱
+        latitude:
+          type: string
+          title: Latitude
+          description: 站牌所在地緯度
+        longitude:
+          type: string
+          title: Longitude
+          description: 站牌所在地經度
+      type: object
+      required:
+      - name
+      - name_en
+      - latitude
+      - longitude
+      title: BusStopsInfo
+      description: Bus stop information.
+    BusStopsName:
+      type: string
+      enum:
+      - 北校門口
+      - 綜二館
+      - 楓林小徑
+      - 人社院&生科館
+      - 台積館
+      - 奕園停車場
+      - 教育學院大樓&南門停車場
+      - 南大校區校門口右側(食品路校牆邊)
+      title: BusStopsName
+      description: Bus stop names.
+    BusStopsQueryResult:
+      properties:
+        arrive_time:
+          type: string
+          title: Arrive Time
+          description: 預計到達時間
+        dep_time:
+          type: string
+          title: Dep Time
+          description: 發車時間
+        dep_stop:
+          type: string
+          title: Dep Stop
+          description: 發車站牌
+        description:
+          type: string
+          title: Description
+          description: 備註
+        bus_type:
+          $ref: '#/components/schemas/BusType'
+          description: 營運車輛類型
+      type: object
+      required:
+      - arrive_time
+      - dep_time
+      - dep_stop
+      - description
+      - bus_type
+      title: BusStopsQueryResult
+      description: Result of querying bus stops.
+    BusType:
+      type: string
+      enum:
+      - route_83
+      - large-sized_bus
+      - middle-sized_bus
+      title: BusType
+      description: Bus vehicle type.
+    CourseCondition:
+      properties:
+        row_field:
+          $ref: '#/components/schemas/CourseFieldName'
+          description: 搜尋的欄位名稱
+        matcher:
+          type: string
+          title: Matcher
+          description: 搜尋的值
+        regex_match:
+          type: boolean
+          title: Regex Match
+          description: 是否使用正則表達式
+          default: false
+      type: object
+      required:
+      - row_field
+      - matcher
+      title: CourseCondition
+      description: Single course query condition.
+    CourseData:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: 課號
+        chinese_title:
+          type: string
+          title: Chinese Title
+          description: 課程中文名稱
+        english_title:
+          type: string
+          title: English Title
+          description: 課程英文名稱
+        credit:
+          type: string
+          title: Credit
+          description: 學分數
+        size_limit:
+          type: string
+          title: Size Limit
+          description: 人限
+        freshman_reservation:
+          type: string
+          title: Freshman Reservation
+          description: 新生保留人數
+        object:
+          type: string
+          title: Object
+          description: 通識對象
+        ge_type:
+          type: string
+          title: Ge Type
+          description: 通識類別
+        language:
+          $ref: '#/components/schemas/CourseLanguage'
+          description: 授課語言
+        note:
+          type: string
+          title: Note
+          description: 備註
+        suspend:
+          type: string
+          title: Suspend
+          description: 停開註記
+        class_room_and_time:
+          type: string
+          title: Class Room And Time
+          description: 教室與上課時間
+        teacher:
+          type: string
+          title: Teacher
+          description: 授課教師
+        prerequisite:
+          type: string
+          title: Prerequisite
+          description: 擋修說明
+        limit_note:
+          type: string
+          title: Limit Note
+          description: 課程限制說明
+        expertise:
+          type: string
+          title: Expertise
+          description: 第一二專長對應
+        program:
+          type: string
+          title: Program
+          description: 學分學程對應
+        no_extra_selection:
+          type: string
+          title: No Extra Selection
+          description: 不可加簽說明
+        required_optional_note:
+          type: string
+          title: Required Optional Note
+          description: 必選修說明
+      type: object
+      required:
+      - id
+      - chinese_title
+      - english_title
+      - credit
+      - size_limit
+      - freshman_reservation
+      - object
+      - ge_type
+      - language
+      - note
+      - suspend
+      - class_room_and_time
+      - teacher
+      - prerequisite
+      - limit_note
+      - expertise
+      - program
+      - no_extra_selection
+      - required_optional_note
+      title: CourseData
+      description: Course data schema.
+    CourseFieldName:
+      type: string
+      enum:
+      - id
+      - chinese_title
+      - english_title
+      - credit
+      - size_limit
+      - freshman_reservation
+      - object
+      - ge_type
+      - language
+      - note
+      - suspend
+      - class_room_and_time
+      - teacher
+      - prerequisite
+      - limit_note
+      - expertise
+      - program
+      - no_extra_selection
+      - required_optional_note
+      title: CourseFieldName
+      description: Course field names for querying.
+    CourseLanguage:
+      type: string
+      enum:
+      - 中
+      - 英
+      title: CourseLanguage
+      description: Course language options.
+    CourseListName:
+      type: string
+      enum:
+      - microcredits
+      - xclass
+      title: CourseListName
+      description: Predefined course lists.
+    CourseQueryCondition:
+      items:
+        anyOf:
+        - $ref: '#/components/schemas/CourseQueryCondition'
+        - $ref: '#/components/schemas/CourseCondition'
+        - $ref: '#/components/schemas/CourseQueryOperation'
+      type: array
+      title: CourseQueryCondition
+      description: Complex course query condition.
+    CourseQueryOperation:
+      type: string
+      enum:
+      - and
+      - or
+      title: CourseQueryOperation
+      description: Query operation type.
+    Department:
+      properties:
+        index:
+          type: string
+          title: Index
+          description: 系所代碼
+        name:
+          type: string
+          title: Name
+          description: 系所名稱
+        parent_name:
+          title: Parent Name
+          description: 上層系所名稱
+          nullable: true
+          type: string
+        url:
+          title: Url
+          description: 系所網站
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        details:
+          $ref: '#/components/schemas/DepartmentDetails'
+      type: object
+      required:
+      - index
+      - name
+      title: Department
+    DepartmentContact:
+      properties:
+        extension:
+          title: Extension
+          nullable: true
+          type: string
+        phone:
+          title: Phone
+          nullable: true
+          type: string
+        fax:
+          title: Fax
+          nullable: true
+          type: string
+        email:
+          title: Email
+          nullable: true
+          type: string
+        website:
+          title: Website
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+      type: object
+      title: DepartmentContact
+    DepartmentDetails:
+      properties:
+        departments:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Departments
+        contact:
+          $ref: '#/components/schemas/DepartmentContact'
+        people:
+          items:
+            $ref: '#/components/schemas/DepartmentPerson'
+          type: array
+          title: People
+      type: object
+      title: DepartmentDetails
+    DepartmentPerson:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 姓名
+        title:
+          title: Title
+          description: 職稱
+          nullable: true
+          type: string
+        extension:
+          title: Extension
+          description: 分機
+          nullable: true
+          type: string
+        note:
+          title: Note
+          description: 備註
+          nullable: true
+          type: string
+        email:
+          title: Email
+          description: 電子郵件
+          nullable: true
+          type: string
+      type: object
+      required:
+      - name
+      - title
+      - extension
+      - email
+      title: DepartmentPerson
+    DiningBuilding:
+      properties:
+        building:
+          type: string
+          title: Building
+          description: 建築名稱
+        restaurants:
+          items:
+            $ref: '#/components/schemas/DiningRestaurant'
+          type: array
+          title: Restaurants
+          description: 餐廳資料
+      type: object
+      required:
+      - building
+      - restaurants
+      title: DiningBuilding
+      description: Building with restaurants.
+    DiningBuildingName:
+      type: string
+      enum:
+      - 小吃部
+      - 水木生活中心
+      - 風雲樓
+      - 綜合教學大樓(南大校區)
+      - 其他餐廳
+      title: DiningBuildingName
+      description: Dining building names.
+    DiningRestaurant:
+      properties:
+        area:
+          type: string
+          title: Area
+          description: 餐廳所在建築
+        image:
+          title: Image
+          description: 餐廳圖片
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        name:
+          type: string
+          title: Name
+          description: 餐廳名稱
+        note:
+          type: string
+          title: Note
+          description: 餐廳備註
+        phone:
+          type: string
+          title: Phone
+          description: 餐廳電話
+        schedule:
+          additionalProperties: true
+          type: object
+          title: Schedule
+          description: 餐廳營業時間
+      type: object
+      required:
+      - area
+      - image
+      - name
+      - note
+      - phone
+      - schedule
+      title: DiningRestaurant
+      description: Restaurant information.
+    DiningScheduleName:
+      type: string
+      enum:
+      - today
+      - weekday
+      - saturday
+      - sunday
+      title: DiningScheduleName
+      description: Schedule names for dining queries.
+    EnergyElectricityInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 電力名稱
+        data:
+          type: integer
+          title: Data
+          description: 電力使用量
+        capacity:
+          type: integer
+          title: Capacity
+          description: 電力容量
+        unit:
+          type: string
+          title: Unit
+          description: 單位
+        last_updated:
+          type: string
+          title: Last Updated
+          description: 最後更新時間
+      type: object
+      required:
+      - name
+      - data
+      - capacity
+      - unit
+      - last_updated
+      title: EnergyElectricityInfo
+      description: Electricity usage information.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LibraryLostAndFound:
+      properties:
+        序號:
+          type: string
+          title: 序號
+          description: 序號
+        拾獲時間:
+          type: string
+          title: 拾獲時間
+          description: 拾獲日期
+        拾獲地點:
+          type: string
+          title: 拾獲地點
+          description: 拾獲地點
+        描述:
+          type: string
+          title: 描述
+          description: 物品描述
+      type: object
+      required:
+      - 序號
+      - 拾獲時間
+      - 拾獲地點
+      - 描述
+      title: LibraryLostAndFound
+    LibraryRssImage:
+      properties:
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+          description: 圖片網址
+        title:
+          type: string
+          title: Title
+          description: 圖片標題
+        link:
+          title: Link
+          description: 連結
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+      type: object
+      required:
+      - url
+      - title
+      - link
+      title: LibraryRssImage
+    LibraryRssItem:
+      properties:
+        guid:
+          type: string
+          title: Guid
+          description: 文章 id
+        category:
+          type: string
+          title: Category
+          description: 文章分類
+        title:
+          type: string
+          title: Title
+          description: 文章標題
+        link:
+          title: Link
+          description: 文章連結
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        pubDate:
+          type: string
+          title: Pubdate
+          description: 文章發布日期
+        description:
+          type: string
+          title: Description
+          description: 文章內容
+        author:
+          type: string
+          title: Author
+          description: 文章作者
+        image:
+          $ref: '#/components/schemas/LibraryRssImage'
+          description: 文章圖片
+      type: object
+      required:
+      - guid
+      - category
+      - title
+      - link
+      - pubDate
+      - description
+      - author
+      - image
+      title: LibraryRssItem
+    LibraryRssType:
+      type: string
+      enum:
+      - news
+      - eresources
+      - exhibit
+      - branches
+      title: LibraryRssType
+    LibrarySpace:
+      properties:
+        spacetype:
+          type: integer
+          title: Spacetype
+          description: 空間類型
+        spacetypename:
+          type: string
+          title: Spacetypename
+          description: 空間類型名稱
+        zoneid:
+          type: string
+          title: Zoneid
+          description: 區域代號
+        zonename:
+          type: string
+          title: Zonename
+          description: 區域名稱
+        count:
+          type: integer
+          title: Count
+          description: 空間剩餘數量
+      type: object
+      required:
+      - spacetype
+      - spacetypename
+      - zoneid
+      - zonename
+      - count
+      title: LibrarySpace
+    LocationDetail:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 地點名稱
+        latitude:
+          type: string
+          title: Latitude
+          description: 緯度
+        longitude:
+          type: string
+          title: Longitude
+          description: 經度
+      type: object
+      required:
+      - name
+      - latitude
+      - longitude
+      title: LocationDetail
+      description: Location detail information.
+    NewsletterArticle:
+      properties:
+        title:
+          title: Title
+          description: 電子報標題
+          nullable: true
+          type: string
+        link:
+          title: Link
+          description: 電子報網址
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        date:
+          title: Date
+          description: 發布日期
+          nullable: true
+          type: string
+      type: object
+      required:
+      - title
+      - link
+      title: NewsletterArticle
+    NewsletterInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 該電子報名稱
+        link:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Link
+          description: 該電子報網址
+        details:
+          additionalProperties: true
+          type: object
+          title: Details
+          description: 該電子報詳細資訊
+        articles:
+          items:
+            $ref: '#/components/schemas/NewsletterArticle'
+          type: array
+          title: Articles
+          description: 該電子報文章列表
+      type: object
+      required:
+      - name
+      - link
+      - details
+      - articles
+      title: NewsletterInfo
+    NewsletterName:
+      type: string
+      enum:
+      - 藝術文化總中心電子報
+      - 域報 Field Cast
+      - 校長同意權人投票事務委員會
+      - 國立清華大學校長遴選委員會
+      - 清華校友總會會務訊息
+      - 築思脈動(Pulse of Education)
+      - 心諮系雙週例講座
+      - 愛慾電子報報
+      - 教學發展中心電子報-教師
+      - 清華校友電子報
+      - 清華大學化學系電子報
+      - 國立清華大學核工暨工科系友會電子報
+      - 國立清華大學動機系系友電子報
+      - 清華大學化工系友電子報
+      - 國立清華大學學生會電子報
+      - 台灣語言學通訊
+      - 教務處綜合教務組電子報
+      - 課務電子報
+      - 清華大學工工系電子報
+      - 語文中心電子報
+      - eecs-students
+      - 科管院職涯電子報
+      - 人事室電子報
+      - 研發處電子報-教職
+      - 學生事務報-學生
+      - 數學系電子報
+      - 電機工程學系電子報(學生)
+      - 秘書處-全校教職員
+      - 住宿書院電子報
+      - 主計室電子報
+      - 國立清華大學圖書館-學生
+      - 諮商中心-心窩報報
+      - NTHU-Newsletter
+      - NTHU-Division of Health Service
+      - 人社院學士班電子報
+      - 人文社會學院電子報
+      - 新聞剪輯電子報
+      - 清華簡訊
+      - 計中-教育訓練
+      title: NewsletterName
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+servers:
+- url: https://api.nthusa.tw
+  description: NTHU Data API production server

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.nthusa.tw/structures/Location.json",
+  "name": "Location",
+  "description": "Campus location with coordinates (校園地點).",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "地點名稱"
+    },
+    "latitude": {
+      "type": "string",
+      "description": "緯度"
+    },
+    "longitude": {
+      "type": "string",
+      "description": "經度"
+    }
+  }
+}

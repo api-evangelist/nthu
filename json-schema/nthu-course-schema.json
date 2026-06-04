@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.nthusa.tw/schemas/course.json",
+  "title": "CourseData",
+  "description": "A single NTHU course record (課程資料).",
+  "type": "object",
+  "required": [
+    "id",
+    "chinese_title",
+    "english_title",
+    "credit",
+    "teacher",
+    "class_room_and_time"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "課號 (course number)"
+    },
+    "chinese_title": {
+      "type": "string",
+      "description": "課程中文名稱"
+    },
+    "english_title": {
+      "type": "string",
+      "description": "課程英文名稱"
+    },
+    "credit": {
+      "type": "string",
+      "description": "學分數"
+    },
+    "size_limit": {
+      "type": "string",
+      "description": "人限"
+    },
+    "freshman_reservation": {
+      "type": "string",
+      "description": "新生保留人數"
+    },
+    "object": {
+      "type": "string",
+      "description": "通識對象"
+    },
+    "ge_type": {
+      "type": "string",
+      "description": "通識類別"
+    },
+    "language": {
+      "type": "string",
+      "description": "授課語言",
+      "enum": [
+        "中",
+        "英"
+      ]
+    },
+    "note": {
+      "type": "string",
+      "description": "備註"
+    },
+    "suspend": {
+      "type": "string",
+      "description": "停開註記"
+    },
+    "class_room_and_time": {
+      "type": "string",
+      "description": "教室與上課時間"
+    },
+    "teacher": {
+      "type": "string",
+      "description": "授課教師"
+    },
+    "prerequisite": {
+      "type": "string",
+      "description": "擋修說明"
+    },
+    "limit_note": {
+      "type": "string",
+      "description": "課程限制說明"
+    },
+    "expertise": {
+      "type": "string",
+      "description": "第一二專長對應"
+    },
+    "program": {
+      "type": "string",
+      "description": "學分學程對應"
+    },
+    "no_extra_selection": {
+      "type": "string",
+      "description": "不可加簽說明"
+    },
+    "required_optional_note": {
+      "type": "string",
+      "description": "必選修說明"
+    }
+  }
+}

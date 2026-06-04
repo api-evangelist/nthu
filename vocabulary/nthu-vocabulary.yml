@@ -1,0 +1,73 @@
+vocabulary:
+  name: NTHU Data API Vocabulary
+  description: Domain terms used across the community-maintained NTHU Data API, covering
+    campus open-data objects from National Tsing Hua University.
+  version: 2.0.0
+  terms:
+  - term: Announcement
+    definition: 佈告欄公告 — a notice published by a university office, grouped into announcement
+      boards with article lists.
+    tags:
+    - announcements
+    - notices
+  - term: Bus Route
+    definition: 校園公車路線 — a campus shuttle route with direction, validity period, and
+      Chinese/English names.
+    tags:
+    - buses
+    - transit
+  - term: Bus Schedule
+    definition: 公車時刻表 — departure times for a route by day type (weekday/weekend).
+    tags:
+    - buses
+    - transit
+  - term: Course
+    definition: 課程資料 — a catalog course record including course number, titles, credits,
+      teacher, room/time, and language.
+    tags:
+    - courses
+    - academics
+  - term: Department
+    definition: 系所 — an academic department or administrative unit with code, name,
+      parent unit, and website.
+    tags:
+    - departments
+    - org
+  - term: Dining Restaurant
+    definition: 餐廳資訊 — a campus eatery with location building, phone, schedule, and
+      notes.
+    tags:
+    - dining
+    - campus
+  - term: Electricity Usage
+    definition: 電力使用量 — real-time power consumption and capacity for a campus power
+      zone, in kW.
+    tags:
+    - energy
+    - sustainability
+  - term: Library Space
+    definition: 圖書館空間 — availability count for a library zone such as study rooms
+      or discussion rooms.
+    tags:
+    - library
+    - facilities
+  - term: Library RSS
+    definition: 圖書館 RSS — syndicated library news/announcement feed items.
+    tags:
+    - library
+    - rss
+  - term: Location
+    definition: 校園地點 — a named campus place with latitude and longitude.
+    tags:
+    - locations
+    - geo
+  - term: Newsletter
+    definition: 電子報 — a university newsletter publication and its articles.
+    tags:
+    - newsletters
+    - communications
+  - term: Lost and Found
+    definition: 失物招領 — library lost-and-found item records.
+    tags:
+    - library
+    - services

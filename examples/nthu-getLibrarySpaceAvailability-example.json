@@ -1,0 +1,23 @@
+[
+  {
+    "spacetype": 1,
+    "spacetypename": "研究小間",
+    "zoneid": "1_5A",
+    "zonename": "5F-研究小間A",
+    "count": 1
+  },
+  {
+    "spacetype": 1,
+    "spacetypename": "研究小間",
+    "zoneid": "1_5B",
+    "zonename": "5F-研究小間B",
+    "count": 0
+  },
+  {
+    "spacetype": 2,
+    "spacetypename": "討論室",
+    "zoneid": "2_2A",
+    "zonename": "2F-討論室",
+    "count": 3
+  }
+]

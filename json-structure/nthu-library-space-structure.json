@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.nthusa.tw/structures/LibrarySpace.json",
+  "name": "LibrarySpace",
+  "description": "Library space availability (圖書館空間).",
+  "type": "object",
+  "properties": {
+    "spacetype": {
+      "type": "int32",
+      "description": "空間類型"
+    },
+    "spacetypename": {
+      "type": "string",
+      "description": "空間類型名稱"
+    },
+    "zoneid": {
+      "type": "string",
+      "description": "區域代號"
+    },
+    "zonename": {
+      "type": "string",
+      "description": "區域名稱"
+    },
+    "count": {
+      "type": "int32",
+      "description": "空間剩餘數量"
+    }
+  }
+}

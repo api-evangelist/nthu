@@ -1,0 +1,42 @@
+formats:
+- oas3
+rules:
+  nthu-info-version:
+    description: 'API info must carry a semantic version (observed: 2.0.0).'
+    given: $.info
+    severity: warn
+    then:
+      field: version
+      function: truthy
+  nthu-operation-id:
+    description: Every operation must declare an operationId (NTHU uses camelCase
+      getX/listX/searchX).
+    given: $.paths[*][get,post,put,delete]
+    severity: error
+    then:
+      field: operationId
+      function: truthy
+  nthu-operation-tags:
+    description: Operations are grouped by campus unit tag (Announcements, Buses,
+      Courses, etc.).
+    given: $.paths[*][get,post,put,delete]
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+  nthu-snake-case-properties:
+    description: Schema property names use snake_case (with documented camelCase exceptions
+      like routeEN).
+    given: $.components.schemas[*].properties[*]~
+    severity: hint
+    then:
+      function: pattern
+      functionOptions:
+        match: ^[a-zA-Z][a-zA-Z0-9_]*$
+  nthu-uri-format-on-links:
+    description: 'Link/url/image fields should declare format: uri.'
+    given: $.components.schemas[*].properties[link,url,image]
+    severity: hint
+    then:
+      field: format
+      function: truthy

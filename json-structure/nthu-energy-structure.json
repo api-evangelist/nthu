@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.nthusa.tw/structures/Energy.json",
+  "name": "Energy",
+  "description": "Real-time electricity usage zone (電力使用量).",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "電力名稱"
+    },
+    "data": {
+      "type": "int32",
+      "description": "電力使用量"
+    },
+    "capacity": {
+      "type": "int32",
+      "description": "電力容量"
+    },
+    "unit": {
+      "type": "string",
+      "description": "單位"
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "最後更新時間"
+    }
+  }
+}

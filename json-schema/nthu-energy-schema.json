@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.nthusa.tw/schemas/energy.json",
+  "title": "EnergyElectricityInfo",
+  "description": "Real-time electricity usage for an NTHU power zone (電力使用量).",
+  "type": "object",
+  "required": [
+    "name",
+    "data",
+    "capacity",
+    "unit",
+    "last_updated"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "電力名稱"
+    },
+    "data": {
+      "type": "integer",
+      "description": "電力使用量"
+    },
+    "capacity": {
+      "type": "integer",
+      "description": "電力容量"
+    },
+    "unit": {
+      "type": "string",
+      "description": "單位",
+      "examples": [
+        "kW"
+      ]
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "最後更新時間"
+    }
+  }
+}

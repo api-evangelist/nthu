@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.nthusa.tw/structures/Course.json",
+  "name": "Course",
+  "description": "NTHU course record (課程資料).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "課號"
+    },
+    "chinese_title": {
+      "type": "string",
+      "description": "課程中文名稱"
+    },
+    "english_title": {
+      "type": "string",
+      "description": "課程英文名稱"
+    },
+    "credit": {
+      "type": "string",
+      "description": "學分數"
+    },
+    "language": {
+      "type": "string",
+      "description": "授課語言"
+    },
+    "teacher": {
+      "type": "string",
+      "description": "授課教師"
+    },
+    "class_room_and_time": {
+      "type": "string",
+      "description": "教室與上課時間"
+    }
+  }
+}

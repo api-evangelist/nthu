@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.nthusa.tw/structures/Bus.json",
+  "name": "Bus",
+  "description": "NTHU campus bus route (校園公車).",
+  "type": "object",
+  "properties": {
+    "direction": {
+      "type": "string",
+      "description": "方向"
+    },
+    "duration": {
+      "type": "string",
+      "description": "時刻表有效期間"
+    },
+    "route": {
+      "type": "string",
+      "description": "路線"
+    },
+    "routeEN": {
+      "type": "string",
+      "description": "英文路線"
+    }
+  }
+}

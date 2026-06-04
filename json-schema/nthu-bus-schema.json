@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.nthusa.tw/schemas/bus.json",
+  "title": "BusInfo",
+  "description": "NTHU campus bus route information (校園公車路線).",
+  "type": "object",
+  "required": [
+    "direction",
+    "duration",
+    "route",
+    "routeEN"
+  ],
+  "properties": {
+    "direction": {
+      "type": "string",
+      "description": "方向"
+    },
+    "duration": {
+      "type": "string",
+      "description": "時刻表有效期間"
+    },
+    "route": {
+      "type": "string",
+      "description": "路線"
+    },
+    "routeEN": {
+      "type": "string",
+      "description": "英文路線"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.nthusa.tw/schemas/dining-restaurant.json",
+  "title": "DiningRestaurant",
+  "description": "A campus dining restaurant (餐廳資訊).",
+  "type": "object",
+  "required": [
+    "area",
+    "name",
+    "note",
+    "phone",
+    "schedule"
+  ],
+  "properties": {
+    "area": {
+      "type": "string",
+      "description": "餐廳所在建築"
+    },
+    "image": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri",
+      "description": "餐廳圖片"
+    },
+    "name": {
+      "type": "string",
+      "description": "餐廳名稱"
+    },
+    "note": {
+      "type": "string",
+      "description": "餐廳備註"
+    },
+    "phone": {
+      "type": "string",
+      "description": "餐廳電話"
+    },
+    "schedule": {
+      "type": "object",
+      "description": "餐廳營業時間",
+      "additionalProperties": true
+    }
+  }
+}

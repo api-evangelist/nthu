@@ -1,0 +1,6 @@
+{
+  "row_field": "chinese_title",
+  "matcher": "資料",
+  "regex_match": false,
+  "and_condition": []
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.nthusa.tw/schemas/announcement.json",
+  "title": "AnnouncementDetail",
+  "description": "Announcement board detail with article list (佈告欄公告).",
+  "type": "object",
+  "required": [
+    "title",
+    "link",
+    "language",
+    "department",
+    "articles"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "佈告欄標題"
+    },
+    "link": {
+      "type": "string",
+      "format": "uri",
+      "description": "佈告欄連結"
+    },
+    "language": {
+      "type": "string",
+      "description": "佈告欄語言"
+    },
+    "department": {
+      "type": "string",
+      "description": "發布部門"
+    },
+    "articles": {
+      "type": "array",
+      "description": "公告列表",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

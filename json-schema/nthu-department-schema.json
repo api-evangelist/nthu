@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.nthusa.tw/schemas/department.json",
+  "title": "Department",
+  "description": "An NTHU academic department/unit (系所).",
+  "type": "object",
+  "required": [
+    "index",
+    "name"
+  ],
+  "properties": {
+    "index": {
+      "type": "string",
+      "description": "系所代碼"
+    },
+    "name": {
+      "type": "string",
+      "description": "系所名稱"
+    },
+    "parent_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "上層系所名稱"
+    },
+    "url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri",
+      "description": "系所網站"
+    }
+  }
+}

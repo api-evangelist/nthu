@@ -46,10 +46,18 @@ apis:
         url: https://api.nthusa.tw/docs
       - type: OpenAPI
         url: https://api.nthusa.tw/openapi.json
+      - type: OpenAPI
+        url: openapi/nthu-data-api.yaml
       - type: GitHub
         url: https://github.com/NTHU-SA/NTHU-Data-API
       - type: SourceCode
         url: https://github.com/NTHU-SA/NTHU-Data-API
+      - type: Vocabulary
+        url: vocabulary/nthu-vocabulary.yml
+      - type: JSONLD
+        url: json-ld/nthu-context.jsonld
+      - type: Rules
+        url: rules/nthu-rules.yml
 common:
   - type: Website
     url: https://www.nthu.edu.tw/

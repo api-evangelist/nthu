@@ -1,0 +1,23 @@
+[
+  {
+    "name": "北區一號",
+    "data": 3495,
+    "capacity": 5200,
+    "unit": "kW",
+    "last_updated": "2026-06-04 11:16:40"
+  },
+  {
+    "name": "北區二號",
+    "data": 6382,
+    "capacity": 5600,
+    "unit": "kW",
+    "last_updated": "2026-06-04 11:16:40"
+  },
+  {
+    "name": "仙宮",
+    "data": 1641,
+    "capacity": 1500,
+    "unit": "kW",
+    "last_updated": "2026-06-04 11:16:40"
+  }
+]

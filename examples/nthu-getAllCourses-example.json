@@ -1,0 +1,23 @@
+[
+  {
+    "id": "GE  110100",
+    "chinese_title": "大學中文",
+    "english_title": "College Chinese",
+    "credit": "2",
+    "size_limit": "50",
+    "freshman_reservation": "0",
+    "object": "",
+    "ge_type": "",
+    "language": "中",
+    "note": "",
+    "suspend": "",
+    "class_room_and_time": "T3T4 通識教室A",
+    "teacher": "王小明",
+    "prerequisite": "",
+    "limit_note": "",
+    "expertise": "",
+    "program": "",
+    "no_extra_selection": "",
+    "required_optional_note": "必修"
+  }
+]
