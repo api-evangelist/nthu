@@ -59,6 +59,8 @@ apis:
       - type: Rules
         url: rules/nthu-rules.yml
 common:
+  - type: DomainSecurity
+    url: security/nthu-domain-security.yml
   - type: Website
     url: https://www.nthu.edu.tw/
   - type: GitHub

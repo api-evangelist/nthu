@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.nthu.edu.tw
+  https: true
+  tls_cert_error: '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Missing Subject
+    Key Identifier (_ssl.c:1082)'
+  hsts: null
+- host: api.nthusa.tw
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 25 02:04:51 2026 GMT
+  hsts: null
+domains:
+- domain: nthu.edu.tw
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+- domain: nthusa.tw
+  dnssec: true
+  caa: []
+  spf: false
+  dmarc: true
+  dmarc_policy: none
