@@ -1,0 +1,252 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/nthu-data-api.yaml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 23
+  by_action_class:
+    connected: 22
+    acting: 1
+  by_consequence:
+    read: 22
+    write: 1
+  human_in_the_loop_required: 0
+operations:
+- path: /announcements/
+  method: get
+  operationId: getAnnouncements
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /announcements/sources
+  method: get
+  operationId: getAnnouncementsList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /announcements/lists/departments
+  method: get
+  operationId: listAnnouncementDepartments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /buses/routes
+  method: get
+  operationId: getBusRouteData
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /buses/info/stops
+  method: get
+  operationId: getBusStopsInformation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /buses/schedules
+  method: get
+  operationId: getBusSchedules
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /buses/stops/{stop_name}
+  method: get
+  operationId: getStopBusInformationByStop
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /courses/
+  method: get
+  operationId: getAllCourses
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /courses/search
+  method: get
+  operationId: searchCoursesByFieldAndValue
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /courses/search
+  method: post
+  operationId: searchCoursesByCondition
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /courses/lists/{list_name}
+  method: get
+  operationId: listCoursesByType
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /departments/
+  method: get
+  operationId: getAllDepartments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /departments/search
+  method: get
+  operationId: searchDepartmentsAndPeople
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /dining/
+  method: get
+  operationId: getDiningData
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /dining/open
+  method: get
+  operationId: getOpenRestaurants
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /energy/electricity_usage
+  method: get
+  operationId: getRealtimeElectricityUsage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /libraries/space
+  method: get
+  operationId: getLibrarySpaceAvailability
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /libraries/lost_and_found
+  method: get
+  operationId: getLibraryLostAndFoundItems
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /libraries/rss/{rss_type}
+  method: get
+  operationId: getLibraryRssData
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /locations/
+  method: get
+  operationId: getAllLocations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /locations/search
+  method: get
+  operationId: fuzzySearchLocations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /newsletters/
+  method: get
+  operationId: getAllNewsletters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /newsletters/{newsletter_name}
+  method: get
+  operationId: getNewsletterByName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
