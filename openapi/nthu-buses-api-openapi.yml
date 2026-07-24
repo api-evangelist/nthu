@@ -1,0 +1,452 @@
+openapi: 3.0.3
+info:
+  title: NTHU Data Announcements Buses API
+  description: 由國立清華大學校內各單位資料所組成的公共資料 API。
+  version: 2.0.0
+servers:
+- url: https://api.nthusa.tw
+  description: NTHU Data API production server
+tags:
+- name: Buses
+paths:
+  /buses/routes:
+    get:
+      tags:
+      - Buses
+      summary: Get Bus Route Metadata
+      description: '取得校園公車資訊。
+
+        - 校本部來自[總務處事務組](https://affairs.site.nthu.edu.tw/p/412-1165-20978.php?Lang=zh-tw)
+
+        - 南大來自[總務處事務組](https://affairs.site.nthu.edu.tw/p/412-1165-20979.php?Lang=zh-tw)'
+      operationId: getBusRouteData
+      parameters:
+      - name: bus_type
+        in: query
+        required: false
+        schema:
+          enum:
+          - main
+          - nanda
+          type: string
+          description: 車種選擇
+          title: Bus Type
+        description: 車種選擇
+      - name: direction
+        in: query
+        required: false
+        schema:
+          enum:
+          - up
+          - down
+          type: string
+          description: 方向選擇
+          title: Direction
+        description: 方向選擇
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BusInfo'
+                title: Response Getbusroutedata
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /buses/info/stops:
+    get:
+      tags:
+      - Buses
+      summary: Get Bus Stops Information
+      description: 取得所有公車站牌的經緯度與資訊。
+      operationId: getBusStopsInformation
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusStopsInfo'
+                type: array
+                title: Response Getbusstopsinformation
+  /buses/schedules:
+    get:
+      tags:
+      - Buses
+      summary: Get Bus Schedules
+      description: '取得指定條件的公車時刻表。
+
+        - **details=False**: 回傳簡易時刻表（僅發車時間）。
+
+        - **details=True**: 回傳詳細時刻表（包含每站預估到達時間）。'
+      operationId: getBusSchedules
+      parameters:
+      - name: bus_type
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusRouteType'
+          description: 車種選擇
+        description: 車種選擇
+      - name: day
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusDayWithCurrent'
+          description: 平日、假日或目前時刻
+        description: 平日、假日或目前時刻
+      - name: direction
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusDirection'
+          description: 上山或下山
+        description: 上山或下山
+      - name: details
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: 是否包含詳細站點時間資訊
+          default: false
+          title: Details
+        description: 是否包含詳細站點時間資訊
+      - name: time
+        in: query
+        required: false
+        schema:
+          description: 時間。若搜尋 day 選擇 current 時失效。
+          title: Time
+          nullable: true
+          type: string
+        description: 時間。若搜尋 day 選擇 current 時失效。
+      - name: limits
+        in: query
+        required: false
+        schema:
+          description: 最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。
+          default: 5
+          title: Limits
+          nullable: true
+          type: integer
+          minimum: 1
+        description: 最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。
+      responses:
+        '200':
+          description: 取得公車時刻表信息。
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  anyOf:
+                  - $ref: '#/components/schemas/BusDetailedSchedule'
+                  - $ref: '#/components/schemas/BusSchedule'
+                  nullable: true
+                title: Response Getbusschedules
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /buses/stops/{stop_name}:
+    get:
+      tags:
+      - Buses
+      summary: Get Stop Bus Information By Stop
+      description: 取得指定公車站牌的資訊和即將停靠公車。
+      operationId: getStopBusInformationByStop
+      parameters:
+      - name: stop_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusStopsName'
+      - name: bus_type
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusRouteType'
+          description: 車種選擇
+        description: 車種選擇
+      - name: day
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusDayWithCurrent'
+          description: 平日、假日或目前時刻
+        description: 平日、假日或目前時刻
+      - name: direction
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/BusDirection'
+          description: 上山或下山
+        description: 上山或下山
+      - name: time
+        in: query
+        required: false
+        schema:
+          description: 時間。若搜尋 day 選擇 current 時失效。
+          title: Time
+          nullable: true
+          type: string
+        description: 時間。若搜尋 day 選擇 current 時失效。
+      - name: limits
+        in: query
+        required: false
+        schema:
+          description: 最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。
+          default: 5
+          title: Limits
+          nullable: true
+          type: integer
+          minimum: 1
+        description: 最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  nullable: true
+                  $ref: '#/components/schemas/BusStopsQueryResult'
+                title: Response Getstopbusinformationbystop
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    BusSchedule:
+      properties:
+        time:
+          type: string
+          title: Time
+          description: 發車時間
+        description:
+          type: string
+          title: Description
+          description: 備註
+        dep_stop:
+          type: string
+          title: Dep Stop
+          description: 發車地點
+        line:
+          type: string
+          title: Line
+          description: '路線 (主校區: red/green, 南大: route_1/route_2)'
+          default: ''
+        bus_type:
+          $ref: '#/components/schemas/BusType'
+          description: 營運車輛類型
+      type: object
+      required:
+      - time
+      - description
+      - dep_stop
+      - bus_type
+      title: BusSchedule
+      description: Unified bus schedule entry for both Main and Nanda campus.
+    BusDetailedSchedule:
+      properties:
+        dep_info:
+          $ref: '#/components/schemas/BusSchedule'
+          description: 發車資訊
+        stops_time:
+          items:
+            $ref: '#/components/schemas/BusArriveTime'
+          type: array
+          title: Stops Time
+          description: 各站發車時間
+      type: object
+      required:
+      - dep_info
+      - stops_time
+      title: BusDetailedSchedule
+      description: Unified detailed bus schedule for both Main and Nanda campus.
+    BusStopsName:
+      type: string
+      enum:
+      - 北校門口
+      - 綜二館
+      - 楓林小徑
+      - 人社院&生科館
+      - 台積館
+      - 奕園停車場
+      - 教育學院大樓&南門停車場
+      - 南大校區校門口右側(食品路校牆邊)
+      title: BusStopsName
+      description: Bus stop names.
+    BusDirection:
+      type: string
+      enum:
+      - all
+      - up
+      - down
+      title: BusDirection
+      description: Bus direction.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    BusInfo:
+      properties:
+        direction:
+          type: string
+          title: Direction
+          description: 方向
+        duration:
+          type: string
+          title: Duration
+          description: 時刻表有效期間
+        route:
+          type: string
+          title: Route
+          description: 路線
+        routeEN:
+          type: string
+          title: Routeen
+          description: 英文路線
+      type: object
+      required:
+      - direction
+      - duration
+      - route
+      - routeEN
+      title: BusInfo
+      description: Bus route information.
+    BusRouteType:
+      type: string
+      enum:
+      - all
+      - main
+      - nanda
+      title: BusRouteType
+      description: Bus route type.
+    BusStopsQueryResult:
+      properties:
+        arrive_time:
+          type: string
+          title: Arrive Time
+          description: 預計到達時間
+        dep_time:
+          type: string
+          title: Dep Time
+          description: 發車時間
+        dep_stop:
+          type: string
+          title: Dep Stop
+          description: 發車站牌
+        description:
+          type: string
+          title: Description
+          description: 備註
+        bus_type:
+          $ref: '#/components/schemas/BusType'
+          description: 營運車輛類型
+      type: object
+      required:
+      - arrive_time
+      - dep_time
+      - dep_stop
+      - description
+      - bus_type
+      title: BusStopsQueryResult
+      description: Result of querying bus stops.
+    BusArriveTime:
+      properties:
+        stop:
+          type: string
+          title: Stop
+          description: 公車站牌名稱
+        arrive_time:
+          type: string
+          title: Arrive Time
+          description: 預計到達時間
+      type: object
+      required:
+      - stop
+      - arrive_time
+      title: BusArriveTime
+      description: Bus arrival time at a stop.
+    BusStopsInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 站牌中文名稱
+        name_en:
+          type: string
+          title: Name En
+          description: 站牌英文名稱
+        latitude:
+          type: string
+          title: Latitude
+          description: 站牌所在地緯度
+        longitude:
+          type: string
+          title: Longitude
+          description: 站牌所在地經度
+      type: object
+      required:
+      - name
+      - name_en
+      - latitude
+      - longitude
+      title: BusStopsInfo
+      description: Bus stop information.
+    BusType:
+      type: string
+      enum:
+      - route_83
+      - large-sized_bus
+      - middle-sized_bus
+      title: BusType
+      description: Bus vehicle type.
+    BusDayWithCurrent:
+      type: string
+      enum:
+      - weekday
+      - weekend
+      - current
+      title: BusDayWithCurrent
+      description: Day type including current day option.

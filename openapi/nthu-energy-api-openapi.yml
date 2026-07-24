@@ -1,0 +1,63 @@
+openapi: 3.0.3
+info:
+  title: NTHU Data Announcements Energy API
+  description: 由國立清華大學校內各單位資料所組成的公共資料 API。
+  version: 2.0.0
+servers:
+- url: https://api.nthusa.tw
+  description: NTHU Data API production server
+tags:
+- name: Energy
+paths:
+  /energy/electricity_usage:
+    get:
+      tags:
+      - Energy
+      summary: Get Realtime Electricity Usage
+      description: '取得校園電力即時使用量。
+
+        資料來源：[校園能源查詢管理系統](http://140.114.188.86/powermanage/index.aspx)'
+      operationId: getRealtimeElectricityUsage
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/EnergyElectricityInfo'
+                type: array
+                title: Response Getrealtimeelectricityusage
+components:
+  schemas:
+    EnergyElectricityInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 電力名稱
+        data:
+          type: integer
+          title: Data
+          description: 電力使用量
+        capacity:
+          type: integer
+          title: Capacity
+          description: 電力容量
+        unit:
+          type: string
+          title: Unit
+          description: 單位
+        last_updated:
+          type: string
+          title: Last Updated
+          description: 最後更新時間
+      type: object
+      required:
+      - name
+      - data
+      - capacity
+      - unit
+      - last_updated
+      title: EnergyElectricityInfo
+      description: Electricity usage information.

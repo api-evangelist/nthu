@@ -1,0 +1,252 @@
+openapi: 3.0.3
+info:
+  title: NTHU Data Announcements Libraries API
+  description: 由國立清華大學校內各單位資料所組成的公共資料 API。
+  version: 2.0.0
+servers:
+- url: https://api.nthusa.tw
+  description: NTHU Data API production server
+tags:
+- name: Libraries
+paths:
+  /libraries/space:
+    get:
+      tags:
+      - Libraries
+      summary: Get Library Space Availability
+      description: '取得圖書館空間使用資訊。
+
+        資料來源：[圖書館空間預約系統](https://libsms.lib.nthu.edu.tw/RWDAPI_New/GetDevUseStatus.aspx)'
+      operationId: getLibrarySpaceAvailability
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LibrarySpace'
+                type: array
+                title: Response Getlibraryspaceavailability
+  /libraries/lost_and_found:
+    get:
+      tags:
+      - Libraries
+      summary: Get Library Lost And Found Items
+      description: '取得圖書館失物招領資訊。
+
+        資料來源：[圖書館失物招領系統](https://adage.lib.nthu.edu.tw/find)'
+      operationId: getLibraryLostAndFoundItems
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LibraryLostAndFound'
+                type: array
+                title: Response Getlibrarylostandfounditems
+  /libraries/rss/{rss_type}:
+    get:
+      tags:
+      - Libraries
+      summary: Get Library Rss Data
+      description: '取得指定圖書館的 RSS 資料。
+
+        資料來源：[圖書館官網展覽與活動](https://www.lib.nthu.edu.tw/events/index.html)'
+      operationId: getLibraryRssData
+      parameters:
+      - name: rss_type
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/LibraryRssType'
+          description: RSS 類型：最新消息(news)、電子資源(eresources)、展覽及活動(exhibit)、南大與人社分館(branches)
+        description: RSS 類型：最新消息(news)、電子資源(eresources)、展覽及活動(exhibit)、南大與人社分館(branches)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LibraryRssItem'
+                title: Response Getlibraryrssdata
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    LibraryLostAndFound:
+      properties:
+        序號:
+          type: string
+          title: 序號
+          description: 序號
+        拾獲時間:
+          type: string
+          title: 拾獲時間
+          description: 拾獲日期
+        拾獲地點:
+          type: string
+          title: 拾獲地點
+          description: 拾獲地點
+        描述:
+          type: string
+          title: 描述
+          description: 物品描述
+      type: object
+      required:
+      - 序號
+      - 拾獲時間
+      - 拾獲地點
+      - 描述
+      title: LibraryLostAndFound
+    LibrarySpace:
+      properties:
+        spacetype:
+          type: integer
+          title: Spacetype
+          description: 空間類型
+        spacetypename:
+          type: string
+          title: Spacetypename
+          description: 空間類型名稱
+        zoneid:
+          type: string
+          title: Zoneid
+          description: 區域代號
+        zonename:
+          type: string
+          title: Zonename
+          description: 區域名稱
+        count:
+          type: integer
+          title: Count
+          description: 空間剩餘數量
+      type: object
+      required:
+      - spacetype
+      - spacetypename
+      - zoneid
+      - zonename
+      - count
+      title: LibrarySpace
+    LibraryRssType:
+      type: string
+      enum:
+      - news
+      - eresources
+      - exhibit
+      - branches
+      title: LibraryRssType
+    LibraryRssImage:
+      properties:
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+          description: 圖片網址
+        title:
+          type: string
+          title: Title
+          description: 圖片標題
+        link:
+          title: Link
+          description: 連結
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+      type: object
+      required:
+      - url
+      - title
+      - link
+      title: LibraryRssImage
+    LibraryRssItem:
+      properties:
+        guid:
+          type: string
+          title: Guid
+          description: 文章 id
+        category:
+          type: string
+          title: Category
+          description: 文章分類
+        title:
+          type: string
+          title: Title
+          description: 文章標題
+        link:
+          title: Link
+          description: 文章連結
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        pubDate:
+          type: string
+          title: Pubdate
+          description: 文章發布日期
+        description:
+          type: string
+          title: Description
+          description: 文章內容
+        author:
+          type: string
+          title: Author
+          description: 文章作者
+        image:
+          $ref: '#/components/schemas/LibraryRssImage'
+          description: 文章圖片
+      type: object
+      required:
+      - guid
+      - category
+      - title
+      - link
+      - pubDate
+      - description
+      - author
+      - image
+      title: LibraryRssItem

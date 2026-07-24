@@ -1,0 +1,187 @@
+openapi: 3.0.3
+info:
+  title: NTHU Data Announcements Newsletters API
+  description: 由國立清華大學校內各單位資料所組成的公共資料 API。
+  version: 2.0.0
+servers:
+- url: https://api.nthusa.tw
+  description: NTHU Data API production server
+tags:
+- name: Newsletters
+paths:
+  /newsletters/:
+    get:
+      tags:
+      - Newsletters
+      summary: Get All Newsletters
+      description: '取得所有的電子報。
+
+        資料來源：[國立清華大學電子報系統](https://newsletter.cc.nthu.edu.tw/nthu-list/index.php/zh/)'
+      operationId: getAllNewsletters
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/NewsletterInfo'
+                type: array
+                title: Response Getallnewsletters
+  /newsletters/{newsletter_name}:
+    get:
+      tags:
+      - Newsletters
+      summary: Get Newsletter By Name
+      description: 取得指定電子報的資訊。
+      operationId: getNewsletterByName
+      parameters:
+      - name: newsletter_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NewsletterName'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsletterInfo'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    NewsletterName:
+      type: string
+      enum:
+      - 藝術文化總中心電子報
+      - 域報 Field Cast
+      - 校長同意權人投票事務委員會
+      - 國立清華大學校長遴選委員會
+      - 清華校友總會會務訊息
+      - 築思脈動(Pulse of Education)
+      - 心諮系雙週例講座
+      - 愛慾電子報報
+      - 教學發展中心電子報-教師
+      - 清華校友電子報
+      - 清華大學化學系電子報
+      - 國立清華大學核工暨工科系友會電子報
+      - 國立清華大學動機系系友電子報
+      - 清華大學化工系友電子報
+      - 國立清華大學學生會電子報
+      - 台灣語言學通訊
+      - 教務處綜合教務組電子報
+      - 課務電子報
+      - 清華大學工工系電子報
+      - 語文中心電子報
+      - eecs-students
+      - 科管院職涯電子報
+      - 人事室電子報
+      - 研發處電子報-教職
+      - 學生事務報-學生
+      - 數學系電子報
+      - 電機工程學系電子報(學生)
+      - 秘書處-全校教職員
+      - 住宿書院電子報
+      - 主計室電子報
+      - 國立清華大學圖書館-學生
+      - 諮商中心-心窩報報
+      - NTHU-Newsletter
+      - NTHU-Division of Health Service
+      - 人社院學士班電子報
+      - 人文社會學院電子報
+      - 新聞剪輯電子報
+      - 清華簡訊
+      - 計中-教育訓練
+      title: NewsletterName
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    NewsletterInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 該電子報名稱
+        link:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Link
+          description: 該電子報網址
+        details:
+          additionalProperties: true
+          type: object
+          title: Details
+          description: 該電子報詳細資訊
+        articles:
+          items:
+            $ref: '#/components/schemas/NewsletterArticle'
+          type: array
+          title: Articles
+          description: 該電子報文章列表
+      type: object
+      required:
+      - name
+      - link
+      - details
+      - articles
+      title: NewsletterInfo
+    NewsletterArticle:
+      properties:
+        title:
+          title: Title
+          description: 電子報標題
+          nullable: true
+          type: string
+        link:
+          title: Link
+          description: 電子報網址
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        date:
+          title: Date
+          description: 發布日期
+          nullable: true
+          type: string
+      type: object
+      required:
+      - title
+      - link
+      title: NewsletterArticle

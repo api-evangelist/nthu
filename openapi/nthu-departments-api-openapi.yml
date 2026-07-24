@@ -1,0 +1,207 @@
+openapi: 3.0.3
+info:
+  title: NTHU Data Announcements Departments API
+  description: 由國立清華大學校內各單位資料所組成的公共資料 API。
+  version: 2.0.0
+servers:
+- url: https://api.nthusa.tw
+  description: NTHU Data API production server
+tags:
+- name: Departments
+paths:
+  /departments/:
+    get:
+      tags:
+      - Departments
+      summary: Get All Departments
+      description: '取得所有部門與人員資料。
+
+        資料來源：[清華通訊錄](https://tel.net.nthu.edu.tw/nthusearch/)'
+      operationId: getAllDepartments
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Department'
+                type: array
+                title: Response Getalldepartments
+  /departments/search:
+    get:
+      tags:
+      - Departments
+      summary: Fuzzy Search Departments And People
+      description: 模糊搜尋全校部門與人員名稱。
+      operationId: searchDepartmentsAndPeople
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+          description: 要查詢的部門或人員名稱
+          title: Query
+        description: 要查詢的部門或人員名稱
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  anyOf:
+                  - type: array
+                    items:
+                      $ref: '#/components/schemas/Department'
+                  - type: array
+                    items:
+                      $ref: '#/components/schemas/DepartmentPerson'
+                title: Response Searchdepartmentsandpeople
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    Department:
+      properties:
+        index:
+          type: string
+          title: Index
+          description: 系所代碼
+        name:
+          type: string
+          title: Name
+          description: 系所名稱
+        parent_name:
+          title: Parent Name
+          description: 上層系所名稱
+          nullable: true
+          type: string
+        url:
+          title: Url
+          description: 系所網站
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        details:
+          $ref: '#/components/schemas/DepartmentDetails'
+      type: object
+      required:
+      - index
+      - name
+      title: Department
+    DepartmentContact:
+      properties:
+        extension:
+          title: Extension
+          nullable: true
+          type: string
+        phone:
+          title: Phone
+          nullable: true
+          type: string
+        fax:
+          title: Fax
+          nullable: true
+          type: string
+        email:
+          title: Email
+          nullable: true
+          type: string
+        website:
+          title: Website
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+      type: object
+      title: DepartmentContact
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    DepartmentPerson:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 姓名
+        title:
+          title: Title
+          description: 職稱
+          nullable: true
+          type: string
+        extension:
+          title: Extension
+          description: 分機
+          nullable: true
+          type: string
+        note:
+          title: Note
+          description: 備註
+          nullable: true
+          type: string
+        email:
+          title: Email
+          description: 電子郵件
+          nullable: true
+          type: string
+      type: object
+      required:
+      - name
+      - title
+      - extension
+      - email
+      title: DepartmentPerson
+    DepartmentDetails:
+      properties:
+        departments:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Departments
+        contact:
+          $ref: '#/components/schemas/DepartmentContact'
+        people:
+          items:
+            $ref: '#/components/schemas/DepartmentPerson'
+          type: array
+          title: People
+      type: object
+      title: DepartmentDetails

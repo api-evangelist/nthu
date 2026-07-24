@@ -1,0 +1,202 @@
+openapi: 3.0.3
+info:
+  title: NTHU Data Announcements Dining API
+  description: 由國立清華大學校內各單位資料所組成的公共資料 API。
+  version: 2.0.0
+servers:
+- url: https://api.nthusa.tw
+  description: NTHU Data API production server
+tags:
+- name: Dining
+paths:
+  /dining/:
+    get:
+      tags:
+      - Dining
+      summary: Get Dining Data
+      description: '取得所有餐廳及廠商資料。
+
+        資料來源：[總務處經營管理組](https://ddfm.site.nthu.edu.tw/p/404-1494-256455.php?Lang=zh-tw)'
+      operationId: getDiningData
+      parameters:
+      - name: building_name
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/DiningBuildingName'
+          description: 餐廳建築名稱（可選）
+        description: 餐廳建築名稱（可選）
+      - name: restaurant_name
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 餐廳名稱（可選）
+          title: Restaurant Name
+        description: 餐廳名稱（可選）
+      - name: fuzzy
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: 是否進行模糊搜尋，若不啟用則必須完全符合（不建議）
+          default: true
+          title: Fuzzy
+        description: 是否進行模糊搜尋，若不啟用則必須完全符合（不建議）
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiningBuilding'
+                title: Response Getdiningdata
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /dining/open:
+    get:
+      tags:
+      - Dining
+      summary: Get Open Restaurants
+      description: 取得指定營業日的餐廳資料。
+      operationId: getOpenRestaurants
+      parameters:
+      - name: schedule
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/DiningScheduleName'
+          description: 營業時間查詢
+        description: 營業時間查詢
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiningRestaurant'
+                title: Response Getopenrestaurants
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    DiningBuilding:
+      properties:
+        building:
+          type: string
+          title: Building
+          description: 建築名稱
+        restaurants:
+          items:
+            $ref: '#/components/schemas/DiningRestaurant'
+          type: array
+          title: Restaurants
+          description: 餐廳資料
+      type: object
+      required:
+      - building
+      - restaurants
+      title: DiningBuilding
+      description: Building with restaurants.
+    DiningRestaurant:
+      properties:
+        area:
+          type: string
+          title: Area
+          description: 餐廳所在建築
+        image:
+          title: Image
+          description: 餐廳圖片
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        name:
+          type: string
+          title: Name
+          description: 餐廳名稱
+        note:
+          type: string
+          title: Note
+          description: 餐廳備註
+        phone:
+          type: string
+          title: Phone
+          description: 餐廳電話
+        schedule:
+          additionalProperties: true
+          type: object
+          title: Schedule
+          description: 餐廳營業時間
+      type: object
+      required:
+      - area
+      - image
+      - name
+      - note
+      - phone
+      - schedule
+      title: DiningRestaurant
+      description: Restaurant information.
+    DiningScheduleName:
+      type: string
+      enum:
+      - today
+      - weekday
+      - saturday
+      - sunday
+      title: DiningScheduleName
+      description: Schedule names for dining queries.
+    DiningBuildingName:
+      type: string
+      enum:
+      - 小吃部
+      - 水木生活中心
+      - 風雲樓
+      - 綜合教學大樓(南大校區)
+      - 其他餐廳
+      title: DiningBuildingName
+      description: Dining building names.

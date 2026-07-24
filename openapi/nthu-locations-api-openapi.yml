@@ -1,0 +1,115 @@
+openapi: 3.0.3
+info:
+  title: NTHU Data Announcements Locations API
+  description: 由國立清華大學校內各單位資料所組成的公共資料 API。
+  version: 2.0.0
+servers:
+- url: https://api.nthusa.tw
+  description: NTHU Data API production server
+tags:
+- name: Locations
+paths:
+  /locations/:
+    get:
+      tags:
+      - Locations
+      summary: Get All Locations
+      description: '取得校內所有地點資訊。
+
+        資料來源：[國立清華大學校園地圖](https://www.nthu.edu.tw/campusmap)'
+      operationId: getAllLocations
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LocationDetail'
+                type: array
+                title: Response Getalllocations
+  /locations/search:
+    get:
+      tags:
+      - Locations
+      summary: Fuzzy Search Locations
+      description: 使用名稱模糊搜尋地點資訊。
+      operationId: fuzzySearchLocations
+      parameters:
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+          description: 要查詢的地點
+          title: Query
+        description: 要查詢的地點
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LocationDetail'
+                title: Response Fuzzysearchlocations
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    LocationDetail:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 地點名稱
+        latitude:
+          type: string
+          title: Latitude
+          description: 緯度
+        longitude:
+          type: string
+          title: Longitude
+          description: 經度
+      type: object
+      required:
+      - name
+      - latitude
+      - longitude
+      title: LocationDetail
+      description: Location detail information.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

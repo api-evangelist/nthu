@@ -1,0 +1,492 @@
+openapi: 3.0.3
+info:
+  title: NTHU Data Announcements Courses API
+  description: 由國立清華大學校內各單位資料所組成的公共資料 API。
+  version: 2.0.0
+servers:
+- url: https://api.nthusa.tw
+  description: NTHU Data API production server
+tags:
+- name: Courses
+paths:
+  /courses/:
+    get:
+      tags:
+      - Courses
+      summary: Get All Courses
+      description: '取得所有課程。
+
+        資料來源：[教務處課務組/JSON格式下載](https://curricul.site.nthu.edu.tw/p/406-1208-111356,r7883.php?Lang=zh-tw)'
+      operationId: getAllCourses
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CourseData'
+                type: array
+                title: Response Getallcourses
+  /courses/search:
+    get:
+      tags:
+      - Courses
+      summary: Search Courses By Field And Value
+      description: '根據提供的欄位和值搜尋課程。
+
+        - 使用欄位名稱作為查詢參數
+
+        - 例如：/search?chinese_title=產業.+&english_title=...'
+      operationId: searchCoursesByFieldAndValue
+      parameters:
+      - name: id
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 課號
+          title: Id
+        description: 課號
+      - name: chinese_title
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 課程中文名稱
+          title: Chinese Title
+        description: 課程中文名稱
+      - name: english_title
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 課程英文名稱
+          title: English Title
+        description: 課程英文名稱
+      - name: credit
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 學分數
+          title: Credit
+        description: 學分數
+      - name: size_limit
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 人限
+          title: Size Limit
+        description: 人限
+      - name: freshman_reservation
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 新生保留人數
+          title: Freshman Reservation
+        description: 新生保留人數
+      - name: object
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 通識對象
+          title: Object
+        description: 通識對象
+      - name: ge_type
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 通識類別
+          title: Ge Type
+        description: 通識類別
+      - name: language
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/CourseLanguage'
+          description: 授課語言
+        description: 授課語言
+      - name: note
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 備註
+          title: Note
+        description: 備註
+      - name: suspend
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 停開註記
+          title: Suspend
+        description: 停開註記
+      - name: class_room_and_time
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 教室與上課時間
+          title: Class Room And Time
+        description: 教室與上課時間
+      - name: teacher
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 授課教師
+          title: Teacher
+        description: 授課教師
+      - name: prerequisite
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 擋修說明
+          title: Prerequisite
+        description: 擋修說明
+      - name: limit_note
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 課程限制說明
+          title: Limit Note
+        description: 課程限制說明
+      - name: expertise
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 第一二專長對應
+          title: Expertise
+        description: 第一二專長對應
+      - name: program
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 學分學程對應
+          title: Program
+        description: 學分學程對應
+      - name: no_extra_selection
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 不可加簽說明
+          title: No Extra Selection
+        description: 不可加簽說明
+      - name: required_optional_note
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 必選修說明
+          title: Required Optional Note
+        description: 必選修說明
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseData'
+                title: Response Searchcoursesbyfieldandvalue
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - Courses
+      summary: Search Courses By Condition
+      description: 進階搜尋，根據條件取得課程。可以使用巢狀條件。
+      operationId: searchCoursesByCondition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/CourseQueryCondition'
+              - $ref: '#/components/schemas/CourseCondition'
+              title: Query Condition
+            examples:
+              normal_1:
+                summary: 單一搜尋條件
+                value:
+                  row_field: chinese_title
+                  matcher: 數統導論
+                  regex_match: true
+              normal_2:
+                summary: 兩個搜尋條件
+                value:
+                - row_field: teacher
+                  matcher: 黃
+                  regex_match: true
+                - or
+                - row_field: teacher
+                  matcher: 孫
+                  regex_match: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseData'
+                title: Response Searchcoursesbycondition
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /courses/lists/{list_name}:
+    get:
+      tags:
+      - Courses
+      summary: List Courses By Type
+      description: 取得指定類型的課程列表。
+      operationId: listCoursesByType
+      parameters:
+      - name: list_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/CourseListName'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CourseData'
+                title: Response Listcoursesbytype
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CourseFieldName:
+      type: string
+      enum:
+      - id
+      - chinese_title
+      - english_title
+      - credit
+      - size_limit
+      - freshman_reservation
+      - object
+      - ge_type
+      - language
+      - note
+      - suspend
+      - class_room_and_time
+      - teacher
+      - prerequisite
+      - limit_note
+      - expertise
+      - program
+      - no_extra_selection
+      - required_optional_note
+      title: CourseFieldName
+      description: Course field names for querying.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    CourseLanguage:
+      type: string
+      enum:
+      - 中
+      - 英
+      title: CourseLanguage
+      description: Course language options.
+    CourseQueryOperation:
+      type: string
+      enum:
+      - and
+      - or
+      title: CourseQueryOperation
+      description: Query operation type.
+    CourseListName:
+      type: string
+      enum:
+      - microcredits
+      - xclass
+      title: CourseListName
+      description: Predefined course lists.
+    CourseData:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: 課號
+        chinese_title:
+          type: string
+          title: Chinese Title
+          description: 課程中文名稱
+        english_title:
+          type: string
+          title: English Title
+          description: 課程英文名稱
+        credit:
+          type: string
+          title: Credit
+          description: 學分數
+        size_limit:
+          type: string
+          title: Size Limit
+          description: 人限
+        freshman_reservation:
+          type: string
+          title: Freshman Reservation
+          description: 新生保留人數
+        object:
+          type: string
+          title: Object
+          description: 通識對象
+        ge_type:
+          type: string
+          title: Ge Type
+          description: 通識類別
+        language:
+          $ref: '#/components/schemas/CourseLanguage'
+          description: 授課語言
+        note:
+          type: string
+          title: Note
+          description: 備註
+        suspend:
+          type: string
+          title: Suspend
+          description: 停開註記
+        class_room_and_time:
+          type: string
+          title: Class Room And Time
+          description: 教室與上課時間
+        teacher:
+          type: string
+          title: Teacher
+          description: 授課教師
+        prerequisite:
+          type: string
+          title: Prerequisite
+          description: 擋修說明
+        limit_note:
+          type: string
+          title: Limit Note
+          description: 課程限制說明
+        expertise:
+          type: string
+          title: Expertise
+          description: 第一二專長對應
+        program:
+          type: string
+          title: Program
+          description: 學分學程對應
+        no_extra_selection:
+          type: string
+          title: No Extra Selection
+          description: 不可加簽說明
+        required_optional_note:
+          type: string
+          title: Required Optional Note
+          description: 必選修說明
+      type: object
+      required:
+      - id
+      - chinese_title
+      - english_title
+      - credit
+      - size_limit
+      - freshman_reservation
+      - object
+      - ge_type
+      - language
+      - note
+      - suspend
+      - class_room_and_time
+      - teacher
+      - prerequisite
+      - limit_note
+      - expertise
+      - program
+      - no_extra_selection
+      - required_optional_note
+      title: CourseData
+      description: Course data schema.
+    CourseQueryCondition:
+      items:
+        anyOf:
+        - $ref: '#/components/schemas/CourseQueryCondition'
+        - $ref: '#/components/schemas/CourseCondition'
+        - $ref: '#/components/schemas/CourseQueryOperation'
+      type: array
+      title: CourseQueryCondition
+      description: Complex course query condition.
+    CourseCondition:
+      properties:
+        row_field:
+          $ref: '#/components/schemas/CourseFieldName'
+          description: 搜尋的欄位名稱
+        matcher:
+          type: string
+          title: Matcher
+          description: 搜尋的值
+        regex_match:
+          type: boolean
+          title: Regex Match
+          description: 是否使用正則表達式
+          default: false
+      type: object
+      required:
+      - row_field
+      - matcher
+      title: CourseCondition
+      description: Single course query condition.

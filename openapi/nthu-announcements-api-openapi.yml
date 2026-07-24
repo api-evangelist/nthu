@@ -1,0 +1,221 @@
+openapi: 3.0.3
+info:
+  title: NTHU Data Announcements API
+  description: 由國立清華大學校內各單位資料所組成的公共資料 API。
+  version: 2.0.0
+servers:
+- url: https://api.nthusa.tw
+  description: NTHU Data API production server
+tags:
+- name: Announcements
+paths:
+  /announcements/:
+    get:
+      tags:
+      - Announcements
+      summary: Get Announcements
+      description: '取得校內每個處室的所有公告資訊。
+
+        資料來源：各處室網站'
+      operationId: getAnnouncements
+      parameters:
+      - name: department
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 部門名稱。請透過 `/announcements/lists/departments` 取得完整列表。
+          title: Department
+        description: 部門名稱。請透過 `/announcements/lists/departments` 取得完整列表。
+      - name: title
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 公告標題關鍵字
+          title: Title
+        description: 公告標題關鍵字
+      - name: language
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/AnnouncementLanguageOption'
+          description: 語言篩選
+        description: 語言篩選
+      - name: fuzzy
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: 是否進行模糊搜尋，若不啟用則必須完全符合（不建議）
+          default: true
+          title: Fuzzy
+        description: 是否進行模糊搜尋，若不啟用則必須完全符合（不建議）
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnnouncementDetail'
+                title: Response Getannouncements
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /announcements/sources:
+    get:
+      tags:
+      - Announcements
+      summary: Get Announcements List
+      description: '取得公告列表（不包含文章內容）。
+
+        資料來源：各處室網站'
+      operationId: getAnnouncementsList
+      parameters:
+      - name: department
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 部門名稱
+          title: Department
+        description: 部門名稱
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+                title: Response Getannouncementslist
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /announcements/lists/departments:
+    get:
+      tags:
+      - Announcements
+      summary: List Announcement Departments
+      description: 取得所有有公告的部門列表。
+      operationId: listAnnouncementDepartments
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+                title: Response Listannouncementdepartments
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    AnnouncementArticle:
+      properties:
+        title:
+          title: Title
+          description: 公告標題
+          nullable: true
+          type: string
+        link:
+          title: Link
+          description: 公告連結
+          nullable: true
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        date:
+          title: Date
+          description: 公告日期 (YYYY-MM-DD)
+          nullable: true
+          type: string
+      type: object
+      required:
+      - title
+      - link
+      title: AnnouncementArticle
+      description: Individual announcement article.
+    AnnouncementLanguageOption:
+      type: string
+      enum:
+      - zh-tw
+      - en
+      title: AnnouncementLanguageOption
+    AnnouncementDetail:
+      properties:
+        title:
+          type: string
+          title: Title
+          description: 佈告欄標題
+        link:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Link
+          description: 佈告欄連結
+        language:
+          type: string
+          title: Language
+          description: 佈告欄語言
+        department:
+          type: string
+          title: Department
+          description: 發布部門
+        articles:
+          items:
+            $ref: '#/components/schemas/AnnouncementArticle'
+          type: array
+          title: Articles
+          description: 公告列表
+      type: object
+      required:
+      - title
+      - link
+      - language
+      - department
+      - articles
+      title: AnnouncementDetail
+      description: Announcement detail with articles list.
