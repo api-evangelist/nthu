@@ -13,9 +13,21 @@ description: >-
   energy usage. Related open-source work lives across student and lab GitHub
   organizations.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/nthu.png
 url: https://raw.githubusercontent.com/api-evangelist/nthu/refs/heads/main/apis.yml
 tags:
   - Education
@@ -28,36 +40,205 @@ created: '2026-06-03'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: nthu:data-api
-    name: NTHU Data API
-    description: >-
-      A public, community-maintained REST API (NTHU-SA, "NTHUSA 32nd") that
-      aggregates public data from National Tsing Hua University campus units.
-      Version 2.0.0, built with FastAPI and exposing interactive Swagger/OpenAPI
-      docs. Confirmed endpoint groups include announcements, buses (routes,
-      stops, schedules), courses (search, lists), departments, dining,
-      energy/electricity usage, libraries (space, lost and found, RSS),
-      locations, and newsletters.
-    humanURL: https://api.nthusa.tw/docs
-    baseURL: https://api.nthusa.tw
-    tags: [ Open Data, Campus, Courses, Transit, Library, Education ]
-    properties:
-      - type: Documentation
-        url: https://api.nthusa.tw/docs
-      - type: OpenAPI
-        url: https://api.nthusa.tw/openapi.json
-      - type: OpenAPI
-        url: openapi/nthu-data-api.yaml
-      - type: GitHub
-        url: https://github.com/NTHU-SA/NTHU-Data-API
-      - type: SourceCode
-        url: https://github.com/NTHU-SA/NTHU-Data-API
-      - type: Vocabulary
-        url: vocabulary/nthu-vocabulary.yml
-      - type: JSONLD
-        url: json-ld/nthu-context.jsonld
-      - type: Rules
-        url: rules/nthu-rules.yml
+- aid: nthu:nthu-announcements-api
+  name: National Tsing Hua University Announcements API
+  description: >-
+    The Announcements API from National Tsing Hua University — 3 operation(s) for announcements.
+  humanURL: https://api.nthusa.tw/docs
+  baseURL: https://api.nthusa.tw
+  tags:
+  - Announcements
+  properties:
+  - type: OpenAPI
+    url: openapi/nthu-announcements-api-openapi.yml
+  - type: Documentation
+    url: https://api.nthusa.tw/docs
+  - type: GitHub
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: SourceCode
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: Vocabulary
+    url: vocabulary/nthu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nthu-context.jsonld
+  - type: Rules
+    url: rules/nthu-rules.yml
+- aid: nthu:nthu-buses-api
+  name: National Tsing Hua University Buses API
+  description: The Buses API from National Tsing Hua University — 4 operation(s) for buses.
+  humanURL: https://api.nthusa.tw/docs
+  baseURL: https://api.nthusa.tw
+  tags:
+  - Buses
+  properties:
+  - type: OpenAPI
+    url: openapi/nthu-buses-api-openapi.yml
+  - type: Documentation
+    url: https://api.nthusa.tw/docs
+  - type: GitHub
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: SourceCode
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: Vocabulary
+    url: vocabulary/nthu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nthu-context.jsonld
+  - type: Rules
+    url: rules/nthu-rules.yml
+- aid: nthu:nthu-courses-api
+  name: National Tsing Hua University Courses API
+  description: The Courses API from National Tsing Hua University — 3 operation(s) for courses.
+  humanURL: https://api.nthusa.tw/docs
+  baseURL: https://api.nthusa.tw
+  tags:
+  - Courses
+  properties:
+  - type: OpenAPI
+    url: openapi/nthu-courses-api-openapi.yml
+  - type: Documentation
+    url: https://api.nthusa.tw/docs
+  - type: GitHub
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: SourceCode
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: Vocabulary
+    url: vocabulary/nthu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nthu-context.jsonld
+  - type: Rules
+    url: rules/nthu-rules.yml
+- aid: nthu:nthu-departments-api
+  name: National Tsing Hua University Departments API
+  description: The Departments API from National Tsing Hua University — 2 operation(s) for departments.
+  humanURL: https://api.nthusa.tw/docs
+  baseURL: https://api.nthusa.tw
+  tags:
+  - Departments
+  properties:
+  - type: OpenAPI
+    url: openapi/nthu-departments-api-openapi.yml
+  - type: Documentation
+    url: https://api.nthusa.tw/docs
+  - type: GitHub
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: SourceCode
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: Vocabulary
+    url: vocabulary/nthu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nthu-context.jsonld
+  - type: Rules
+    url: rules/nthu-rules.yml
+- aid: nthu:nthu-dining-api
+  name: National Tsing Hua University Dining API
+  description: The Dining API from National Tsing Hua University — 2 operation(s) for dining.
+  humanURL: https://api.nthusa.tw/docs
+  baseURL: https://api.nthusa.tw
+  tags:
+  - Dining
+  properties:
+  - type: OpenAPI
+    url: openapi/nthu-dining-api-openapi.yml
+  - type: Documentation
+    url: https://api.nthusa.tw/docs
+  - type: GitHub
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: SourceCode
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: Vocabulary
+    url: vocabulary/nthu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nthu-context.jsonld
+  - type: Rules
+    url: rules/nthu-rules.yml
+- aid: nthu:nthu-energy-api
+  name: National Tsing Hua University Energy API
+  description: The Energy API from National Tsing Hua University — 1 operation(s) for energy.
+  humanURL: https://api.nthusa.tw/docs
+  baseURL: https://api.nthusa.tw
+  tags:
+  - Energy
+  properties:
+  - type: OpenAPI
+    url: openapi/nthu-energy-api-openapi.yml
+  - type: Documentation
+    url: https://api.nthusa.tw/docs
+  - type: GitHub
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: SourceCode
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: Vocabulary
+    url: vocabulary/nthu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nthu-context.jsonld
+  - type: Rules
+    url: rules/nthu-rules.yml
+- aid: nthu:nthu-libraries-api
+  name: National Tsing Hua University Libraries API
+  description: The Libraries API from National Tsing Hua University — 3 operation(s) for libraries.
+  humanURL: https://api.nthusa.tw/docs
+  baseURL: https://api.nthusa.tw
+  tags:
+  - Libraries
+  properties:
+  - type: OpenAPI
+    url: openapi/nthu-libraries-api-openapi.yml
+  - type: Documentation
+    url: https://api.nthusa.tw/docs
+  - type: GitHub
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: SourceCode
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: Vocabulary
+    url: vocabulary/nthu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nthu-context.jsonld
+  - type: Rules
+    url: rules/nthu-rules.yml
+- aid: nthu:nthu-locations-api
+  name: National Tsing Hua University Locations API
+  description: The Locations API from National Tsing Hua University — 2 operation(s) for locations.
+  humanURL: https://api.nthusa.tw/docs
+  baseURL: https://api.nthusa.tw
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/nthu-locations-api-openapi.yml
+  - type: Documentation
+    url: https://api.nthusa.tw/docs
+  - type: GitHub
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: SourceCode
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: Vocabulary
+    url: vocabulary/nthu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nthu-context.jsonld
+  - type: Rules
+    url: rules/nthu-rules.yml
+- aid: nthu:nthu-newsletters-api
+  name: National Tsing Hua University Newsletters API
+  description: The Newsletters API from National Tsing Hua University — 2 operation(s) for newsletters.
+  humanURL: https://api.nthusa.tw/docs
+  baseURL: https://api.nthusa.tw
+  tags:
+  - Newsletters
+  properties:
+  - type: OpenAPI
+    url: openapi/nthu-newsletters-api-openapi.yml
+  - type: Documentation
+    url: https://api.nthusa.tw/docs
+  - type: GitHub
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: SourceCode
+    url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: Vocabulary
+    url: vocabulary/nthu-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/nthu-context.jsonld
+  - type: Rules
+    url: rules/nthu-rules.yml
 common:
   - type: AgenticAccess
     url: agentic-access/nthu-agentic-access.yml
