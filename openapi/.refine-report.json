@@ -1,0 +1,30 @@
+{
+  "provider": "nthu",
+  "sources": [
+    "nthu-announcements-api-openapi.yml",
+    "nthu-buses-api-openapi.yml",
+    "nthu-courses-api-openapi.yml",
+    "nthu-departments-api-openapi.yml",
+    "nthu-dining-api-openapi.yml",
+    "nthu-energy-api-openapi.yml",
+    "nthu-libraries-api-openapi.yml",
+    "nthu-locations-api-openapi.yml",
+    "nthu-newsletters-api-openapi.yml"
+  ],
+  "outputs": [
+    "nthu-announcements-api-openapi.yml",
+    "nthu-buses-api-openapi.yml",
+    "nthu-courses-api-openapi.yml",
+    "nthu-departments-api-openapi.yml",
+    "nthu-dining-api-openapi.yml",
+    "nthu-energy-api-openapi.yml",
+    "nthu-libraries-api-openapi.yml",
+    "nthu-locations-api-openapi.yml",
+    "nthu-newsletters-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
