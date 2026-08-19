@@ -1,0 +1,311 @@
+{
+  "item": [
+    {
+      "id": "53396de5-920d-4339-aa32-8977c914b4f6",
+      "name": "Libraries",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1ef7fd06-3eea-44d3-82d9-4eb49de80451",
+          "name": "Get Library Space Availability",
+          "request": {
+            "name": "Get Library Space Availability",
+            "description": {
+              "content": "取得圖書館空間使用資訊。\n資料來源：[圖書館空間預約系統](https://libsms.lib.nthu.edu.tw/RWDAPI_New/GetDevUseStatus.aspx)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "libraries",
+                "space"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98726363-a127-4573-ab23-01d91552b322",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "libraries",
+                    "space"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"spacetype\": 2909,\n    \"spacetypename\": \"string\",\n    \"zoneid\": \"string\",\n    \"zonename\": \"string\",\n    \"count\": 7775\n  },\n  {\n    \"spacetype\": 4528,\n    \"spacetypename\": \"string\",\n    \"zoneid\": \"string\",\n    \"zonename\": \"string\",\n    \"count\": 2120\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1102a07-ecda-4708-930a-68c5969d62fd",
+          "name": "Get Library Lost And Found Items",
+          "request": {
+            "name": "Get Library Lost And Found Items",
+            "description": {
+              "content": "取得圖書館失物招領資訊。\n資料來源：[圖書館失物招領系統](https://adage.lib.nthu.edu.tw/find)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "libraries",
+                "lost_and_found"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe247c63-7828-471d-a2f4-2f028bfa98ee",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "libraries",
+                    "lost_and_found"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"序號\": \"string\",\n    \"拾獲時間\": \"string\",\n    \"拾獲地點\": \"string\",\n    \"描述\": \"string\"\n  },\n  {\n    \"序號\": \"string\",\n    \"拾獲時間\": \"string\",\n    \"拾獲地點\": \"string\",\n    \"描述\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2bf2383a-8c17-40ff-a78c-c6dc884eb662",
+          "name": "Get Library Rss Data",
+          "request": {
+            "name": "Get Library Rss Data",
+            "description": {
+              "content": "取得指定圖書館的 RSS 資料。\n資料來源：[圖書館官網展覽與活動](https://www.lib.nthu.edu.tw/events/index.html)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "libraries",
+                "rss",
+                ":rss_type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rss_type",
+                  "description": "(Required) RSS 類型：最新消息(news)、電子資源(eresources)、展覽及活動(exhibit)、南大與人社分館(branches)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc9cd3ba-0894-47ca-87df-c99f2d41f6e3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "libraries",
+                    "rss",
+                    ":rss_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rss_type",
+                      "description": "(Required) RSS 類型：最新消息(news)、電子資源(eresources)、展覽及活動(exhibit)、南大與人社分館(branches)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"guid\": \"string\",\n    \"category\": \"string\",\n    \"title\": \"string\",\n    \"link\": \"https://PMKpBLGqassqXHJsIeMYhESrwoPJ.dlpxERBdEy3jb.thmM3\",\n    \"pubDate\": \"string\",\n    \"description\": \"string\",\n    \"author\": \"string\",\n    \"image\": {\n      \"url\": \"http://kTOsbcehwbewRBuhOBgBHhoOrzdGpuNCh.qnBa6nW.dyRKjIwqjtBhU3\",\n      \"title\": \"string\",\n      \"link\": \"http://BLBTYffDKwxEUfMOsI.syrRdTCka2athpa.nkd0QGp\"\n    }\n  },\n  {\n    \"guid\": \"string\",\n    \"category\": \"string\",\n    \"title\": \"string\",\n    \"link\": \"http://LdwSasIySREJB.hglah5hr.gjU2xY+2w+G2Dst\",\n    \"pubDate\": \"string\",\n    \"description\": \"string\",\n    \"author\": \"string\",\n    \"image\": {\n      \"url\": \"https://OUwdxBtz.llvawTzBEtUlNLOftJ.UD1zAx\",\n      \"title\": \"string\",\n      \"link\": \"https://IkJjPoilTYBIQKwtEBoNcoBYxPgPcGNC.oaFCRAs384v1WVpTm3Rwxyye8No7h3Fb9zuOQrRDt70nORD.AO9jQbL3\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f8830d6-b1ff-4707-88ca-7066f39c88ad",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "libraries",
+                    "rss",
+                    ":rss_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rss_type",
+                      "description": "(Required) RSS 類型：最新消息(news)、電子資源(eresources)、展覽及活動(exhibit)、南大與人社分館(branches)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nthusa.tw",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7ec93a00-218c-4db9-a010-2899dfcfe247",
+    "name": "NTHU Data Announcements Libraries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "由國立清華大學校內各單位資料所組成的公共資料 API。",
+      "type": "text/plain"
+    }
+  }
+}

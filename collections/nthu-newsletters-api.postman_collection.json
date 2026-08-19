@@ -1,0 +1,236 @@
+{
+  "item": [
+    {
+      "id": "ff598536-66d8-4ee0-8252-4217fb5e175e",
+      "name": "Newsletters",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "add28791-a900-4a42-9968-63cbd9b7ad02",
+          "name": "Get All Newsletters",
+          "request": {
+            "name": "Get All Newsletters",
+            "description": {
+              "content": "取得所有的電子報。\n資料來源：[國立清華大學電子報系統](https://newsletter.cc.nthu.edu.tw/nthu-list/index.php/zh/)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "newsletters",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2df60355-48cb-4e34-a573-f9194933a81b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "newsletters",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"link\": \"https://gEPMPUW.xkbdTn83ym2-FTPEpvJ3N3I-wUSqseO3ABj-tmlJS67\",\n    \"details\": {\n      \"key_0\": 3708.594452768661\n    },\n    \"articles\": [\n      {\n        \"title\": \"string\",\n        \"link\": \"http://r.upOwgksMal.DcCI46BdSzt1D5q4AtORuySJILLXdikMkUIJoGa6EQEVnf\",\n        \"date\": \"string\"\n      },\n      {\n        \"title\": \"string\",\n        \"link\": \"http://odDzjimOtITbI.hcneNRg8WzJT5WnOrcznnA7dgq0YY4TxwXWgmCGKCMcY.D5bkrglJ\",\n        \"date\": \"string\"\n      }\n    ]\n  },\n  {\n    \"name\": \"string\",\n    \"link\": \"http://BpXik.uazB8f2L6z0..pd,PXdHJEq6rjkGuk25cd2-8+DLHGRJ\",\n    \"details\": {\n      \"key_0\": 6253.60435360426,\n      \"key_1\": 3134.458294290352,\n      \"key_2\": 6341,\n      \"key_3\": \"string\",\n      \"key_4\": 9805.195383558528\n    },\n    \"articles\": [\n      {\n        \"title\": \"string\",\n        \"link\": \"https://Ju.iyzjX8lp31kZql0ERWfdBag9nauL5lsFrxGE.pzY7C7cxAMWRqZckjIQoJYM,d5jkDdBZpODa\",\n        \"date\": \"string\"\n      },\n      {\n        \"title\": \"string\",\n        \"link\": \"https://KWdYdFcrhyQSMmszkFTfjeSByQdKafA.alT17me8kvzIaa5lgJXKu--kCLi\",\n        \"date\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68985a7f-4c90-4dd9-a535-792d85505f65",
+          "name": "Get Newsletter By Name",
+          "request": {
+            "name": "Get Newsletter By Name",
+            "description": {
+              "content": "取得指定電子報的資訊。",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "newsletters",
+                ":newsletter_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "newsletter_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec7733ea-8551-403f-9cfd-9e611afe584e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "newsletters",
+                    ":newsletter_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "newsletter_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"link\": \"http://dGOhubLMyrtNJmbitjPzbf.pyatsw3IUFKMrP-CJMIQeMr.k4EIT46bGEvCTqt7eE\",\n  \"details\": {\n    \"key_0\": 7117,\n    \"key_1\": 6356.135625593886,\n    \"key_2\": 8889.634359760767\n  },\n  \"articles\": [\n    {\n      \"title\": \"string\",\n      \"link\": \"http://lImdrgfxkOsPZeKIwnXJ.asoyG,ImGj1Yf2tU5uLSl5P\",\n      \"date\": \"string\"\n    },\n    {\n      \"title\": \"string\",\n      \"link\": \"https://vVYSqDSG.geYJ55z7C4MxI\",\n      \"date\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e4ba22e-4618-4dba-8db4-a427e503ef81",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "newsletters",
+                    ":newsletter_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "newsletter_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nthusa.tw",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ca349c60-3fff-4a1f-8aab-4abf621d00f0",
+    "name": "NTHU Data Announcements Newsletters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "由國立清華大學校內各單位資料所組成的公共資料 API。",
+      "type": "text/plain"
+    }
+  }
+}

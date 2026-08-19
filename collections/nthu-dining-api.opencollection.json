@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NTHU Data Announcements Dining API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dining",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Dining Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/dining/",
+            "params": [
+              {
+                "name": "building_name",
+                "value": "",
+                "type": "query",
+                "description": "餐廳建築名稱（可選）"
+              },
+              {
+                "name": "restaurant_name",
+                "value": "",
+                "type": "query",
+                "description": "餐廳名稱（可選）"
+              },
+              {
+                "name": "fuzzy",
+                "value": "",
+                "type": "query",
+                "description": "是否進行模糊搜尋，若不啟用則必須完全符合（不建議）"
+              }
+            ]
+          },
+          "docs": "取得所有餐廳及廠商資料。\n資料來源：[總務處經營管理組](https://ddfm.site.nthu.edu.tw/p/404-1494-256455.php?Lang=zh-tw)"
+        },
+        {
+          "info": {
+            "name": "Get Open Restaurants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/dining/open",
+            "params": [
+              {
+                "name": "schedule",
+                "value": "",
+                "type": "query",
+                "description": "營業時間查詢"
+              }
+            ]
+          },
+          "docs": "取得指定營業日的餐廳資料。"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

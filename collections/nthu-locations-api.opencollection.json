@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NTHU Data Announcements Locations API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/locations/"
+          },
+          "docs": "取得校內所有地點資訊。\n資料來源：[國立清華大學校園地圖](https://www.nthu.edu.tw/campusmap)"
+        },
+        {
+          "info": {
+            "name": "Fuzzy Search Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/locations/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "要查詢的地點"
+              }
+            ]
+          },
+          "docs": "使用名稱模糊搜尋地點資訊。"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

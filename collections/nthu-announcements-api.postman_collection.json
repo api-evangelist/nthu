@@ -1,0 +1,398 @@
+{
+  "item": [
+    {
+      "id": "131a594e-4c85-45b8-a712-c7a32ea61859",
+      "name": "Announcements",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d9921169-a0e6-402b-9a42-73d5dfe02953",
+          "name": "Get Announcements",
+          "request": {
+            "name": "Get Announcements",
+            "description": {
+              "content": "取得校內每個處室的所有公告資訊。\n資料來源：各處室網站",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "announcements",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "department",
+                  "value": "<string>",
+                  "description": "部門名稱。請透過 `/announcements/lists/departments` 取得完整列表。"
+                },
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "公告標題關鍵字"
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "語言篩選"
+                },
+                {
+                  "disabled": false,
+                  "key": "fuzzy",
+                  "value": "true",
+                  "description": "是否進行模糊搜尋，若不啟用則必須完全符合（不建議）"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cf4fab4f-3e4c-499d-90f1-ddfcc101fece",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "department",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fuzzy",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"title\": \"string\",\n    \"link\": \"http://TBDGsjwmIzwsIk.gezaI0-eTlucp,\",\n    \"language\": \"string\",\n    \"department\": \"string\",\n    \"articles\": [\n      {\n        \"title\": \"string\",\n        \"link\": \"http://KECOrUwYMymMQBQMZLAToRbZJIk.kypzCx9RYT9nf39X8Y,NGheAotxzmwx4esdoIlo\",\n        \"date\": \"string\"\n      },\n      {\n        \"title\": \"string\",\n        \"link\": \"http://YuDDIxqstTSCM.mzxh0hufwDaZ-X0ivaEuBbKcqH8J5hHwnQENzkRvIlsnWLqKDOQux.gNETE\",\n        \"date\": \"string\"\n      }\n    ]\n  },\n  {\n    \"title\": \"string\",\n    \"link\": \"http://louAdBFZRrhXkF.zyHp.y80fphpkWmdZfLeI7UKka1YbkLIHkCJCprT+Rb1KoDs0wzDKPMn5KkPq8UU\",\n    \"language\": \"string\",\n    \"department\": \"string\",\n    \"articles\": [\n      {\n        \"title\": \"string\",\n        \"link\": \"http://NCxxa.ultrq7ObpFMzSEPiVfqHUtw6FjcZ2GmM2J5my44MoRPhB,90+qSwSq1J,0-sFf8\",\n        \"date\": \"string\"\n      },\n      {\n        \"title\": \"string\",\n        \"link\": \"https://GwszQwoFYqzBRwgrLKgvNPJIPjAvi.doxGGIvziet4\",\n        \"date\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe743267-bd86-4660-98b4-e3002d15dd0a",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "department",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fuzzy",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa9bebc0-756f-4a82-9e3f-7cd35c8c26c2",
+          "name": "Get Announcements List",
+          "request": {
+            "name": "Get Announcements List",
+            "description": {
+              "content": "取得公告列表（不包含文章內容）。\n資料來源：各處室網站",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "announcements",
+                "sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "department",
+                  "value": "<string>",
+                  "description": "部門名稱"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c66b357f-36c5-46ed-8c10-37607d8fb113",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "department",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"key_0\": \"string\"\n  },\n  {\n    \"key_0\": 16,\n    \"key_1\": 7103.301778473752,\n    \"key_2\": 7677.588306631732\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d839eea-b89a-4308-ac70-ad28fb05f800",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "department",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "511763a2-d26c-4a3e-8a02-6155aadc55bd",
+          "name": "List Announcement Departments",
+          "request": {
+            "name": "List Announcement Departments",
+            "description": {
+              "content": "取得所有有公告的部門列表。",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "announcements",
+                "lists",
+                "departments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "403a8516-45dd-4301-b7ac-e439edb6082e",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements",
+                    "lists",
+                    "departments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"string\",\n  \"string\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nthusa.tw",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6ad84988-18fe-4400-9e2a-374a153b96f3",
+    "name": "NTHU Data Announcements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "由國立清華大學校內各單位資料所組成的公共資料 API。",
+      "type": "text/plain"
+    }
+  }
+}

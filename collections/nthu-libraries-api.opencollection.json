@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NTHU Data Announcements Libraries API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Libraries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Library Space Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/libraries/space"
+          },
+          "docs": "取得圖書館空間使用資訊。\n資料來源：[圖書館空間預約系統](https://libsms.lib.nthu.edu.tw/RWDAPI_New/GetDevUseStatus.aspx)"
+        },
+        {
+          "info": {
+            "name": "Get Library Lost And Found Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/libraries/lost_and_found"
+          },
+          "docs": "取得圖書館失物招領資訊。\n資料來源：[圖書館失物招領系統](https://adage.lib.nthu.edu.tw/find)"
+        },
+        {
+          "info": {
+            "name": "Get Library Rss Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/libraries/rss/:rss_type",
+            "params": [
+              {
+                "name": "rss_type",
+                "value": "",
+                "type": "path",
+                "description": "RSS 類型：最新消息(news)、電子資源(eresources)、展覽及活動(exhibit)、南大與人社分館(branches)"
+              }
+            ]
+          },
+          "docs": "取得指定圖書館的 RSS 資料。\n資料來源：[圖書館官網展覽與活動](https://www.lib.nthu.edu.tw/events/index.html)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

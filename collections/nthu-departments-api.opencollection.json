@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NTHU Data Announcements Departments API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Departments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Departments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/departments/"
+          },
+          "docs": "取得所有部門與人員資料。\n資料來源：[清華通訊錄](https://tel.net.nthu.edu.tw/nthusearch/)"
+        },
+        {
+          "info": {
+            "name": "Fuzzy Search Departments And People",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/departments/search",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "要查詢的部門或人員名稱"
+              }
+            ]
+          },
+          "docs": "模糊搜尋全校部門與人員名稱。"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

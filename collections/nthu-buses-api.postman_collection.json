@@ -1,0 +1,648 @@
+{
+  "item": [
+    {
+      "id": "3bea9394-2195-40f9-b17f-19e9c4ca929a",
+      "name": "Buses",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d12b588c-5401-4767-acb1-4fe74c2eb48d",
+          "name": "Get Bus Route Metadata",
+          "request": {
+            "name": "Get Bus Route Metadata",
+            "description": {
+              "content": "取得校園公車資訊。\n- 校本部來自[總務處事務組](https://affairs.site.nthu.edu.tw/p/412-1165-20978.php?Lang=zh-tw)\n- 南大來自[總務處事務組](https://affairs.site.nthu.edu.tw/p/412-1165-20979.php?Lang=zh-tw)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "buses",
+                "routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bus_type",
+                  "value": "<string>",
+                  "description": "車種選擇"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "方向選擇"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb971b1f-6715-408e-bad8-3a7ea9b0d324",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "buses",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bus_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"direction\": \"string\",\n    \"duration\": \"string\",\n    \"route\": \"string\",\n    \"routeEN\": \"string\"\n  },\n  {\n    \"direction\": \"string\",\n    \"duration\": \"string\",\n    \"route\": \"string\",\n    \"routeEN\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25f90a49-ab13-4db6-8ba1-6ae79ec72cb7",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "buses",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bus_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a97e19ee-e909-40f1-bcac-495a6037b488",
+          "name": "Get Bus Stops Information",
+          "request": {
+            "name": "Get Bus Stops Information",
+            "description": {
+              "content": "取得所有公車站牌的經緯度與資訊。",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "buses",
+                "info",
+                "stops"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55053c0e-cadf-4ad1-af8f-2a98a9cfeb8a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "buses",
+                    "info",
+                    "stops"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"name_en\": \"string\",\n    \"latitude\": \"string\",\n    \"longitude\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"name_en\": \"string\",\n    \"latitude\": \"string\",\n    \"longitude\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5420d0f3-4555-4ccd-bf4e-ef37858ca2a9",
+          "name": "Get Bus Schedules",
+          "request": {
+            "name": "Get Bus Schedules",
+            "description": {
+              "content": "取得指定條件的公車時刻表。\n- **details=False**: 回傳簡易時刻表（僅發車時間）。\n- **details=True**: 回傳詳細時刻表（包含每站預估到達時間）。",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "buses",
+                "schedules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bus_type",
+                  "value": "<string>",
+                  "description": "(Required) 車種選擇"
+                },
+                {
+                  "disabled": false,
+                  "key": "day",
+                  "value": "<string>",
+                  "description": "(Required) 平日、假日或目前時刻"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "(Required) 上山或下山"
+                },
+                {
+                  "disabled": false,
+                  "key": "details",
+                  "value": "false",
+                  "description": "是否包含詳細站點時間資訊"
+                },
+                {
+                  "disabled": false,
+                  "key": "time",
+                  "value": "<string>",
+                  "description": "時間。若搜尋 day 選擇 current 時失效。"
+                },
+                {
+                  "disabled": false,
+                  "key": "limits",
+                  "value": "5",
+                  "description": "最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "484b4af7-3e02-43c6-854e-3820c3aafad8",
+              "name": "取得公車時刻表信息。",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "buses",
+                    "schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bus_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "details",
+                      "value": "false"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limits",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"dep_info\": {\n      \"time\": \"string\",\n      \"description\": \"string\",\n      \"dep_stop\": \"string\",\n      \"bus_type\": \"large-sized_bus\",\n      \"line\": \"\"\n    },\n    \"stops_time\": [\n      {\n        \"stop\": \"string\",\n        \"arrive_time\": \"string\"\n      },\n      {\n        \"stop\": \"string\",\n        \"arrive_time\": \"string\"\n      }\n    ]\n  },\n  {\n    \"dep_info\": {\n      \"time\": \"string\",\n      \"description\": \"string\",\n      \"dep_stop\": \"string\",\n      \"bus_type\": \"middle-sized_bus\",\n      \"line\": \"\"\n    },\n    \"stops_time\": [\n      {\n        \"stop\": \"string\",\n        \"arrive_time\": \"string\"\n      },\n      {\n        \"stop\": \"string\",\n        \"arrive_time\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66e1ffaf-6306-4d5f-b23a-c0779ef48404",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "buses",
+                    "schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bus_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "details",
+                      "value": "false"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limits",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a5e371e-9ba4-4b02-9ba4-3985b37b847e",
+          "name": "Get Stop Bus Information By Stop",
+          "request": {
+            "name": "Get Stop Bus Information By Stop",
+            "description": {
+              "content": "取得指定公車站牌的資訊和即將停靠公車。",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "buses",
+                "stops",
+                ":stop_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bus_type",
+                  "value": "<string>",
+                  "description": "(Required) 車種選擇"
+                },
+                {
+                  "disabled": false,
+                  "key": "day",
+                  "value": "<string>",
+                  "description": "(Required) 平日、假日或目前時刻"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "(Required) 上山或下山"
+                },
+                {
+                  "disabled": false,
+                  "key": "time",
+                  "value": "<string>",
+                  "description": "時間。若搜尋 day 選擇 current 時失效。"
+                },
+                {
+                  "disabled": false,
+                  "key": "limits",
+                  "value": "5",
+                  "description": "最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stop_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ee50fa1-fc77-4e3d-b8a2-38a6b7809647",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "buses",
+                    "stops",
+                    ":stop_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bus_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limits",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stop_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"arrive_time\": \"string\",\n    \"dep_time\": \"string\",\n    \"dep_stop\": \"string\",\n    \"description\": \"string\",\n    \"bus_type\": \"middle-sized_bus\"\n  },\n  {\n    \"arrive_time\": \"string\",\n    \"dep_time\": \"string\",\n    \"dep_stop\": \"string\",\n    \"description\": \"string\",\n    \"bus_type\": \"middle-sized_bus\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74609f18-2495-4d04-a1aa-5b5623724461",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "buses",
+                    "stops",
+                    ":stop_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bus_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "day",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limits",
+                      "value": "5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stop_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nthusa.tw",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1b29ada5-0d3c-4702-b493-1156b5fc5b4f",
+    "name": "NTHU Data Announcements Buses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "由國立清華大學校內各單位資料所組成的公共資料 API。",
+      "type": "text/plain"
+    }
+  }
+}

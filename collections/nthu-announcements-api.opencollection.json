@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NTHU Data Announcements API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Announcements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Announcements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/announcements/",
+            "params": [
+              {
+                "name": "department",
+                "value": "",
+                "type": "query",
+                "description": "部門名稱。請透過 `/announcements/lists/departments` 取得完整列表。"
+              },
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "公告標題關鍵字"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "語言篩選"
+              },
+              {
+                "name": "fuzzy",
+                "value": "",
+                "type": "query",
+                "description": "是否進行模糊搜尋，若不啟用則必須完全符合（不建議）"
+              }
+            ]
+          },
+          "docs": "取得校內每個處室的所有公告資訊。\n資料來源：各處室網站"
+        },
+        {
+          "info": {
+            "name": "Get Announcements List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/announcements/sources",
+            "params": [
+              {
+                "name": "department",
+                "value": "",
+                "type": "query",
+                "description": "部門名稱"
+              }
+            ]
+          },
+          "docs": "取得公告列表（不包含文章內容）。\n資料來源：各處室網站"
+        },
+        {
+          "info": {
+            "name": "List Announcement Departments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/announcements/lists/departments"
+          },
+          "docs": "取得所有有公告的部門列表。"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

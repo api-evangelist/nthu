@@ -1,0 +1,229 @@
+{
+  "item": [
+    {
+      "id": "38dbcc1a-9e65-4a0e-9b89-157949ddb784",
+      "name": "Departments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eb43f962-baaa-4356-8e76-0cccba09dc5e",
+          "name": "Get All Departments",
+          "request": {
+            "name": "Get All Departments",
+            "description": {
+              "content": "取得所有部門與人員資料。\n資料來源：[清華通訊錄](https://tel.net.nthu.edu.tw/nthusearch/)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "departments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85f8f9bd-3d62-42a1-aa71-b1e2fb2f8e9a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "departments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"index\": \"string\",\n    \"name\": \"string\",\n    \"parent_name\": \"string\",\n    \"url\": \"http://nMkuRAwvSnpAUNoXue.khtwqRcdHCFneHIPhfCclvLINOlsZ-+paYFcKI-dQgJWwcorCmx5sbDd\",\n    \"details\": {\n      \"departments\": [\n        {\n          \"key_0\": 4677.1012146834,\n          \"key_1\": true,\n          \"key_2\": true\n        },\n        {\n          \"key_0\": 4425.067810652731\n        }\n      ],\n      \"contact\": {\n        \"extension\": \"string\",\n        \"phone\": \"string\",\n        \"fax\": \"string\",\n        \"email\": \"string\",\n        \"website\": \"https://XImOPtOSYAQyAOJGXszQa.mdzzJAV22R,5msOH35tyd,zRse2XmzUGX6+octUksmMF5OrFjjNNUulGsC8Dv8LPvq\"\n      },\n      \"people\": [\n        {\n          \"name\": \"string\",\n          \"title\": \"string\",\n          \"extension\": \"string\",\n          \"email\": \"string\",\n          \"note\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"title\": \"string\",\n          \"extension\": \"string\",\n          \"email\": \"string\",\n          \"note\": \"string\"\n        }\n      ]\n    }\n  },\n  {\n    \"index\": \"string\",\n    \"name\": \"string\",\n    \"parent_name\": \"string\",\n    \"url\": \"http://dpkiXBpoypgUqyXdrgWMGe.pwpoJ7NU.wbGQot3Pm7ZnWmnWJW\",\n    \"details\": {\n      \"departments\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": 1215\n        },\n        {\n          \"key_0\": 5140,\n          \"key_1\": 6767,\n          \"key_2\": 5454.295736011188,\n          \"key_3\": 2559\n        }\n      ],\n      \"contact\": {\n        \"extension\": \"string\",\n        \"phone\": \"string\",\n        \"fax\": \"string\",\n        \"email\": \"string\",\n        \"website\": \"https://RZqK.feUP0x\"\n      },\n      \"people\": [\n        {\n          \"name\": \"string\",\n          \"title\": \"string\",\n          \"extension\": \"string\",\n          \"email\": \"string\",\n          \"note\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"title\": \"string\",\n          \"extension\": \"string\",\n          \"email\": \"string\",\n          \"note\": \"string\"\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed77f5e9-003c-4058-8a9a-002bc84cc69e",
+          "name": "Fuzzy Search Departments And People",
+          "request": {
+            "name": "Fuzzy Search Departments And People",
+            "description": {
+              "content": "模糊搜尋全校部門與人員名稱。",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "departments",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) 要查詢的部門或人員名稱"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cbc64b0c-ddc3-4559-ae80-b369656f32ad",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "departments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": [\n    {\n      \"index\": \"string\",\n      \"name\": \"string\",\n      \"parent_name\": \"string\",\n      \"url\": \"http://dDaaWWxHxMA.krppe8RL0wU2Hvt26-I9+ylvL-NW\",\n      \"details\": {\n        \"departments\": [\n          {\n            \"key_0\": \"string\"\n          },\n          {\n            \"key_0\": 4791,\n            \"key_1\": \"string\",\n            \"key_2\": 8692\n          }\n        ],\n        \"contact\": {\n          \"extension\": \"string\",\n          \"phone\": \"string\",\n          \"fax\": \"string\",\n          \"email\": \"string\",\n          \"website\": \"https://XmwndloIiSLsxjGMpYjX.qghkT45IT\"\n        },\n        \"people\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"extension\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"note\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"extension\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"note\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"index\": \"string\",\n      \"name\": \"string\",\n      \"parent_name\": \"string\",\n      \"url\": \"http://pAOFDeKMmGNEGQUhroqDY.kokTsfTfqtKYeDQd9qQUO3gEIbnc44jJBV7CuYs9puTuzjA6007V6JdLpZKbb9+4fsttt.Vt\",\n      \"details\": {\n        \"departments\": [\n          {\n            \"key_0\": 1729.4284906378277\n          },\n          {\n            \"key_0\": true,\n            \"key_1\": \"string\"\n          }\n        ],\n        \"contact\": {\n          \"extension\": \"string\",\n          \"phone\": \"string\",\n          \"fax\": \"string\",\n          \"email\": \"string\",\n          \"website\": \"http://XQjsfeqoNPNzXYNNLqN.qmU1w7D2MnOQIvcaNJvwnMI3-uF.ID3iT+SflSfTyHo58MAzjdccCP,gduQVypzvN01s3V16iWePJEvQvezY7U14UF8apmR\"\n        },\n        \"people\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"extension\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"note\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"extension\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"note\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"key_1\": [\n    {\n      \"index\": \"string\",\n      \"name\": \"string\",\n      \"parent_name\": \"string\",\n      \"url\": \"http://zwtzwLEzptNwahEGiTQPVDMCLHFIHFJJH.dxfyKx3wE57LWRkgT4JP9pqmIq\",\n      \"details\": {\n        \"departments\": [\n          {\n            \"key_0\": false,\n            \"key_1\": \"string\"\n          },\n          {\n            \"key_0\": \"string\",\n            \"key_1\": 1047\n          }\n        ],\n        \"contact\": {\n          \"extension\": \"string\",\n          \"phone\": \"string\",\n          \"fax\": \"string\",\n          \"email\": \"string\",\n          \"website\": \"https://qmIDQLSKwqeeNVVMzNbfysk.hkwKJ+z.RvlNvFLnt7ITIfNbSo,KbnpZ7\"\n        },\n        \"people\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"extension\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"note\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"extension\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"note\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"index\": \"string\",\n      \"name\": \"string\",\n      \"parent_name\": \"string\",\n      \"url\": \"https://KpFTdEfjqfUghkUMDcxmqmfdvHhZIAtb.rsodpRFqDUtJ+x9XewmtTe9qrZCKypHJFSa+ZX3vQrITvcF5\",\n      \"details\": {\n        \"departments\": [\n          {\n            \"key_0\": 1943.759778579921\n          },\n          {\n            \"key_0\": 7344.5635904137725,\n            \"key_1\": \"string\"\n          }\n        ],\n        \"contact\": {\n          \"extension\": \"string\",\n          \"phone\": \"string\",\n          \"fax\": \"string\",\n          \"email\": \"string\",\n          \"website\": \"https://isGhREzPpouWyYOdCd.uvxbFxu,Uy1YzLfZCOsmECyqzs1oiLDzMOEO\"\n        },\n        \"people\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"extension\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"note\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"extension\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"note\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "301f431d-b77d-4d8d-af0a-e03c70f1e04e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "departments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nthusa.tw",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6d3f718d-429e-42ee-9f26-197ea4316b6c",
+    "name": "NTHU Data Announcements Departments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "由國立清華大學校內各單位資料所組成的公共資料 API。",
+      "type": "text/plain"
+    }
+  }
+}

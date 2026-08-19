@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NTHU Data Announcements Energy API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Energy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Realtime Electricity Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/energy/electricity_usage"
+          },
+          "docs": "取得校園電力即時使用量。\n資料來源：[校園能源查詢管理系統](http://140.114.188.86/powermanage/index.aspx)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

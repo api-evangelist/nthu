@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NTHU Data Announcements Newsletters API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Newsletters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Newsletters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/newsletters/"
+          },
+          "docs": "取得所有的電子報。\n資料來源：[國立清華大學電子報系統](https://newsletter.cc.nthu.edu.tw/nthu-list/index.php/zh/)"
+        },
+        {
+          "info": {
+            "name": "Get Newsletter By Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/newsletters/:newsletter_name",
+            "params": [
+              {
+                "name": "newsletter_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "取得指定電子報的資訊。"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

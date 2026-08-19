@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NTHU Data Announcements Courses API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Courses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Courses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/courses/"
+          },
+          "docs": "取得所有課程。\n資料來源：[教務處課務組/JSON格式下載](https://curricul.site.nthu.edu.tw/p/406-1208-111356,r7883.php?Lang=zh-tw)"
+        },
+        {
+          "info": {
+            "name": "Search Courses By Field And Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/courses/search",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "課號"
+              },
+              {
+                "name": "chinese_title",
+                "value": "",
+                "type": "query",
+                "description": "課程中文名稱"
+              },
+              {
+                "name": "english_title",
+                "value": "",
+                "type": "query",
+                "description": "課程英文名稱"
+              },
+              {
+                "name": "credit",
+                "value": "",
+                "type": "query",
+                "description": "學分數"
+              },
+              {
+                "name": "size_limit",
+                "value": "",
+                "type": "query",
+                "description": "人限"
+              },
+              {
+                "name": "freshman_reservation",
+                "value": "",
+                "type": "query",
+                "description": "新生保留人數"
+              },
+              {
+                "name": "object",
+                "value": "",
+                "type": "query",
+                "description": "通識對象"
+              },
+              {
+                "name": "ge_type",
+                "value": "",
+                "type": "query",
+                "description": "通識類別"
+              },
+              {
+                "name": "language",
+                "value": "",
+                "type": "query",
+                "description": "授課語言"
+              },
+              {
+                "name": "note",
+                "value": "",
+                "type": "query",
+                "description": "備註"
+              },
+              {
+                "name": "suspend",
+                "value": "",
+                "type": "query",
+                "description": "停開註記"
+              },
+              {
+                "name": "class_room_and_time",
+                "value": "",
+                "type": "query",
+                "description": "教室與上課時間"
+              },
+              {
+                "name": "teacher",
+                "value": "",
+                "type": "query",
+                "description": "授課教師"
+              },
+              {
+                "name": "prerequisite",
+                "value": "",
+                "type": "query",
+                "description": "擋修說明"
+              },
+              {
+                "name": "limit_note",
+                "value": "",
+                "type": "query",
+                "description": "課程限制說明"
+              },
+              {
+                "name": "expertise",
+                "value": "",
+                "type": "query",
+                "description": "第一二專長對應"
+              },
+              {
+                "name": "program",
+                "value": "",
+                "type": "query",
+                "description": "學分學程對應"
+              },
+              {
+                "name": "no_extra_selection",
+                "value": "",
+                "type": "query",
+                "description": "不可加簽說明"
+              },
+              {
+                "name": "required_optional_note",
+                "value": "",
+                "type": "query",
+                "description": "必選修說明"
+              }
+            ]
+          },
+          "docs": "根據提供的欄位和值搜尋課程。\n- 使用欄位名稱作為查詢參數\n- 例如：/search?chinese_title=產業.+&english_title=..."
+        },
+        {
+          "info": {
+            "name": "Search Courses By Condition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.nthusa.tw/courses/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "進階搜尋，根據條件取得課程。可以使用巢狀條件。"
+        },
+        {
+          "info": {
+            "name": "List Courses By Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/courses/lists/:list_name",
+            "params": [
+              {
+                "name": "list_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "取得指定類型的課程列表。"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

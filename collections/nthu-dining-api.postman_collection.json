@@ -1,0 +1,310 @@
+{
+  "item": [
+    {
+      "id": "1d0197a1-06f8-4461-b63c-31913ef908a8",
+      "name": "Dining",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "65cfca9c-2356-4e4f-a0b8-9c1f4d7639b5",
+          "name": "Get Dining Data",
+          "request": {
+            "name": "Get Dining Data",
+            "description": {
+              "content": "取得所有餐廳及廠商資料。\n資料來源：[總務處經營管理組](https://ddfm.site.nthu.edu.tw/p/404-1494-256455.php?Lang=zh-tw)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dining",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "building_name",
+                  "value": "<string>",
+                  "description": "餐廳建築名稱（可選）"
+                },
+                {
+                  "disabled": false,
+                  "key": "restaurant_name",
+                  "value": "<string>",
+                  "description": "餐廳名稱（可選）"
+                },
+                {
+                  "disabled": false,
+                  "key": "fuzzy",
+                  "value": "true",
+                  "description": "是否進行模糊搜尋，若不啟用則必須完全符合（不建議）"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8df3166-0b50-4182-895b-7e441b2f44d6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dining",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "building_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "restaurant_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fuzzy",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"building\": \"string\",\n    \"restaurants\": [\n      {\n        \"area\": \"string\",\n        \"image\": \"https://GKZrBRKAjudFHlZHhIu.ayAJNNOfbLwAPBtc+7NQKwZYwz,ZpA-7lXgaC395A\",\n        \"name\": \"string\",\n        \"note\": \"string\",\n        \"phone\": \"string\",\n        \"schedule\": {\n          \"key_0\": true\n        }\n      },\n      {\n        \"area\": \"string\",\n        \"image\": \"https://FVDkIfPcsJBZKcOG.fcw3Ucz\",\n        \"name\": \"string\",\n        \"note\": \"string\",\n        \"phone\": \"string\",\n        \"schedule\": {\n          \"key_0\": true,\n          \"key_1\": 3932.530588519282,\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        }\n      }\n    ]\n  },\n  {\n    \"building\": \"string\",\n    \"restaurants\": [\n      {\n        \"area\": \"string\",\n        \"image\": \"http://RGgSatcIhtuFjAAeGGm.smquyT9U82wyc.FJnTn5rmVZMpWAJnEyqBeWp2WODNM,of09mW\",\n        \"name\": \"string\",\n        \"note\": \"string\",\n        \"phone\": \"string\",\n        \"schedule\": {\n          \"key_0\": 6986\n        }\n      },\n      {\n        \"area\": \"string\",\n        \"image\": \"https://VHZqinyzfUmWOIvRcDyHhXNRyDqdA.ehsitdUjUbDsjKJSptnVC5aFeycfGFQ4\",\n        \"name\": \"string\",\n        \"note\": \"string\",\n        \"phone\": \"string\",\n        \"schedule\": {\n          \"key_0\": true\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14251f82-abfb-4c1b-b857-b668e5777873",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dining",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "building_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "restaurant_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fuzzy",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7121ad0-e762-43c0-b874-18fec828a8eb",
+          "name": "Get Open Restaurants",
+          "request": {
+            "name": "Get Open Restaurants",
+            "description": {
+              "content": "取得指定營業日的餐廳資料。",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dining",
+                "open"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "schedule",
+                  "value": "<string>",
+                  "description": "(Required) 營業時間查詢"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2f2c2c8-3f5f-410d-9476-2eef38078919",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dining",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "schedule",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"area\": \"string\",\n    \"image\": \"https://HvxaMIbDWlwMEbnrcY.gomvlE,+dwud.BbVWxW+hY2KM12UkN.jyCnB4lSKuK+54\",\n    \"name\": \"string\",\n    \"note\": \"string\",\n    \"phone\": \"string\",\n    \"schedule\": {\n      \"key_0\": 7824.814797390486,\n      \"key_1\": 4231.807404986141\n    }\n  },\n  {\n    \"area\": \"string\",\n    \"image\": \"https://ZBdYJQEEsXCVYpBZnkojLdtPRPlmil.uhjtSdTYjPl8gIuF7EkTqJRfVH\",\n    \"name\": \"string\",\n    \"note\": \"string\",\n    \"phone\": \"string\",\n    \"schedule\": {\n      \"key_0\": true,\n      \"key_1\": true\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5aaf37f-64be-4e28-bc5c-98aa5d0ef239",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dining",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "schedule",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nthusa.tw",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fda34e0a-79d7-4062-ac42-28723666be20",
+    "name": "NTHU Data Announcements Dining API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "由國立清華大學校內各單位資料所組成的公共資料 API。",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NTHU Data Announcements Buses API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Buses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bus Route Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/buses/routes",
+            "params": [
+              {
+                "name": "bus_type",
+                "value": "",
+                "type": "query",
+                "description": "車種選擇"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "方向選擇"
+              }
+            ]
+          },
+          "docs": "取得校園公車資訊。\n- 校本部來自[總務處事務組](https://affairs.site.nthu.edu.tw/p/412-1165-20978.php?Lang=zh-tw)\n- 南大來自[總務處事務組](https://affairs.site.nthu.edu.tw/p/412-1165-20979.php?Lang=zh-tw)"
+        },
+        {
+          "info": {
+            "name": "Get Bus Stops Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/buses/info/stops"
+          },
+          "docs": "取得所有公車站牌的經緯度與資訊。"
+        },
+        {
+          "info": {
+            "name": "Get Bus Schedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/buses/schedules",
+            "params": [
+              {
+                "name": "bus_type",
+                "value": "",
+                "type": "query",
+                "description": "車種選擇"
+              },
+              {
+                "name": "day",
+                "value": "",
+                "type": "query",
+                "description": "平日、假日或目前時刻"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "上山或下山"
+              },
+              {
+                "name": "details",
+                "value": "",
+                "type": "query",
+                "description": "是否包含詳細站點時間資訊"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "時間。若搜尋 day 選擇 current 時失效。"
+              },
+              {
+                "name": "limits",
+                "value": "",
+                "type": "query",
+                "description": "最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。"
+              }
+            ]
+          },
+          "docs": "取得指定條件的公車時刻表。\n- **details=False**: 回傳簡易時刻表（僅發車時間）。\n- **details=True**: 回傳詳細時刻表（包含每站預估到達時間）。"
+        },
+        {
+          "info": {
+            "name": "Get Stop Bus Information By Stop",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.nthusa.tw/buses/stops/:stop_name",
+            "params": [
+              {
+                "name": "stop_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "bus_type",
+                "value": "",
+                "type": "query",
+                "description": "車種選擇"
+              },
+              {
+                "name": "day",
+                "value": "",
+                "type": "query",
+                "description": "平日、假日或目前時刻"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "上山或下山"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "時間。若搜尋 day 選擇 current 時失效。"
+              },
+              {
+                "name": "limits",
+                "value": "",
+                "type": "query",
+                "description": "最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。"
+              }
+            ]
+          },
+          "docs": "取得指定公車站牌的資訊和即將停靠公車。"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

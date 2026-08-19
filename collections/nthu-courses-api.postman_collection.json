@@ -1,0 +1,753 @@
+{
+  "item": [
+    {
+      "id": "320fe031-de65-454b-8608-6435dfc057a5",
+      "name": "Courses",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4164e699-6322-4b52-9126-adbdc5f7992b",
+          "name": "Get All Courses",
+          "request": {
+            "name": "Get All Courses",
+            "description": {
+              "content": "取得所有課程。\n資料來源：[教務處課務組/JSON格式下載](https://curricul.site.nthu.edu.tw/p/406-1208-111356,r7883.php?Lang=zh-tw)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79d0f1eb-20f1-4eb6-9e70-2201c41170db",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"chinese_title\": \"string\",\n    \"english_title\": \"string\",\n    \"credit\": \"string\",\n    \"size_limit\": \"string\",\n    \"freshman_reservation\": \"string\",\n    \"object\": \"string\",\n    \"ge_type\": \"string\",\n    \"language\": \"英\",\n    \"note\": \"string\",\n    \"suspend\": \"string\",\n    \"class_room_and_time\": \"string\",\n    \"teacher\": \"string\",\n    \"prerequisite\": \"string\",\n    \"limit_note\": \"string\",\n    \"expertise\": \"string\",\n    \"program\": \"string\",\n    \"no_extra_selection\": \"string\",\n    \"required_optional_note\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"chinese_title\": \"string\",\n    \"english_title\": \"string\",\n    \"credit\": \"string\",\n    \"size_limit\": \"string\",\n    \"freshman_reservation\": \"string\",\n    \"object\": \"string\",\n    \"ge_type\": \"string\",\n    \"language\": \"英\",\n    \"note\": \"string\",\n    \"suspend\": \"string\",\n    \"class_room_and_time\": \"string\",\n    \"teacher\": \"string\",\n    \"prerequisite\": \"string\",\n    \"limit_note\": \"string\",\n    \"expertise\": \"string\",\n    \"program\": \"string\",\n    \"no_extra_selection\": \"string\",\n    \"required_optional_note\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9e82991-5132-40e8-920c-4a21e542b654",
+          "name": "Search Courses By Field And Value",
+          "request": {
+            "name": "Search Courses By Field And Value",
+            "description": {
+              "content": "根據提供的欄位和值搜尋課程。\n- 使用欄位名稱作為查詢參數\n- 例如：/search?chinese_title=產業.+&english_title=...",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "課號"
+                },
+                {
+                  "disabled": false,
+                  "key": "chinese_title",
+                  "value": "<string>",
+                  "description": "課程中文名稱"
+                },
+                {
+                  "disabled": false,
+                  "key": "english_title",
+                  "value": "<string>",
+                  "description": "課程英文名稱"
+                },
+                {
+                  "disabled": false,
+                  "key": "credit",
+                  "value": "<string>",
+                  "description": "學分數"
+                },
+                {
+                  "disabled": false,
+                  "key": "size_limit",
+                  "value": "<string>",
+                  "description": "人限"
+                },
+                {
+                  "disabled": false,
+                  "key": "freshman_reservation",
+                  "value": "<string>",
+                  "description": "新生保留人數"
+                },
+                {
+                  "disabled": false,
+                  "key": "object",
+                  "value": "<string>",
+                  "description": "通識對象"
+                },
+                {
+                  "disabled": false,
+                  "key": "ge_type",
+                  "value": "<string>",
+                  "description": "通識類別"
+                },
+                {
+                  "disabled": false,
+                  "key": "language",
+                  "value": "<string>",
+                  "description": "授課語言"
+                },
+                {
+                  "disabled": false,
+                  "key": "note",
+                  "value": "<string>",
+                  "description": "備註"
+                },
+                {
+                  "disabled": false,
+                  "key": "suspend",
+                  "value": "<string>",
+                  "description": "停開註記"
+                },
+                {
+                  "disabled": false,
+                  "key": "class_room_and_time",
+                  "value": "<string>",
+                  "description": "教室與上課時間"
+                },
+                {
+                  "disabled": false,
+                  "key": "teacher",
+                  "value": "<string>",
+                  "description": "授課教師"
+                },
+                {
+                  "disabled": false,
+                  "key": "prerequisite",
+                  "value": "<string>",
+                  "description": "擋修說明"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit_note",
+                  "value": "<string>",
+                  "description": "課程限制說明"
+                },
+                {
+                  "disabled": false,
+                  "key": "expertise",
+                  "value": "<string>",
+                  "description": "第一二專長對應"
+                },
+                {
+                  "disabled": false,
+                  "key": "program",
+                  "value": "<string>",
+                  "description": "學分學程對應"
+                },
+                {
+                  "disabled": false,
+                  "key": "no_extra_selection",
+                  "value": "<string>",
+                  "description": "不可加簽說明"
+                },
+                {
+                  "disabled": false,
+                  "key": "required_optional_note",
+                  "value": "<string>",
+                  "description": "必選修說明"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cca7d801-2e53-4bb0-aa41-789eb7525d15",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "chinese_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "english_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "credit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size_limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "freshman_reservation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ge_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "suspend",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "class_room_and_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "teacher",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prerequisite",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit_note",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expertise",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "program",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no_extra_selection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "required_optional_note",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"chinese_title\": \"string\",\n    \"english_title\": \"string\",\n    \"credit\": \"string\",\n    \"size_limit\": \"string\",\n    \"freshman_reservation\": \"string\",\n    \"object\": \"string\",\n    \"ge_type\": \"string\",\n    \"language\": \"<string>\",\n    \"note\": \"string\",\n    \"suspend\": \"string\",\n    \"class_room_and_time\": \"string\",\n    \"teacher\": \"string\",\n    \"prerequisite\": \"string\",\n    \"limit_note\": \"string\",\n    \"expertise\": \"string\",\n    \"program\": \"string\",\n    \"no_extra_selection\": \"string\",\n    \"required_optional_note\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"chinese_title\": \"string\",\n    \"english_title\": \"string\",\n    \"credit\": \"string\",\n    \"size_limit\": \"string\",\n    \"freshman_reservation\": \"string\",\n    \"object\": \"string\",\n    \"ge_type\": \"string\",\n    \"language\": \"<string>\",\n    \"note\": \"string\",\n    \"suspend\": \"string\",\n    \"class_room_and_time\": \"string\",\n    \"teacher\": \"string\",\n    \"prerequisite\": \"string\",\n    \"limit_note\": \"string\",\n    \"expertise\": \"string\",\n    \"program\": \"string\",\n    \"no_extra_selection\": \"string\",\n    \"required_optional_note\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfb61cab-8093-49be-ab5c-73364690acab",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "chinese_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "english_title",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "credit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size_limit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "freshman_reservation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ge_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "language",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "suspend",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "class_room_and_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "teacher",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prerequisite",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit_note",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expertise",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "program",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no_extra_selection",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "required_optional_note",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36e3278c-3311-4c9b-8559-36c926ae5ada",
+          "name": "Search Courses By Condition",
+          "request": {
+            "name": "Search Courses By Condition",
+            "description": {
+              "content": "進階搜尋，根據條件取得課程。可以使用巢狀條件。",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"value\": \"<Circular reference to #/components/schemas/CourseQueryCondition detected>\"\n  },\n  {\n    \"value\": \"<Circular reference to #/components/schemas/CourseQueryCondition detected>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c3408e15-5a22-4a4f-9777-e10d8470663a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"row_field\": \"chinese_title\",\n  \"matcher\": \"數統導論\",\n  \"regex_match\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"chinese_title\": \"string\",\n    \"english_title\": \"string\",\n    \"credit\": \"string\",\n    \"size_limit\": \"string\",\n    \"freshman_reservation\": \"string\",\n    \"object\": \"string\",\n    \"ge_type\": \"string\",\n    \"language\": \"<string>\",\n    \"note\": \"string\",\n    \"suspend\": \"string\",\n    \"class_room_and_time\": \"string\",\n    \"teacher\": \"string\",\n    \"prerequisite\": \"string\",\n    \"limit_note\": \"string\",\n    \"expertise\": \"string\",\n    \"program\": \"string\",\n    \"no_extra_selection\": \"string\",\n    \"required_optional_note\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"chinese_title\": \"string\",\n    \"english_title\": \"string\",\n    \"credit\": \"string\",\n    \"size_limit\": \"string\",\n    \"freshman_reservation\": \"string\",\n    \"object\": \"string\",\n    \"ge_type\": \"string\",\n    \"language\": \"<string>\",\n    \"note\": \"string\",\n    \"suspend\": \"string\",\n    \"class_room_and_time\": \"string\",\n    \"teacher\": \"string\",\n    \"prerequisite\": \"string\",\n    \"limit_note\": \"string\",\n    \"expertise\": \"string\",\n    \"program\": \"string\",\n    \"no_extra_selection\": \"string\",\n    \"required_optional_note\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a7958c3-613b-436f-913e-12d64a257c23",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"row_field\": \"chinese_title\",\n  \"matcher\": \"數統導論\",\n  \"regex_match\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "414705a1-9c18-4a02-8101-ccdb152c4cab",
+          "name": "List Courses By Type",
+          "request": {
+            "name": "List Courses By Type",
+            "description": {
+              "content": "取得指定類型的課程列表。",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses",
+                "lists",
+                ":list_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "list_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd85e6cf-8c99-4a4a-be27-335511ec7e94",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    "lists",
+                    ":list_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "list_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"chinese_title\": \"string\",\n    \"english_title\": \"string\",\n    \"credit\": \"string\",\n    \"size_limit\": \"string\",\n    \"freshman_reservation\": \"string\",\n    \"object\": \"string\",\n    \"ge_type\": \"string\",\n    \"language\": \"<string>\",\n    \"note\": \"string\",\n    \"suspend\": \"string\",\n    \"class_room_and_time\": \"string\",\n    \"teacher\": \"string\",\n    \"prerequisite\": \"string\",\n    \"limit_note\": \"string\",\n    \"expertise\": \"string\",\n    \"program\": \"string\",\n    \"no_extra_selection\": \"string\",\n    \"required_optional_note\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"chinese_title\": \"string\",\n    \"english_title\": \"string\",\n    \"credit\": \"string\",\n    \"size_limit\": \"string\",\n    \"freshman_reservation\": \"string\",\n    \"object\": \"string\",\n    \"ge_type\": \"string\",\n    \"language\": \"<string>\",\n    \"note\": \"string\",\n    \"suspend\": \"string\",\n    \"class_room_and_time\": \"string\",\n    \"teacher\": \"string\",\n    \"prerequisite\": \"string\",\n    \"limit_note\": \"string\",\n    \"expertise\": \"string\",\n    \"program\": \"string\",\n    \"no_extra_selection\": \"string\",\n    \"required_optional_note\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d75424b2-6c7a-4e65-9d19-ff101dc96f94",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    "lists",
+                    ":list_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "list_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.nthusa.tw",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a86f6b14-2866-4078-8123-a636a828fcea",
+    "name": "NTHU Data Announcements Courses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "由國立清華大學校內各單位資料所組成的公共資料 API。",
+      "type": "text/plain"
+    }
+  }
+}
