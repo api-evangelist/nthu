@@ -69,6 +69,8 @@ apis:
   humanURL: https://api.nthusa.tw/docs
   baseURL: https://api.nthusa.tw
   tags:
+  - Bus
+  tags_raw:
   - Buses
   properties:
   - type: OpenAPI
