@@ -256,6 +256,9 @@ apis:
   - type: Rules
     url: rules/nthu-rules.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/nthu-capability-edges.yml
+    name: National Tsing Hua University Business Capability Map
   - type: License
     name: MIT
     url: https://github.com/NTHU-SA/NTHU-Data-API/blob/main/LICENSE
