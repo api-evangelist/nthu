@@ -1,44 +1,64 @@
 ---
 aid: nthu
 name: National Tsing Hua University
+x-type: university
+x-category: Public Research University
 description: >-
-  National Tsing Hua University (NTHU) is a national public research university
-  in Hsinchu, Taiwan, originally founded in 1911 and re-established in Taiwan in
-  1956. It is ranked #210 in the QS World University Rankings 2025 and is one of
-  Taiwan's premier research institutions across science, engineering, humanities,
-  and management. NTHU does not operate an official institution-wide developer
-  portal, but its public developer footprint centers on the community-maintained
-  NTHU Data API (NTHU-SA), a live FastAPI/OpenAPI service that aggregates public
-  campus data such as courses, buses, dining, library spaces, announcements, and
-  energy usage. Related open-source work lives across student and lab GitHub
-  organizations.
+  National Tsing Hua University (NTHU) is a national public research university in Hsinchu, Taiwan,
+  founded in Beijing in 1911 and re-established in Taiwan in 1956. It has no central developer
+  portal, no API catalog and no institution-wide API program, and this profile is deliberately small
+  because the honest footprint is small. It does, however, hold something most of this cohort does
+  not: one genuinely institution-operated, institution-governed API. NTHU's Computer and
+  Communication Center runs an OAuth 2.0 authorization and identity service at
+  oauth.ccxp.nthu.edu.tw, fronting the Academic Information System (CCXP), documented by the
+  university in its own interface manual, governed by a regulation passed by the Computer and
+  Communication Committee in December 2020, and carrying a published scheduled repeal date of
+  2027-07-31. It is not self-service — a request needs a unit head's signature, Computer and
+  Communication Center review, and sign-off from every unit that owns a requested data field — but
+  it is NTHU's own engineering on NTHU's own host. Everything else programmable that carries NTHU's
+  name is operated by someone else. The widely cited NTHU Data API, a live FastAPI service with an
+  OpenAPI 3.1.0 description and 22 keyless public paths over campus announcements, buses, courses,
+  departments, dining, energy, library spaces, locations and newsletters, is built and hosted by the
+  NTHU Student Association on nthusa.tw, not by the university on nthu.edu.tw. The research portal
+  at scholars.nthu.edu.tw is an Ex Libris Esploro tenant, and the library discovery service is an
+  Ex Libris Primo VE tenant shared through the University System of Taiwan consortium. Those are
+  real institutional facts and they are recorded as tenant relationships, but they are not NTHU's
+  contracts and are not scored as such.
 type: Index
 deliveryModel:
-  model: open-core
+  model: open-source
   license: MIT
   open_source: true
-  commercial: true
+  commercial: false
   callable_host: true
-  label: Open core · an OSS project plus a commercial hosted product
+  label: Open source · a freely callable public API with a permissively licensed implementation
   confidence: high
   source:
   - license
   - openapi
-  - pricing
-  generated: '2026-08-28'
-  method: derived
+  - probe
+  generated: '2026-08-30'
+  method: probed
+  note: >-
+    Corrects a 2026-08-28 `open-core` / `commercial: true` classification. Neither the institution
+    nor the student association sells anything here: the NTHU Data API is MIT-licensed and free, and
+    the institution's OAuth service is an internal identity service with no price at all.
 accessModel:
   pricing: free
-  onboarding: unknown
+  onboarding: mixed
   trial: false
-  try_now: false
-  public: false
-  label: Free
-  confidence: medium
+  try_now: true
+  public: true
+  label: Free · public and keyless on the tenant data API, application-gated on the institution's own OAuth service
+  confidence: high
   source:
-  - plans
-  generated: '2026-07-22'
-  method: derived
+  - probe
+  - https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+  generated: '2026-08-30'
+  method: probed
+  note: >-
+    All 22 NTHU Data API paths returned 200 with live data on 2026-08-30 with no credential. The
+    institution's OAuth service is not self-service and cannot be signed up for from outside NTHU.
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/nthu.png
@@ -48,199 +68,104 @@ tags:
   - Higher Education
   - University
   - Taiwan
+  - Public Research University
+  - Identity
+  - OAuth
   - Open Data
   - Campus
+  - Course Catalog
+  - Research Repository
+  - Library
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 specificationVersion: '0.23'
 apis:
-- aid: nthu:nthu-announcements-api
-  name: National Tsing Hua University Announcements API
+- aid: nthu:nthu-oauth-api
+  name: NTHU Academic Information System OAuth 2.0 Service
+  x-operator: institution
   description: >-
-    The Announcements API from National Tsing Hua University — 3 operation(s) for announcements.
-  humanURL: https://api.nthusa.tw/docs
-  baseURL: https://api.nthusa.tw
+    The one API National Tsing Hua University operates itself. An OAuth 2.0 authorization-code
+    service run by the Computer and Communication Center on NTHU's own host, letting a reviewed
+    external application authenticate an NTHU faculty, staff or student account against the Academic
+    Information System (CCXP) and read an approved subset of six identity fields — userid, name,
+    email, inschool, cid and lmsid. NTHU publishes the interface manual itself; the OpenAPI here is
+    derived from that manual, not fabricated, and all three endpoints were probed live on
+    2026-08-30. Access is application-gated: a unit head must sign, the Computer and Communication
+    Center must review, and each data-owning unit must approve the fields released. Secret keys
+    expire after one year.
+  humanURL: https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+  baseURL: https://oauth.ccxp.nthu.edu.tw/v1.1
   tags:
-  - Announcements
+  - Identity
+  - OAuth
+  - Authentication
   properties:
   - type: OpenAPI
-    url: openapi/nthu-announcements-api-openapi.yml
+    url: openapi/nthu-oauth-api-openapi.yml
   - type: Documentation
-    url: https://api.nthusa.tw/docs
-  - type: GitHub
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: SourceCode
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: Vocabulary
-    url: vocabulary/nthu-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/nthu-context.jsonld
-  - type: Rules
-    url: rules/nthu-rules.yml
-- aid: nthu:nthu-buses-api
-  name: National Tsing Hua University Buses API
-  description: The Buses API from National Tsing Hua University — 4 operation(s) for buses.
+    url: https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+  - type: TermsOfService
+    url: https://law.site.nthu.edu.tw/p/406-1326-197509,r6923.php
+  - type: Authentication
+    url: authentication/nthu-authentication.yml
+  - type: Scopes
+    url: scopes/nthu-scopes.yml
+  - type: Errors
+    url: errors/nthu-errors.yml
+  - type: Lifecycle
+    url: lifecycle/nthu-lifecycle.yml
+  - type: Conformance
+    url: conformance/nthu-conformance.yml
+  - type: Support
+    url: https://ccc.site.nthu.edu.tw/
+- aid: nthu:nthu-data-api
+  name: NTHU Data API
+  x-operator: tenant
+  x-operator-detail: >-
+    Built, hosted and maintained by the NTHU Student Association (NTHU-SA) at api.nthusa.tw, a
+    domain the university does not own. The data is NTHU's campus data, scraped from NTHU unit
+    websites; the service, the contract and the operational continuity are the student
+    organisation's. Institution-endorsed to the extent that it aggregates official NTHU sources, but
+    it is not published, hosted or supported by the university.
+  description: >-
+    A live, keyless, MIT-licensed FastAPI service publishing 22 paths over NTHU campus data —
+    announcements by unit, campus bus routes and schedules, the course catalog and course search,
+    department directories, dining venues and opening hours, real-time campus electricity usage,
+    library study-space availability and lost-and-found, campus locations, and unit newsletters. It
+    publishes its own OpenAPI description at /openapi.json (serving 3.1.0 as of 2026-08-30; the
+    archived pristine copy in openapi/_original/ declares 3.0.3, so upstream has since bumped its
+    emitted version) and Swagger UI at /docs. Split
+    per tag by our refine pipeline into the nine documents referenced below; the pristine source
+    contract is openapi/_original/nthu-data-api.yaml.
   humanURL: https://api.nthusa.tw/docs
   baseURL: https://api.nthusa.tw
   tags:
-  - Bus
-  tags_raw:
-  - Buses
-  properties:
-  - type: OpenAPI
-    url: openapi/nthu-buses-api-openapi.yml
-  - type: Documentation
-    url: https://api.nthusa.tw/docs
-  - type: GitHub
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: SourceCode
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: Vocabulary
-    url: vocabulary/nthu-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/nthu-context.jsonld
-  - type: Rules
-    url: rules/nthu-rules.yml
-- aid: nthu:nthu-courses-api
-  name: National Tsing Hua University Courses API
-  description: The Courses API from National Tsing Hua University — 3 operation(s) for courses.
-  humanURL: https://api.nthusa.tw/docs
-  baseURL: https://api.nthusa.tw
-  tags:
-  - Courses
-  properties:
-  - type: OpenAPI
-    url: openapi/nthu-courses-api-openapi.yml
-  - type: Documentation
-    url: https://api.nthusa.tw/docs
-  - type: GitHub
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: SourceCode
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: Vocabulary
-    url: vocabulary/nthu-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/nthu-context.jsonld
-  - type: Rules
-    url: rules/nthu-rules.yml
-- aid: nthu:nthu-departments-api
-  name: National Tsing Hua University Departments API
-  description: The Departments API from National Tsing Hua University — 2 operation(s) for departments.
-  humanURL: https://api.nthusa.tw/docs
-  baseURL: https://api.nthusa.tw
-  tags:
-  - Departments
-  properties:
-  - type: OpenAPI
-    url: openapi/nthu-departments-api-openapi.yml
-  - type: Documentation
-    url: https://api.nthusa.tw/docs
-  - type: GitHub
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: SourceCode
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: Vocabulary
-    url: vocabulary/nthu-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/nthu-context.jsonld
-  - type: Rules
-    url: rules/nthu-rules.yml
-- aid: nthu:nthu-dining-api
-  name: National Tsing Hua University Dining API
-  description: The Dining API from National Tsing Hua University — 2 operation(s) for dining.
-  humanURL: https://api.nthusa.tw/docs
-  baseURL: https://api.nthusa.tw
-  tags:
+  - Campus
+  - Open Data
+  - Course Catalog
+  - Transit
   - Dining
-  properties:
-  - type: OpenAPI
-    url: openapi/nthu-dining-api-openapi.yml
-  - type: Documentation
-    url: https://api.nthusa.tw/docs
-  - type: GitHub
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: SourceCode
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: Vocabulary
-    url: vocabulary/nthu-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/nthu-context.jsonld
-  - type: Rules
-    url: rules/nthu-rules.yml
-- aid: nthu:nthu-energy-api
-  name: National Tsing Hua University Energy API
-  description: The Energy API from National Tsing Hua University — 1 operation(s) for energy.
-  humanURL: https://api.nthusa.tw/docs
-  baseURL: https://api.nthusa.tw
-  tags:
+  - Library
   - Energy
   properties:
   - type: OpenAPI
+    url: openapi/_original/nthu-data-api.yaml
+  - type: OpenAPI
+    url: openapi/nthu-announcements-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/nthu-buses-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/nthu-courses-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/nthu-departments-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/nthu-dining-api-openapi.yml
+  - type: OpenAPI
     url: openapi/nthu-energy-api-openapi.yml
-  - type: Documentation
-    url: https://api.nthusa.tw/docs
-  - type: GitHub
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: SourceCode
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: Vocabulary
-    url: vocabulary/nthu-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/nthu-context.jsonld
-  - type: Rules
-    url: rules/nthu-rules.yml
-- aid: nthu:nthu-libraries-api
-  name: National Tsing Hua University Libraries API
-  description: The Libraries API from National Tsing Hua University — 3 operation(s) for libraries.
-  humanURL: https://api.nthusa.tw/docs
-  baseURL: https://api.nthusa.tw
-  tags:
-  - Libraries
-  properties:
   - type: OpenAPI
     url: openapi/nthu-libraries-api-openapi.yml
-  - type: Documentation
-    url: https://api.nthusa.tw/docs
-  - type: GitHub
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: SourceCode
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: Vocabulary
-    url: vocabulary/nthu-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/nthu-context.jsonld
-  - type: Rules
-    url: rules/nthu-rules.yml
-- aid: nthu:nthu-locations-api
-  name: National Tsing Hua University Locations API
-  description: The Locations API from National Tsing Hua University — 2 operation(s) for locations.
-  humanURL: https://api.nthusa.tw/docs
-  baseURL: https://api.nthusa.tw
-  tags:
-  - Locations
-  properties:
   - type: OpenAPI
     url: openapi/nthu-locations-api-openapi.yml
-  - type: Documentation
-    url: https://api.nthusa.tw/docs
-  - type: GitHub
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: SourceCode
-    url: https://github.com/NTHU-SA/NTHU-Data-API
-  - type: Vocabulary
-    url: vocabulary/nthu-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/nthu-context.jsonld
-  - type: Rules
-    url: rules/nthu-rules.yml
-- aid: nthu:nthu-newsletters-api
-  name: National Tsing Hua University Newsletters API
-  description: The Newsletters API from National Tsing Hua University — 2 operation(s) for newsletters.
-  humanURL: https://api.nthusa.tw/docs
-  baseURL: https://api.nthusa.tw
-  tags:
-  - Newsletters
-  properties:
   - type: OpenAPI
     url: openapi/nthu-newsletters-api-openapi.yml
   - type: Documentation
@@ -249,29 +174,139 @@ apis:
     url: https://github.com/NTHU-SA/NTHU-Data-API
   - type: SourceCode
     url: https://github.com/NTHU-SA/NTHU-Data-API
+  - type: License
+    url: https://github.com/NTHU-SA/NTHU-Data-API/blob/main/LICENSE
   - type: Vocabulary
     url: vocabulary/nthu-vocabulary.yml
   - type: JSONLD
     url: json-ld/nthu-context.jsonld
   - type: Rules
     url: rules/nthu-rules.yml
+  - type: AgenticAccess
+    url: agentic-access/nthu-agentic-access.yml
+  - type: Errors
+    url: errors/nthu-errors.yml
+  - type: Lifecycle
+    url: lifecycle/nthu-lifecycle.yml
+- aid: nthu:nthu-research-portal
+  name: NTHU Research Portal (Esploro tenant)
+  x-operator: tenant
+  x-operator-detail: >-
+    scholars.nthu.edu.tw is an NTHU-owned hostname CNAMEd to
+    nthu-researchportal.esploro.exlibrisgroup.com; the portal footer reads "Powered by Esploro from
+    Clarivate". The scholarly record is NTHU's, the platform and every interface on it are Ex
+    Libris/Clarivate's. No Esploro contract is saved under this institution.
+  description: >-
+    NTHU's institutional research repository and researcher-profile portal, running on Ex Libris
+    Esploro. The former institutional repository host nthur.lib.nthu.edu.tw now redirects here. An
+    OAI-PMH service is deployed and addressable at /view/oai/886UST_NTHU/request, but harvesting is
+    switched off — a verb=Identify request returns HTTP 403 with OAI error code 21, "Unauthorized
+    access to the OAI services". The portal itself serves an SPA shell to non-browser clients, so
+    nothing on it is machine-readable from outside.
+  humanURL: https://scholars.nthu.edu.tw/esploro/
+  baseURL: https://scholars.nthu.edu.tw
+  tags:
+  - Research Repository
+  - OAI-PMH
+  - Scholarly Communication
+  properties:
+  - type: Website
+    url: https://scholars.nthu.edu.tw/esploro/
+  - type: Conformance
+    url: conformance/nthu-conformance.yml
+- aid: nthu:nthu-library-discovery
+  name: NTHU Library Discovery (Primo VE tenant)
+  x-operator: tenant
+  x-operator-detail: >-
+    Hosted on nthu.primo.exlibrisgroup.com — an Ex Libris host, not an NTHU one — under the view
+    identifier 886UST_NTHU, shared through the University System of Taiwan consortium. The
+    collection is NTHU's; the discovery layer and its APIs are Ex Libris's, and are not saved here.
+  description: >-
+    NTHU Library's discovery service on Ex Libris Primo VE. Notable for what it reveals rather than
+    what it offers: its sign-in link declares authenticationProfile=NTHU_SAML and auth=SAML, which
+    is the only public evidence that NTHU operates its own SAML identity provider. The Primo public
+    PNX search API was probed and returned HTTP 400 for an unauthenticated caller, and the
+    corresponding OAI endpoint returns the same 403 as the research portal.
+  humanURL: https://nthu.primo.exlibrisgroup.com/discovery/search?vid=886UST_NTHU
+  baseURL: https://nthu.primo.exlibrisgroup.com
+  tags:
+  - Library
+  - Discovery
+  - SAML
+  properties:
+  - type: Website
+    url: https://nthu.primo.exlibrisgroup.com/discovery/search?vid=886UST_NTHU
+  - type: Documentation
+    url: https://www.lib.nthu.edu.tw/
+  - type: Conformance
+    url: conformance/nthu-conformance.yml
 common:
+  - type: Website
+    url: https://www.nthu.edu.tw/
+  - type: Website
+    name: English site
+    url: https://nthu-en.site.nthu.edu.tw/
+  - type: Documentation
+    name: NTHU Academic Information System OAuth interface manual
+    url: https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+  - type: APIReference
+    name: NTHU Data API interactive reference
+    url: https://api.nthusa.tw/docs
+  - type: TermsOfService
+    name: NTHU Academic Information System OAuth Service Management Regulations
+    url: https://law.site.nthu.edu.tw/p/406-1326-197509,r6923.php
+  - type: IdentityFederation
+    name: NTHU Academic Information System OAuth 2.0 service
+    url: https://oauth.ccxp.nthu.edu.tw/
+  - type: ResearchRepository
+    name: NTHU Research Portal (Ex Libris Esploro tenant)
+    url: https://scholars.nthu.edu.tw/esploro/
+  - type: LibraryCatalog
+    name: NTHU Library discovery (Ex Libris Primo VE tenant, vid 886UST_NTHU)
+    url: https://nthu.primo.exlibrisgroup.com/discovery/search?vid=886UST_NTHU
+  - type: CourseCatalog
+    name: NTHU Curriculum Division
+    url: https://curricul.site.nthu.edu.tw/
+  - type: AIPolicy
+    name: NTHU generative AI ethics statement for course syllabi
+    url: https://curricul.site.nthu.edu.tw/p/404-1208-248357.php?Lang=zh-tw
+  - type: AIPolicy
+    name: Guidelines for AI collaboration, co-learning and literacy in higher education (PDF)
+    url: https://ctld.site.nthu.edu.tw/p/450-1217-253458,c0.php?Lang=zh-tw
+  - type: Support
+    name: NTHU Computer and Communication Center
+    url: https://ccc.site.nthu.edu.tw/
+  - type: Support
+    name: NTHU Network Systems Division — CCXP portal login integration notes
+    url: https://net.nthu.edu.tw/netsys/service:portal:login_from_ccxp
+  - type: GitHub
+    name: NTHU Student Association
+    url: https://github.com/NTHU-SA
+  - type: GitHub
+    name: NTHUMods student developer organisation
+    url: https://github.com/nthumodifications
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/national-tsing-hua-university/
+  - type: License
+    name: MIT (NTHU Data API, NTHU-SA)
+    url: https://github.com/NTHU-SA/NTHU-Data-API/blob/main/LICENSE
+  - type: Authentication
+    url: authentication/nthu-authentication.yml
+  - type: Scopes
+    url: scopes/nthu-scopes.yml
+  - type: Errors
+    url: errors/nthu-errors.yml
+  - type: Lifecycle
+    url: lifecycle/nthu-lifecycle.yml
+  - type: Conformance
+    url: conformance/nthu-conformance.yml
   - type: CapabilityMap
     url: capabilities/nthu-capability-edges.yml
     name: National Tsing Hua University Business Capability Map
-  - type: License
-    name: MIT
-    url: https://github.com/NTHU-SA/NTHU-Data-API/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/nthu-agentic-access.yml
   - type: DomainSecurity
     url: security/nthu-domain-security.yml
-  - type: Website
-    url: https://www.nthu.edu.tw/
-  - type: GitHub
-    url: https://github.com/NTHU-SA
-  - type: LinkedIn
-    url: https://www.linkedin.com/school/national-tsing-hua-university/
   - type: Plans
     url: plans/nthu-plans-pricing.yml
   - type: RateLimits
@@ -280,6 +315,86 @@ common:
     url: finops/nthu-finops.yml
   - type: Review
     url: review.yml
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    National Tsing Hua University operates exactly one API of its own and it was found, documented
+    and probed: the Computer and Communication Center's OAuth 2.0 service at
+    oauth.ccxp.nthu.edu.tw/v1.1, with a published interface manual, a governing regulation adopted
+    2020-12-22 and a scheduled repeal of 2027-07-31. Everything else in this repo is now correctly
+    attributed away from the institution. The nine OpenAPI documents previously listed as nine
+    separate NTHU APIs are one contract, the NTHU Data API, and it is operated by the NTHU Student
+    Association on nthusa.tw rather than by the university — recorded here as a single tenant
+    surface rather than deleted, because the relationship is real. Two vendor platform tenancies
+    were found and recorded without saving a vendor contract: an Ex Libris Esploro research portal
+    on the NTHU-owned host scholars.nthu.edu.tw, and an Ex Libris Primo VE library discovery service
+    on an Ex Libris host under the University System of Taiwan view 886UST_NTHU. Hunted and not
+    found: no data./opendata./api. host under nthu.edu.tw resolves at all; NTHU has no eduGAIN entry
+    and no Taiwanese registration authority appears in the eduGAIN entity list; the OAI-PMH service
+    exists but returns 403; the Esploro portal answers every path with the same 2,328-byte SPA
+    shell. Searched in Traditional Chinese as well as English, which is how the OAuth governance
+    regulation and both AI-policy documents were found.
+  evidence:
+  - url: https://oauth.ccxp.nthu.edu.tw/
+    status: 200
+  - url: https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+    status: 200
+  - url: https://oauth.ccxp.nthu.edu.tw/v1.1/authorize.php
+    status: 200
+  - url: https://oauth.ccxp.nthu.edu.tw/v1.1/token.php
+    status: 404
+  - url: https://oauth.ccxp.nthu.edu.tw/v1.1/resource.php
+    status: 401
+  - url: https://oauth.ccxp.nthu.edu.tw/.well-known/openid-configuration
+    status: 403
+  - url: https://law.site.nthu.edu.tw/p/406-1326-197509,r6923.php
+    status: 200
+  - url: https://api.nthusa.tw/openapi.json
+    status: 200
+  - url: https://api.nthusa.tw/dining/
+    status: 200
+  - url: https://api.nthusa.tw/energy/electricity_usage
+    status: 200
+  - url: https://api.nthusa.tw/libraries/space
+    status: 200
+  - url: https://api.nthusa.tw/buses/routes
+    status: 200
+  - url: https://nthur.lib.nthu.edu.tw/
+    status: 200
+  - url: https://scholars.nthu.edu.tw/esploro/
+    status: 200
+  - url: https://scholars.nthu.edu.tw/view/oai/886UST_NTHU/request?verb=Identify
+    status: 403
+  - url: https://nthu.primo.exlibrisgroup.com/discovery/search?vid=886UST_NTHU
+    status: 200
+  - url: https://curricul.site.nthu.edu.tw/p/404-1208-248357.php?Lang=zh-tw
+    status: 200
+  - url: https://ctld.site.nthu.edu.tw/p/450-1217-253458,c0.php?Lang=zh-tw
+    status: 200
+  - url: https://ccc.site.nthu.edu.tw/
+    status: 200
+    note: >-
+      Live canonical host for the Computer and Communication Center. Replaced
+      https://www.cc.nthu.edu.tw/ in this profile on 2026-08-30.
+  - url: https://www.cc.nthu.edu.tw/
+    status: 0
+    note: >-
+      Dead for any TLS-verifying client. The host serves a Let's Encrypt certificate that expired
+      2023-12-04, so the handshake fails; plain http:// on the same name redirects to
+      https://ccc.site.nthu.edu.tw/, which is the live site. Removed as a pointer, recorded here.
+  - url: https://net.nthu.edu.tw/netsys/service:portal:login_from_ccxp
+    status: 200
+  - url: https://data.nthu.edu.tw/
+    status: 0
+  - url: https://api.nthu.edu.tw/
+    status: 0
+  - url: https://opendata.nthu.edu.tw/
+    status: 0
+  - url: https://idp.nthu.edu.tw/idp/shibboleth
+    status: 0
+  - url: https://www.nthu.edu.tw/llms.txt
+    status: 404
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
