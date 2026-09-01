@@ -70,6 +70,19 @@ tags:
   - Taiwan
   - Public Research University
   - Identity
+  - Authentication
+  - Open Data
+  - Campus
+  - Course Catalog
+  - Research Repository
+  - Library
+tags_raw:
+  - Education
+  - Higher Education
+  - University
+  - Taiwan
+  - Public Research University
+  - Identity
   - OAuth
   - Open Data
   - Campus
@@ -96,6 +109,9 @@ apis:
   humanURL: https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
   baseURL: https://oauth.ccxp.nthu.edu.tw/v1.1
   tags:
+  - Identity
+  - Authentication
+  tags_raw:
   - Identity
   - OAuth
   - Authentication
