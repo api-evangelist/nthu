@@ -59,7 +59,7 @@ accessModel:
   note: >-
     All 22 NTHU Data API paths returned 200 with live data on 2026-08-30 with no credential. The
     institution's OAuth service is not self-service and cannot be signed up for from outside NTHU.
-position: Consumer
+position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/nthu.png
 url: https://raw.githubusercontent.com/api-evangelist/nthu/refs/heads/main/apis.yml
