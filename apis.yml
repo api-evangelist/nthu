@@ -215,6 +215,8 @@ apis:
   humanURL: https://api.nthusa.tw/docs
   baseURL: https://api.nthusa.tw
   tags:
+  - Authentication
+  tags_raw:
   - OAuth
   properties:
   - type: OpenAPI
