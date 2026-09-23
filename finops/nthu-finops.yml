@@ -1,3 +1,6 @@
+# method: generated
+# x-source-url: API Evangelist FinOps template; NTHU publishes no API billing
+# note: Authored by API Evangelist, not published by National Tsing Hua University.
 specification: FinOps Framework
 specificationVersion: '1.0'
 schema: https://www.finops.org/framework/

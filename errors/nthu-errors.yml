@@ -1,0 +1,52 @@
+generated: '2026-08-30'
+method: derived
+evidence_method: probed
+source: live HTTP probes on 2026-08-30 of https://oauth.ccxp.nthu.edu.tw/v1.1/ and https://api.nthusa.tw
+note: >-
+  Every row below was observed on a live request. NTHU publishes no error reference; the OAuth
+  service's token endpoint deviates from RFC 6749 by returning HTTP 404 for a client-authentication
+  failure, and it emits the JSON error body twice in a single response.
+surfaces:
+- surface: NTHU Academic Information System OAuth 2.0 Service
+  x-operator: institution
+  base_url: https://oauth.ccxp.nthu.edu.tw/v1.1
+  errors:
+  - request: GET /authorize.php with no client_id
+    status: 200
+    content_type: text/html; charset=UTF-8
+    body: invalid_client
+    note: >-
+      Returns 200 for an error condition and a bare token string rather than an OAuth error
+      redirect or JSON body.
+  - request: POST /token.php with no credentials
+    status: 404
+    content_type: application/json
+    body: '{"error":"invalid_client","error_description":"The client_id is invalid"}'
+    note: >-
+      RFC 6749 section 5.2 specifies 400 (or 401 with WWW-Authenticate) for invalid_client. The
+      body was observed emitted twice concatenated in one response.
+  - request: GET /resource.php with no access_token
+    status: 401
+    content_type: application/json
+    body: ''
+    note: Correct status, but an empty body with no error code for the client to branch on.
+  - request: GET /.well-known/openid-configuration
+    status: 403
+    content_type: text/html; charset=iso-8859-1
+    note: No OIDC discovery document is served; the path is blocked by the web server, not absent.
+- surface: NTHU Data API
+  x-operator: tenant
+  base_url: https://api.nthusa.tw
+  errors:
+  - request: GET /
+    status: 404
+    content_type: application/json
+    note: Service root is not mounted; all operations live under documented path prefixes.
+  - request: validation failure on any documented operation
+    status: 422
+    content_type: application/json
+    schema: HTTPValidationError
+    note: >-
+      FastAPI's default validation envelope, declared in the OpenAPI as HTTPValidationError with a
+      detail[] of ValidationError objects carrying loc, msg and type.
+    source: openapi/_original/nthu-data-api.yaml

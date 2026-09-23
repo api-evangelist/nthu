@@ -1,3 +1,6 @@
+# method: generated
+# x-source-url: API Evangelist plans template; no NTHU pricing is published
+# note: Authored by API Evangelist, not published by National Tsing Hua University.
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans

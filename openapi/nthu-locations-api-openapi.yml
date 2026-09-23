@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: NTHU Data Announcements Locations API
+  title: NTHU Data Locations API
   description: 由國立清華大學校內各單位資料所組成的公共資料 API。
   version: 2.0.0
 servers:
@@ -16,7 +16,7 @@ paths:
       summary: Get All Locations
       description: '取得校內所有地點資訊。
 
-        資料來源：[國立清華大學校園地圖](https://www.nthu.edu.tw/campusmap)'
+        資料來源：國立清華大學校園地圖'
       operationId: getAllLocations
       responses:
         '200':
@@ -62,6 +62,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     LocationDetail:
       properties:
         name:
@@ -83,15 +92,6 @@ components:
       - longitude
       title: LocationDetail
       description: Location detail information.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:

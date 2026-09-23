@@ -1,15 +1,8 @@
 {
   "provider": "nthu",
   "sources": [
-    "nthu-announcements-api-openapi.yml",
-    "nthu-buses-api-openapi.yml",
-    "nthu-courses-api-openapi.yml",
-    "nthu-departments-api-openapi.yml",
-    "nthu-dining-api-openapi.yml",
-    "nthu-energy-api-openapi.yml",
-    "nthu-libraries-api-openapi.yml",
-    "nthu-locations-api-openapi.yml",
-    "nthu-newsletters-api-openapi.yml"
+    "_original/nthu-data-api.yaml",
+    "nthu-o-auth-api-openapi.yml"
   ],
   "outputs": [
     "nthu-announcements-api-openapi.yml",
@@ -20,11 +13,37 @@
     "nthu-energy-api-openapi.yml",
     "nthu-libraries-api-openapi.yml",
     "nthu-locations-api-openapi.yml",
-    "nthu-newsletters-api-openapi.yml"
+    "nthu-newsletters-api-openapi.yml",
+    "nthu-o-auth-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "warnings": [
+    "nthu-o-auth-api-openapi.yml: previously refined output kept for 4 operation(s) no archived document covers (e.g. /authorize.php get, /resource.php get, /resource.php post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "nthu-data-api.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "nthu-data-api.yaml: declared missing tag: Announcements",
+    "nthu-data-api.yaml: declared missing tag: Buses",
+    "nthu-data-api.yaml: declared missing tag: Courses",
+    "nthu-data-api.yaml: declared missing tag: Departments",
+    "nthu-data-api.yaml: declared missing tag: Dining",
+    "nthu-data-api.yaml: declared missing tag: Energy",
+    "nthu-data-api.yaml: declared missing tag: Libraries",
+    "nthu-data-api.yaml: declared missing tag: Locations",
+    "nthu-data-api.yaml: declared missing tag: Newsletters",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "nthu-announcements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nthu-buses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nthu-courses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nthu-departments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nthu-dining-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nthu-energy-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nthu-libraries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nthu-locations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nthu-newsletters-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,3 +1,6 @@
+# method: derived
+# x-source-url: openapi/_original/nthu-data-api.yaml (NTHU Student Association contract)
+# note: Authored by API Evangelist, not published by National Tsing Hua University.
 formats:
 - oas3
 rules:

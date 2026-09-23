@@ -1,0 +1,36 @@
+generated: '2026-08-30'
+method: searched
+source: https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+note: >-
+  National Tsing Hua University is unusual for this cohort in publishing a dated sunset for an API
+  governance policy. The OAuth service management regulation carries an explicit scheduled repeal
+  timestamp on the same page as the interface manual.
+surfaces:
+- surface: NTHU Academic Information System OAuth 2.0 Service
+  x-operator: institution
+  base_url: https://oauth.ccxp.nthu.edu.tw/v1.1
+  version: '1.1'
+  versioning: path
+  versioning_detail: The major/minor version is carried in the path segment /v1.1/.
+  policy_adopted: '2020-12-22'
+  policy_adopted_detail: >-
+    Passed by the Computer and Communication Committee (計算機與通訊委員會) on 22 December 2020
+    (Republic of China year 109), then reported to the university administrative meeting for record.
+  scheduled_repeal: '2027-07-31T23:59:59+08:00'
+  scheduled_repeal_detail: >-
+    The published policy page states 預計廢止時間 (scheduled repeal time) of
+    2027-07-31 23:59:59+0800 for version 1.1 of the regulation.
+  credential_expiry: 1 year, renewal requires re-application (policy article 5).
+  sources:
+  - https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+  - https://law.site.nthu.edu.tw/p/406-1326-197509,r6923.php
+- surface: NTHU Data API
+  x-operator: tenant
+  base_url: https://api.nthusa.tw
+  version: 2.0.0
+  versioning: none
+  versioning_detail: >-
+    The OpenAPI declares version 2.0.0 but no version segment appears in any path and no
+    deprecation, sunset or changelog policy is published. Continuity depends on a volunteer
+    student organisation, which is the main operational risk on this surface.
+  source: https://api.nthusa.tw/openapi.json

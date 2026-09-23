@@ -3,8 +3,101 @@ name: National Tsing Hua University
 description: National Tsing Hua University public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/nthu/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reviews:
+  - date: '2026-08-30'
+    rating: 3
+    summary: >-
+      University-pipeline re-profile, run for operator attribution rather than artifact volume. The
+      June 2026 profile listed nine NTHU APIs; there are not nine, and none of the nine is the
+      university's. All nine were per-tag splits of ONE contract, the NTHU Data API, and that API is
+      built and hosted by the NTHU Student Association on nthusa.tw — a domain National Tsing Hua
+      University does not own. It is recorded here as a single tenant surface rather than deleted,
+      because the relationship is real and the data is NTHU's campus data. Against that correction,
+      the run found something the June pass missed entirely: NTHU does operate one API of its own.
+      The Computer and Communication Center runs an OAuth 2.0 authorization and identity service at
+      oauth.ccxp.nthu.edu.tw/v1.1, fronting the Academic Information System (CCXP), with a published
+      interface manual, six documented scopes, a governing regulation adopted by the Computer and
+      Communication Committee on 2020-12-22, and a published scheduled repeal of 2027-07-31 — a
+      dated sunset, which almost nothing in this cohort publishes. Two Ex Libris tenancies were
+      identified and recorded without saving a vendor contract: an Esploro research portal on the
+      NTHU-owned host scholars.nthu.edu.tw, and a Primo VE library discovery service under the
+      University System of Taiwan view 886UST_NTHU. The Primo sign-in URL is the only public
+      evidence that NTHU runs its own SAML IdP. An OAI-PMH service is deployed for NTHU at
+      scholars.nthu.edu.tw/view/oai/886UST_NTHU/request but returns 403 with OAI error code 21;
+      the institution code was confirmed correct by contrast against a deliberately wrong one.
+      No data./opendata./api. host under nthu.edu.tw resolves. NTHU has no eduGAIN entry and no
+      Taiwanese registration authority appears in the eduGAIN entity list. Searching in Traditional
+      Chinese is what surfaced the OAuth governance regulation and both AI-policy documents.
+      Also repaired eight of our own welded OpenAPI titles: the per-tag split had carried
+      "Announcements" onto every output ("NTHU Data Announcements Buses API").
+    endpoints:
+      - url: https://oauth.ccxp.nthu.edu.tw/
+        status: 200
+        note: 'Institution-operated. Body: "This is National Tsing Hua University OAUTH2 Server."'
+      - url: https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+        status: 200
+        note: Published OAuth interface manual plus the governing regulation, in Traditional Chinese.
+      - url: https://oauth.ccxp.nthu.edu.tw/v1.1/authorize.php
+        status: 200
+        note: Authorization endpoint; returns the bare body `invalid_client` without a client_id.
+      - url: https://oauth.ccxp.nthu.edu.tw/v1.1/token.php
+        status: 404
+        note: >-
+          Token endpoint; returns a JSON invalid_client body. RFC 6749 5.2 specifies 400/401, so
+          this is a real deviation, not an absent endpoint.
+      - url: https://oauth.ccxp.nthu.edu.tw/v1.1/resource.php
+        status: 401
+        note: Identity resource endpoint; correct 401 without a token, but an empty body.
+      - url: https://oauth.ccxp.nthu.edu.tw/.well-known/openid-configuration
+        status: 403
+        note: No OIDC discovery document served.
+      - url: https://law.site.nthu.edu.tw/p/406-1326-197509,r6923.php
+        status: 200
+        note: NTHU Academic Information System OAuth Service Management Regulations.
+      - url: https://api.nthusa.tw/openapi.json
+        status: 200
+        note: >-
+          Tenant. OpenAPI 3.1.0, "NTHU Data API" v2.0.0, 22 paths, 40,307 bytes. Operated by the
+          NTHU Student Association, not the university.
+      - url: https://api.nthusa.tw/energy/electricity_usage
+        status: 200
+        note: Keyless, live real-time campus electricity data. Four data paths probed, all 200.
+      - url: https://nthur.lib.nthu.edu.tw/
+        status: 200
+        note: >-
+          The June review recorded this as unresolvable over TLS. It now redirects to
+          https://scholars.nthu.edu.tw/esploro/.
+      - url: https://scholars.nthu.edu.tw/esploro/
+        status: 200
+        note: >-
+          Tenant. CNAME to nthu-researchportal.esploro.exlibrisgroup.com; footer reads "Powered by
+          Esploro from Clarivate". Serves the same 2,328-byte SPA shell on every path probed.
+      - url: https://scholars.nthu.edu.tw/view/oai/886UST_NTHU/request?verb=Identify
+        status: 403
+        note: OAI-PMH deployed but harvesting disabled — error code 21, unauthorized access.
+      - url: https://scholars.nthu.edu.tw/view/oai/886NTHU_INST/request?verb=Identify
+        status: 200
+        note: >-
+          Control probe with a deliberately wrong institution code — "Institution code is invalid",
+          confirming 886UST_NTHU is the correct one.
+      - url: https://nthu.primo.exlibrisgroup.com/discovery/search?vid=886UST_NTHU
+        status: 200
+        note: >-
+          Tenant. Ex Libris Primo VE under the University System of Taiwan view. Its sign-in URL
+          declares authenticationProfile=NTHU_SAML and auth=SAML.
+      - url: https://curricul.site.nthu.edu.tw/p/404-1208-248357.php?Lang=zh-tw
+        status: 200
+        note: NTHU generative AI ethics statement for course syllabi.
+      - url: https://ctld.site.nthu.edu.tw/p/450-1217-253458,c0.php?Lang=zh-tw
+        status: 200
+        note: NTHU guidelines for AI collaboration, co-learning and literacy (PDF, 197 KB).
+      - url: https://data.nthu.edu.tw/
+        status: 0
+        note: Does not resolve. Same for api.nthu.edu.tw, opendata.nthu.edu.tw, idp.nthu.edu.tw, sso.nthu.edu.tw.
+      - url: https://www.nthu.edu.tw/llms.txt
+        status: 404
+        note: No agent-facing document published.
   - date: '2026-06-03'
     rating: 3
     summary: >-

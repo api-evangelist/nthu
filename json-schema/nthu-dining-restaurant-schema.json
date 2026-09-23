@@ -41,5 +41,9 @@
       "description": "餐廳營業時間",
       "additionalProperties": true
     }
-  }
+  },
+  "x-method": "derived",
+  "x-source-url": "openapi/_original/nthu-data-api.yaml",
+  "x-operator": "tenant",
+  "x-note": "Derived from the NTHU Student Association contract at api.nthusa.tw, not published by National Tsing Hua University."
 }

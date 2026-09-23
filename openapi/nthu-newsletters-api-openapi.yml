@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: NTHU Data Announcements Newsletters API
+  title: NTHU Data Newsletters API
   description: 由國立清華大學校內各單位資料所組成的公共資料 API。
   version: 2.0.0
 servers:
@@ -16,7 +16,7 @@ paths:
       summary: Get All Newsletters
       description: '取得所有的電子報。
 
-        資料來源：[國立清華大學電子報系統](https://newsletter.cc.nthu.edu.tw/nthu-list/index.php/zh/)'
+        資料來源：國立清華大學電子報系統'
       operationId: getAllNewsletters
       responses:
         '200':
@@ -56,6 +56,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     NewsletterName:
       type: string
       enum:
@@ -99,36 +108,34 @@ components:
       - 清華簡訊
       - 計中-教育訓練
       title: NewsletterName
-    HTTPValidationError:
+    NewsletterArticle:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+        title:
+          title: Title
+          description: 電子報標題
+          type:
+          - string
+          - 'null'
+        link:
+          title: Link
+          description: 電子報網址
+          type:
+          - string
+          - 'null'
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        date:
+          title: Date
+          description: 發布日期
+          type:
+          - string
+          - 'null'
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - title
+      - link
+      title: NewsletterArticle
     NewsletterInfo:
       properties:
         name:
@@ -160,28 +167,24 @@ components:
       - details
       - articles
       title: NewsletterInfo
-    NewsletterArticle:
+    ValidationError:
       properties:
-        title:
-          title: Title
-          description: 電子報標題
-          nullable: true
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-        link:
-          title: Link
-          description: 電子報網址
-          nullable: true
+          title: Message
+        type:
           type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-        date:
-          title: Date
-          description: 發布日期
-          nullable: true
-          type: string
+          title: Error Type
       type: object
       required:
-      - title
-      - link
-      title: NewsletterArticle
+      - loc
+      - msg
+      - type
+      title: ValidationError

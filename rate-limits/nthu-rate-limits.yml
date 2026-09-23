@@ -1,3 +1,6 @@
+# method: generated
+# x-source-url: API Evangelist rate-limit template; no NTHU rate-limit table is published
+# note: Authored by API Evangelist, not published by National Tsing Hua University.
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits

@@ -1,0 +1,51 @@
+generated: '2026-08-30'
+method: derived
+source: https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+note: >-
+  Derived from National Tsing Hua University's own published OAuth interface manual and confirmed by
+  live probes of the three endpoints on 2026-08-30. NTHU publishes no OpenAPI or OIDC discovery
+  document; there is no .well-known/openid-configuration on the host (403).
+summary:
+  types:
+  - oauth2
+schemes:
+- name: nthuOAuth
+  type: oauth2
+  x-operator: institution
+  operator_detail: >-
+    Run by NTHU's Computer and Communication Center against the Academic Information System (CCXP).
+    Host oauth.ccxp.nthu.edu.tw resolves to 140.114.68.19, inside NTHU's own TANet allocation.
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://oauth.ccxp.nthu.edu.tw/v1.1/authorize.php
+    tokenUrl: https://oauth.ccxp.nthu.edu.tw/v1.1/token.php
+    refreshUrl: https://oauth.ccxp.nthu.edu.tw/v1.1/token.php
+    refresh_tokens: true
+    token_type: Bearer
+    pkce: not_documented
+  onboarding: gated
+  onboarding_detail: >-
+    Not self-service. Applicants must be current NTHU faculty, staff or enrolled students, must have
+    the request signed off by their unit head, and must pass review by the Computer and Communication
+    Center plus every unit that owns a requested data field. Application form published as
+    https://oauth.ccxp.nthu.edu.tw/v1.1/doc/OAuth-Apply.docx.
+  credential_lifetime: >-
+    Secret keys are valid for one year and must be re-applied for on expiry (policy article 5).
+  transport_requirement: >-
+    Callback URLs must use an encrypted connection (policy article 3).
+  prohibited: >-
+    Proxying or harvesting a user's account and password on the client's own login form is
+    prohibited; violation suspends the account and bars the unit from the service for one year
+    (policy article 6).
+  sources:
+  - https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+  - https://law.site.nthu.edu.tw/p/406-1326-197509,r6923.php
+  - openapi/nthu-oauth-api-openapi.yml
+- name: none
+  type: none
+  x-operator: tenant
+  description: >-
+    The NTHU Data API at api.nthusa.tw requires no authentication. All 22 documented paths were
+    probed keyless on 2026-08-30 and returned 200 with live campus data.
+  sources:
+  - openapi/_original/nthu-data-api.yaml

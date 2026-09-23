@@ -1,0 +1,45 @@
+generated: '2026-08-30'
+method: derived
+source: https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+note: >-
+  Scope strings are National Tsing Hua University's, transcribed verbatim from the scope parameter
+  documented in the university's OAuth interface manual; the descriptions are ours. Scopes are
+  requested space-separated on /authorize.php and echoed back space-separated in the token response.
+  Which scopes a client may actually request is decided per application by the data-owning unit.
+schemes:
+- name: nthuOAuth
+  x-operator: institution
+  source: https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://oauth.ccxp.nthu.edu.tw/v1.1/authorize.php
+    tokenUrl: https://oauth.ccxp.nthu.edu.tw/v1.1/token.php
+scopes:
+- scope: userid
+  description: The NTHU Academic Information System account identifier.
+  sensitivity: identifier
+  flows: [authorizationCode]
+- scope: name
+  description: The account holder's Chinese name; the resource endpoint also returns name_en.
+  sensitivity: personal
+  flows: [authorizationCode]
+- scope: email
+  description: The account holder's institutional email address.
+  sensitivity: personal
+  flows: [authorizationCode]
+- scope: inschool
+  description: >-
+    Current affiliation status — true for employed, enrolled or reinstated accounts, false for
+    departed, graduated, withdrawn or cross-institution visiting accounts.
+  sensitivity: affiliation
+  flows: [authorizationCode]
+- scope: cid
+  description: >-
+    National identification number. The most sensitive field the service can release; governed by
+    Taiwan's Personal Data Protection Act and released only on data-owner approval.
+  sensitivity: national_id
+  flows: [authorizationCode]
+- scope: lmsid
+  description: The account holder's learning-management-platform identifier.
+  sensitivity: identifier
+  flows: [authorizationCode]

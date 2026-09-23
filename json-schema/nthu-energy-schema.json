@@ -35,5 +35,9 @@
       "type": "string",
       "description": "最後更新時間"
     }
-  }
+  },
+  "x-method": "derived",
+  "x-source-url": "openapi/_original/nthu-data-api.yaml",
+  "x-operator": "tenant",
+  "x-note": "Derived from the NTHU Student Association contract at api.nthusa.tw, not published by National Tsing Hua University."
 }

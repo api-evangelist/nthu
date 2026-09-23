@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: NTHU Data Announcements Energy API
+  title: NTHU Data Energy API
   description: 由國立清華大學校內各單位資料所組成的公共資料 API。
   version: 2.0.0
 servers:
@@ -16,7 +16,7 @@ paths:
       summary: Get Realtime Electricity Usage
       description: '取得校園電力即時使用量。
 
-        資料來源：[校園能源查詢管理系統](http://140.114.188.86/powermanage/index.aspx)'
+        資料來源：校園能源查詢管理系統'
       operationId: getRealtimeElectricityUsage
       responses:
         '200':

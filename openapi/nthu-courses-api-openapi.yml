@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: NTHU Data Announcements Courses API
+  title: NTHU Data Courses API
   description: 由國立清華大學校內各單位資料所組成的公共資料 API。
   version: 2.0.0
 servers:
@@ -16,7 +16,7 @@ paths:
       summary: Get All Courses
       description: '取得所有課程。
 
-        資料來源：[教務處課務組/JSON格式下載](https://curricul.site.nthu.edu.tw/p/406-1208-111356,r7883.php?Lang=zh-tw)'
+        資料來源：教務處課務組/JSON格式下載'
       operationId: getAllCourses
       responses:
         '200':
@@ -286,81 +286,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    CourseFieldName:
-      type: string
-      enum:
-      - id
-      - chinese_title
-      - english_title
-      - credit
-      - size_limit
-      - freshman_reservation
-      - object
-      - ge_type
-      - language
-      - note
-      - suspend
-      - class_room_and_time
-      - teacher
-      - prerequisite
-      - limit_note
-      - expertise
-      - program
-      - no_extra_selection
-      - required_optional_note
-      title: CourseFieldName
-      description: Course field names for querying.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    CourseLanguage:
-      type: string
-      enum:
-      - 中
-      - 英
-      title: CourseLanguage
-      description: Course language options.
-    CourseQueryOperation:
-      type: string
-      enum:
-      - and
-      - or
-      title: CourseQueryOperation
-      description: Query operation type.
-    CourseListName:
-      type: string
-      enum:
-      - microcredits
-      - xclass
-      title: CourseListName
-      description: Predefined course lists.
     CourseData:
       properties:
         id:
@@ -461,15 +386,53 @@ components:
       - required_optional_note
       title: CourseData
       description: Course data schema.
-    CourseQueryCondition:
-      items:
-        anyOf:
-        - $ref: '#/components/schemas/CourseQueryCondition'
-        - $ref: '#/components/schemas/CourseCondition'
-        - $ref: '#/components/schemas/CourseQueryOperation'
-      type: array
-      title: CourseQueryCondition
-      description: Complex course query condition.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CourseListName:
+      type: string
+      enum:
+      - microcredits
+      - xclass
+      title: CourseListName
+      description: Predefined course lists.
+    CourseFieldName:
+      type: string
+      enum:
+      - id
+      - chinese_title
+      - english_title
+      - credit
+      - size_limit
+      - freshman_reservation
+      - object
+      - ge_type
+      - language
+      - note
+      - suspend
+      - class_room_and_time
+      - teacher
+      - prerequisite
+      - limit_note
+      - expertise
+      - program
+      - no_extra_selection
+      - required_optional_note
+      title: CourseFieldName
+      description: Course field names for querying.
+    CourseLanguage:
+      type: string
+      enum:
+      - 中
+      - 英
+      title: CourseLanguage
+      description: Course language options.
     CourseCondition:
       properties:
         row_field:
@@ -490,3 +453,40 @@ components:
       - matcher
       title: CourseCondition
       description: Single course query condition.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    CourseQueryOperation:
+      type: string
+      enum:
+      - and
+      - or
+      title: CourseQueryOperation
+      description: Query operation type.
+    CourseQueryCondition:
+      items:
+        anyOf:
+        - $ref: '#/components/schemas/CourseQueryCondition'
+        - $ref: '#/components/schemas/CourseCondition'
+        - $ref: '#/components/schemas/CourseQueryOperation'
+      type: array
+      title: CourseQueryCondition
+      description: Complex course query condition.

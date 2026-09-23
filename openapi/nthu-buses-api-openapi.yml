@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: NTHU Data Announcements Buses API
+  title: NTHU Data Buses API
   description: 由國立清華大學校內各單位資料所組成的公共資料 API。
   version: 2.0.0
 servers:
@@ -16,9 +16,9 @@ paths:
       summary: Get Bus Route Metadata
       description: '取得校園公車資訊。
 
-        - 校本部來自[總務處事務組](https://affairs.site.nthu.edu.tw/p/412-1165-20978.php?Lang=zh-tw)
+        - 校本部來自總務處事務組
 
-        - 南大來自[總務處事務組](https://affairs.site.nthu.edu.tw/p/412-1165-20979.php?Lang=zh-tw)'
+        - 南大來自總務處事務組'
       operationId: getBusRouteData
       parameters:
       - name: bus_type
@@ -124,8 +124,9 @@ paths:
         schema:
           description: 時間。若搜尋 day 選擇 current 時失效。
           title: Time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         description: 時間。若搜尋 day 選擇 current 時失效。
       - name: limits
         in: query
@@ -134,8 +135,9 @@ paths:
           description: 最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。
           default: 5
           title: Limits
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
           minimum: 1
         description: 最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。
       responses:
@@ -149,7 +151,6 @@ paths:
                   anyOf:
                   - $ref: '#/components/schemas/BusDetailedSchedule'
                   - $ref: '#/components/schemas/BusSchedule'
-                  nullable: true
                 title: Response Getbusschedules
         '422':
           description: Validation Error
@@ -197,8 +198,9 @@ paths:
         schema:
           description: 時間。若搜尋 day 選擇 current 時失效。
           title: Time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         description: 時間。若搜尋 day 選擇 current 時失效。
       - name: limits
         in: query
@@ -207,8 +209,9 @@ paths:
           description: 最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。
           default: 5
           title: Limits
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
           minimum: 1
         description: 最大回傳資料筆數。預設為 5 筆，可以透過查詢參數調整。
       responses:
@@ -219,7 +222,6 @@ paths:
               schema:
                 type: array
                 items:
-                  nullable: true
                   $ref: '#/components/schemas/BusStopsQueryResult'
                 title: Response Getstopbusinformationbystop
         '422':
@@ -230,36 +232,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    BusSchedule:
+    HTTPValidationError:
       properties:
-        time:
-          type: string
-          title: Time
-          description: 發車時間
-        description:
-          type: string
-          title: Description
-          description: 備註
-        dep_stop:
-          type: string
-          title: Dep Stop
-          description: 發車地點
-        line:
-          type: string
-          title: Line
-          description: '路線 (主校區: red/green, 南大: route_1/route_2)'
-          default: ''
-        bus_type:
-          $ref: '#/components/schemas/BusType'
-          description: 營運車輛類型
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - time
-      - description
-      - dep_stop
-      - bus_type
-      title: BusSchedule
-      description: Unified bus schedule entry for both Main and Nanda campus.
+      title: HTTPValidationError
     BusDetailedSchedule:
       properties:
         dep_info:
@@ -277,57 +258,14 @@ components:
       - stops_time
       title: BusDetailedSchedule
       description: Unified detailed bus schedule for both Main and Nanda campus.
-    BusStopsName:
+    BusType:
       type: string
       enum:
-      - 北校門口
-      - 綜二館
-      - 楓林小徑
-      - 人社院&生科館
-      - 台積館
-      - 奕園停車場
-      - 教育學院大樓&南門停車場
-      - 南大校區校門口右側(食品路校牆邊)
-      title: BusStopsName
-      description: Bus stop names.
-    BusDirection:
-      type: string
-      enum:
-      - all
-      - up
-      - down
-      title: BusDirection
-      description: Bus direction.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - route_83
+      - large-sized_bus
+      - middle-sized_bus
+      title: BusType
+      description: Bus vehicle type.
     BusInfo:
       properties:
         direction:
@@ -354,6 +292,27 @@ components:
       - routeEN
       title: BusInfo
       description: Bus route information.
+    BusStopsName:
+      type: string
+      enum:
+      - 北校門口
+      - 綜二館
+      - 楓林小徑
+      - 人社院&生科館
+      - 台積館
+      - 奕園停車場
+      - 教育學院大樓&南門停車場
+      - 南大校區校門口右側(食品路校牆邊)
+      title: BusStopsName
+      description: Bus stop names.
+    BusDirection:
+      type: string
+      enum:
+      - all
+      - up
+      - down
+      title: BusDirection
+      description: Bus direction.
     BusRouteType:
       type: string
       enum:
@@ -408,6 +367,35 @@ components:
       - arrive_time
       title: BusArriveTime
       description: Bus arrival time at a stop.
+    BusDayWithCurrent:
+      type: string
+      enum:
+      - weekday
+      - weekend
+      - current
+      title: BusDayWithCurrent
+      description: Day type including current day option.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     BusStopsInfo:
       properties:
         name:
@@ -434,19 +422,33 @@ components:
       - longitude
       title: BusStopsInfo
       description: Bus stop information.
-    BusType:
-      type: string
-      enum:
-      - route_83
-      - large-sized_bus
-      - middle-sized_bus
-      title: BusType
-      description: Bus vehicle type.
-    BusDayWithCurrent:
-      type: string
-      enum:
-      - weekday
-      - weekend
-      - current
-      title: BusDayWithCurrent
-      description: Day type including current day option.
+    BusSchedule:
+      properties:
+        time:
+          type: string
+          title: Time
+          description: 發車時間
+        description:
+          type: string
+          title: Description
+          description: 備註
+        dep_stop:
+          type: string
+          title: Dep Stop
+          description: 發車地點
+        line:
+          type: string
+          title: Line
+          description: '路線 (主校區: red/green, 南大: route_1/route_2)'
+          default: ''
+        bus_type:
+          $ref: '#/components/schemas/BusType'
+          description: 營運車輛類型
+      type: object
+      required:
+      - time
+      - description
+      - dep_stop
+      - bus_type
+      title: BusSchedule
+      description: Unified bus schedule entry for both Main and Nanda campus.

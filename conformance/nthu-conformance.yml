@@ -1,0 +1,123 @@
+generated: '2026-08-30'
+method: derived
+evidence_method: probed
+source: live HTTP probes on 2026-08-30 of NTHU-owned and NTHU-tenant hosts
+note: >-
+  Conformance against the Kin Score `education` regime standards. Reward-only: an entry appears here
+  only where a live probe or a published NTHU document supplies evidence. Standards with no evidence
+  are listed under `not_found` rather than left implied. Note the operator on each row — two of the
+  three hits sit on vendor platforms NTHU tenants, not on software NTHU wrote.
+standards:
+- id: oai-pmh
+  conforms: partial
+  x-operator: tenant
+  status: gated
+  endpoint: https://scholars.nthu.edu.tw/view/oai/886UST_NTHU/request
+  evidence: >-
+    GET https://scholars.nthu.edu.tw/view/oai/886UST_NTHU/request?verb=Identify returns HTTP 403
+    with an OAI service error body — <error_code>21</error_code>, "Unauthorized access to the OAI
+    services – please contact the system administrator for assistance". The institution code is
+    confirmed correct by contrast: the same path with the wrong code 886NTHU_INST returns
+    "Institution code 886NTHU_INST is invalid" instead. So the OAI-PMH service is deployed and
+    addressable for NTHU, and harvesting is switched off rather than absent.
+  operator_detail: >-
+    scholars.nthu.edu.tw is an NTHU-owned hostname CNAMEd to
+    nthu-researchportal.esploro.exlibrisgroup.com. The repository is NTHU's; the OAI implementation
+    is Ex Libris Esploro's (footer reads "Powered by Esploro from Clarivate").
+- id: saml
+  conforms: partial
+  x-operator: institution
+  status: live
+  evidence: >-
+    NTHU operates a SAML identity provider. The library discovery service's sign-in link is
+    https://nthu.primo.exlibrisgroup.com/primaws/suprimaExtLogin?institution=886UST_NTHU&...&authenticationProfile=NTHU_SAML&idpCode=NTHU_SAML&auth=SAML,
+    naming NTHU_SAML as the SAML authentication profile and IdP code the vendor platform federates
+    against. The IdP itself is not publicly addressable — idp.nthu.edu.tw and sso.nthu.edu.tw do not
+    resolve — and no SAML metadata document was reachable.
+  limitation: >-
+    Federation membership is not verifiable from outside. The eduGAIN entity list
+    (technical.edugain.org/api.php?action=list_entities, 7.8 MB, fetched 2026-08-30) contains zero
+    entities matching nthu and zero Taiwanese registration authorities, so NTHU's IdP is not
+    published through eduGAIN.
+- id: openapi-3.1
+  conforms: true
+  x-operator: tenant
+  status: live
+  endpoint: https://api.nthusa.tw/openapi.json
+  evidence: >-
+    GET https://api.nthusa.tw/openapi.json returns 200, application/json, 40,307 bytes — a valid
+    OpenAPI 3.1.0 document titled "NTHU Data API" v2.0.0 with 22 paths, re-probed 2026-08-30. The
+    pristine archived copy at openapi/_original/nthu-data-api.yaml declares 3.0.3, so the upstream
+    service has bumped its emitted OpenAPI version since harvest. Not an education-regime standard,
+    recorded because it is the only machine-readable interface description in this repo that the
+    operator publishes themselves.
+  operator_detail: >-
+    Published by the NTHU Student Association (NTHU-SA) on nthusa.tw, not on an nthu.edu.tw host.
+- id: oauth2-authorization-code
+  conforms: partial
+  x-operator: institution
+  status: live
+  endpoint: https://oauth.ccxp.nthu.edu.tw/v1.1
+  evidence: >-
+    All three RFC 6749 authorization-code endpoints respond live: /authorize.php 200,
+    /token.php returns a JSON invalid_client error, /resource.php returns 401 without a token.
+    Documented at https://oauth.ccxp.nthu.edu.tw/v1.1/doc/ with parameters, scopes and token
+    response fields.
+  deviation: >-
+    Partial, not full: /token.php returns HTTP 404 for a client-authentication failure where
+    RFC 6749 section 5.2 specifies 400 or 401, /authorize.php returns 200 with a bare
+    `invalid_client` string, and no OIDC discovery document is served
+    (/.well-known/openid-configuration returns 403). PKCE is not mentioned in the manual.
+not_found:
+- id: shibboleth
+  detail: >-
+    No Shibboleth IdP metadata endpoint was reachable. idp.nthu.edu.tw does not resolve and no
+    /idp/shibboleth or /Shibboleth.sso path answered on any NTHU host probed. The SAML evidence
+    above does not name Shibboleth as the implementation, so it is not claimed.
+- id: orcid
+  detail: >-
+    The Esploro research portal serves the same 2,328-byte SPA shell on every path probed
+    (/esploro/, /esploro/search/outputs, /esploro/search/profiles), so researcher profiles could
+    not be read server-side and no ORCID identifier or ORCID integration statement was observed.
+- id: datacite
+  detail: >-
+    Confirmed absent at registry level, not merely unobserved on NTHU hosts. The DataCite public
+    API returns zero results for both a provider/member search on "tsing hua" and a client search
+    on "nthu" (api.datacite.org/providers?query=tsing+hua and /clients?query=nthu, probed
+    2026-08-30). NTHU is neither a DataCite member nor a registered repository client, so it mints
+    no DataCite DOIs under its own account.
+  evidence_method: probed
+  evidence:
+  - url: https://api.datacite.org/providers?query=tsing+hua
+    status: 200
+    result: 'meta.total = 0'
+  - url: https://api.datacite.org/clients?query=nthu
+    status: 200
+    result: 'meta.total = 0'
+- id: crossref
+  detail: >-
+    Confirmed absent at registry level. The Crossref members API returns
+    total-results 0 for a member search on "tsing hua"
+    (api.crossref.org/members?query=tsing+hua, probed 2026-08-30), so NTHU holds no Crossref
+    member account and deposits no DOIs under its own prefix.
+  evidence_method: probed
+  evidence:
+  - url: https://api.crossref.org/members?query=tsing+hua
+    status: 200
+    result: 'message.total-results = 0'
+- id: lti
+  detail: >-
+    NTHU runs a learning platform — the OAuth resource endpoint releases an `lmsid` field — but no
+    LTI tool registration, LTI Advantage claim or platform configuration endpoint is published.
+- id: scim
+  detail: >-
+    No SCIM /Users or /ServiceProviderConfig endpoint was found. NTHU's identity release is the
+    OAuth resource endpoint above, which is a bespoke JSON payload, not SCIM.
+- id: caliper
+  detail: No Caliper Analytics endpoint or sensor statement published.
+- id: qti
+  detail: No QTI assessment interchange surface published.
+- id: oneroster
+  detail: No OneRoster endpoint published; NTHU is a university, and OneRoster is a K-12 standard.
+- id: ed-fi
+  detail: No Ed-Fi ODS or API published; Ed-Fi is a US K-12 standard with no Taiwanese deployment.

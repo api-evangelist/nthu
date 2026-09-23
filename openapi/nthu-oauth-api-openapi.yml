@@ -1,0 +1,254 @@
+openapi: 3.2.0
+info:
+  title: NTHU Academic Information System 2.0 Service O Auth API
+  description: Institution-operated OAuth 2.0 authorization and identity service run by National Tsing Hua University's Computer and Communication Center (計算機與通訊中心).
+  version: '1.1'
+  termsOfService: https://law.site.nthu.edu.tw/p/406-1326-197509,r6923.php
+  contact:
+    name: National Tsing Hua University Computer and Communication Center
+    url: https://ccc.site.nthu.edu.tw/
+  x-operator: institution
+  x-generated: '2026-08-30'
+  x-method: derived
+  x-source: https://oauth.ccxp.nthu.edu.tw/v1.1/doc/
+servers:
+- url: https://oauth.ccxp.nthu.edu.tw/v1.1
+  description: NTHU CCXP OAuth 2.0 production service
+security:
+- nthuOAuth:
+  - userid
+tags:
+- name: OAuth
+  description: Authorization-code flow against NTHU Academic Information System accounts.
+paths:
+  /authorize.php:
+    get:
+      tags:
+      - OAuth
+      summary: Authorization endpoint
+      description: Starts the OAuth 2.0 authorization-code flow. The user signs in with their NTHU Academic Information System account and consents to the requested scopes; the service redirects back to redirect_uri with a code. Probed 2026-08-30 without a client_id and returned 200 with the body `invalid_client`.
+      operationId: authorize
+      parameters:
+      - name: client_id
+        in: query
+        required: true
+        description: Client identifier issued by the Computer and Communication Center on approval.
+        schema:
+          type: string
+      - name: response_type
+        in: query
+        required: true
+        description: Must be `code`.
+        schema:
+          type: string
+          enum:
+          - code
+      - name: redirect_uri
+        in: query
+        required: true
+        description: Callback URL. The service requires an encrypted (HTTPS) callback.
+        schema:
+          type: string
+          format: uri
+      - name: scope
+        in: query
+        required: true
+        description: Space-separated list of requested identity fields.
+        schema:
+          type: string
+          example: userid name email inschool
+      - name: ui_locales
+        in: query
+        required: false
+        description: Consent-screen language.
+        schema:
+          type: string
+          enum:
+          - en-US
+          - zh-TW
+      - name: state
+        in: query
+        required: false
+        description: Opaque value returned unchanged on the callback.
+        schema:
+          type: string
+      responses:
+        '302':
+          description: Redirect to redirect_uri carrying `code` and `state`.
+        '200':
+          description: Error page. Returns the literal body `invalid_client` for an unknown client_id.
+          content:
+            text/html:
+              schema:
+                type: string
+  /token.php:
+    post:
+      tags:
+      - OAuth
+      summary: Token endpoint
+      description: Exchanges an authorization code for an access token, or refreshes one. Probed 2026-08-30 with no credentials and returned a JSON `invalid_client` error.
+      operationId: token
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - client_id
+              - client_secret
+              - grant_type
+              - redirect_uri
+              properties:
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+                  description: Secret key. Valid for one year; must be re-applied for on expiry.
+                grant_type:
+                  type: string
+                  enum:
+                  - authorization_code
+                  - refresh_token
+                redirect_uri:
+                  type: string
+                  format: uri
+                code:
+                  type: string
+                  description: The authorization code
+                  for grant_type=authorization_code.: null
+      responses:
+        '200':
+          description: Token issued.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '404':
+          description: Client authentication failed. The service returns HTTP 404 with an OAuth 2.0 error body, not the RFC 6749 401/400 — confirmed by live probe on 2026-08-30.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthError'
+  /resource.php:
+    get:
+      tags:
+      - OAuth
+      summary: Identity resource endpoint
+      description: Returns the approved identity fields for the authenticated account. Probed 2026-08-30 with no token and returned HTTP 401 with an empty body.
+      operationId: getResource
+      parameters:
+      - name: access_token
+        in: query
+        required: true
+        description: Access token issued by /token.php.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Identity payload. Field set is limited to the scopes approved for the client.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityResource'
+        '401':
+          description: Missing or invalid access token. Empty body.
+    post:
+      tags:
+      - OAuth
+      summary: Identity resource endpoint (POST)
+      operationId: postResource
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - access_token
+              properties:
+                access_token:
+                  type: string
+      responses:
+        '200':
+          description: Identity payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityResource'
+        '401':
+          description: Missing or invalid access token. Empty body.
+components:
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+          description: Lifetime in seconds.
+        token_type:
+          type: string
+          enum:
+          - Bearer
+        scope:
+          type: string
+          description: Space-separated granted scopes.
+        refresh_token:
+          type: string
+    OAuthError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: invalid_client
+        error_description:
+          type: string
+          example: The client_id is invalid
+    IdentityResource:
+      type: object
+      description: Fields returned by /resource.php. Which fields appear depends on the scopes the data-owning unit approved for the client under the OAuth service management policy.
+      properties:
+        success:
+          type: boolean
+          description: Whether authentication succeeded.
+        userid:
+          type: string
+          description: NTHU account identifier.
+        otp:
+          type: boolean
+          description: Whether the account has one-time-password enabled.
+        inschool:
+          type: boolean
+          description: True for currently employed, enrolled or reinstated accounts; false for departed, graduated, withdrawn or visiting-student accounts.
+        name:
+          type: string
+          description: Chinese name.
+        name_en:
+          type: string
+          description: English name.
+        email:
+          type: string
+          format: email
+        lmsid:
+          type: string
+          description: Learning-management-platform account identifier.
+        cid:
+          type: string
+          description: National identification number. Personally identifiable; release is gated on approval by the data-owning unit under Taiwan's Personal Data Protection Act.
+  securitySchemes:
+    nthuOAuth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://oauth.ccxp.nthu.edu.tw/v1.1/authorize.php
+          tokenUrl: https://oauth.ccxp.nthu.edu.tw/v1.1/token.php
+          refreshUrl: https://oauth.ccxp.nthu.edu.tw/v1.1/token.php
+          scopes:
+            userid: NTHU account identifier
+            name: Chinese and English name
+            email: Institutional email address
+            inschool: Current affiliation status
+            cid: National identification number
+            lmsid: Learning-management-platform account identifier

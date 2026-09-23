@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: NTHU Data Announcements API
   description: 由國立清華大學校內各單位資料所組成的公共資料 API。
@@ -130,59 +130,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    AnnouncementArticle:
-      properties:
-        title:
-          title: Title
-          description: 公告標題
-          nullable: true
-          type: string
-        link:
-          title: Link
-          description: 公告連結
-          nullable: true
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-        date:
-          title: Date
-          description: 公告日期 (YYYY-MM-DD)
-          nullable: true
-          type: string
-      type: object
-      required:
-      - title
-      - link
-      title: AnnouncementArticle
-      description: Individual announcement article.
-    AnnouncementLanguageOption:
-      type: string
-      enum:
-      - zh-tw
-      - en
-      title: AnnouncementLanguageOption
     AnnouncementDetail:
       properties:
         title:
@@ -219,3 +166,59 @@ components:
       - articles
       title: AnnouncementDetail
       description: Announcement detail with articles list.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    AnnouncementLanguageOption:
+      type: string
+      enum:
+      - zh-tw
+      - en
+      title: AnnouncementLanguageOption
+    AnnouncementArticle:
+      properties:
+        title:
+          title: Title
+          description: 公告標題
+          type:
+          - string
+          - 'null'
+        link:
+          title: Link
+          description: 公告連結
+          type:
+          - string
+          - 'null'
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        date:
+          title: Date
+          description: 公告日期 (YYYY-MM-DD)
+          type:
+          - string
+          - 'null'
+      type: object
+      required:
+      - title
+      - link
+      title: AnnouncementArticle
+      description: Individual announcement article.

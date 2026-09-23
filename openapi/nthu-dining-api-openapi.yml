@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: NTHU Data Announcements Dining API
+  title: NTHU Data Dining API
   description: 由國立清華大學校內各單位資料所組成的公共資料 API。
   version: 2.0.0
 servers:
@@ -16,7 +16,7 @@ paths:
       summary: Get Dining Data
       description: '取得所有餐廳及廠商資料。
 
-        資料來源：[總務處經營管理組](https://ddfm.site.nthu.edu.tw/p/404-1494-256455.php?Lang=zh-tw)'
+        資料來源：總務處經營管理組'
       operationId: getDiningData
       parameters:
       - name: building_name
@@ -101,45 +101,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    DiningBuilding:
-      properties:
-        building:
-          type: string
-          title: Building
-          description: 建築名稱
-        restaurants:
-          items:
-            $ref: '#/components/schemas/DiningRestaurant'
-          type: array
-          title: Restaurants
-          description: 餐廳資料
-      type: object
-      required:
-      - building
-      - restaurants
-      title: DiningBuilding
-      description: Building with restaurants.
     DiningRestaurant:
       properties:
         area:
@@ -149,8 +110,9 @@ components:
         image:
           title: Image
           description: 餐廳圖片
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
           maxLength: 2083
           minLength: 1
           format: uri
@@ -181,6 +143,24 @@ components:
       - schedule
       title: DiningRestaurant
       description: Restaurant information.
+    DiningBuilding:
+      properties:
+        building:
+          type: string
+          title: Building
+          description: 建築名稱
+        restaurants:
+          items:
+            $ref: '#/components/schemas/DiningRestaurant'
+          type: array
+          title: Restaurants
+          description: 餐廳資料
+      type: object
+      required:
+      - building
+      - restaurants
+      title: DiningBuilding
+      description: Building with restaurants.
     DiningScheduleName:
       type: string
       enum:
@@ -200,3 +180,24 @@ components:
       - 其他餐廳
       title: DiningBuildingName
       description: Dining building names.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
