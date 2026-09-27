@@ -101,6 +101,15 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    DiningScheduleName:
+      type: string
+      enum:
+      - today
+      - weekday
+      - saturday
+      - sunday
+      title: DiningScheduleName
+      description: Schedule names for dining queries.
     DiningRestaurant:
       properties:
         area:
@@ -161,15 +170,6 @@ components:
       - restaurants
       title: DiningBuilding
       description: Building with restaurants.
-    DiningScheduleName:
-      type: string
-      enum:
-      - today
-      - weekday
-      - saturday
-      - sunday
-      title: DiningScheduleName
-      description: Schedule names for dining queries.
     DiningBuildingName:
       type: string
       enum:

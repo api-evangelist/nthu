@@ -286,6 +286,75 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    CourseLanguage:
+      type: string
+      enum:
+      - 中
+      - 英
+      title: CourseLanguage
+      description: Course language options.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CourseQueryCondition:
+      items:
+        anyOf:
+        - $ref: '#/components/schemas/CourseQueryCondition'
+        - $ref: '#/components/schemas/CourseCondition'
+        - $ref: '#/components/schemas/CourseQueryOperation'
+      type: array
+      title: CourseQueryCondition
+      description: Complex course query condition.
+    CourseCondition:
+      properties:
+        row_field:
+          $ref: '#/components/schemas/CourseFieldName'
+          description: 搜尋的欄位名稱
+        matcher:
+          type: string
+          title: Matcher
+          description: 搜尋的值
+        regex_match:
+          type: boolean
+          title: Regex Match
+          description: 是否使用正則表達式
+          default: false
+      type: object
+      required:
+      - row_field
+      - matcher
+      title: CourseCondition
+      description: Single course query condition.
+    CourseFieldName:
+      type: string
+      enum:
+      - id
+      - chinese_title
+      - english_title
+      - credit
+      - size_limit
+      - freshman_reservation
+      - object
+      - ge_type
+      - language
+      - note
+      - suspend
+      - class_room_and_time
+      - teacher
+      - prerequisite
+      - limit_note
+      - expertise
+      - program
+      - no_extra_selection
+      - required_optional_note
+      title: CourseFieldName
+      description: Course field names for querying.
     CourseData:
       properties:
         id:
@@ -386,15 +455,6 @@ components:
       - required_optional_note
       title: CourseData
       description: Course data schema.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     CourseListName:
       type: string
       enum:
@@ -402,57 +462,13 @@ components:
       - xclass
       title: CourseListName
       description: Predefined course lists.
-    CourseFieldName:
+    CourseQueryOperation:
       type: string
       enum:
-      - id
-      - chinese_title
-      - english_title
-      - credit
-      - size_limit
-      - freshman_reservation
-      - object
-      - ge_type
-      - language
-      - note
-      - suspend
-      - class_room_and_time
-      - teacher
-      - prerequisite
-      - limit_note
-      - expertise
-      - program
-      - no_extra_selection
-      - required_optional_note
-      title: CourseFieldName
-      description: Course field names for querying.
-    CourseLanguage:
-      type: string
-      enum:
-      - 中
-      - 英
-      title: CourseLanguage
-      description: Course language options.
-    CourseCondition:
-      properties:
-        row_field:
-          $ref: '#/components/schemas/CourseFieldName'
-          description: 搜尋的欄位名稱
-        matcher:
-          type: string
-          title: Matcher
-          description: 搜尋的值
-        regex_match:
-          type: boolean
-          title: Regex Match
-          description: 是否使用正則表達式
-          default: false
-      type: object
-      required:
-      - row_field
-      - matcher
-      title: CourseCondition
-      description: Single course query condition.
+      - and
+      - or
+      title: CourseQueryOperation
+      description: Query operation type.
     ValidationError:
       properties:
         loc:
@@ -474,19 +490,3 @@ components:
       - msg
       - type
       title: ValidationError
-    CourseQueryOperation:
-      type: string
-      enum:
-      - and
-      - or
-      title: CourseQueryOperation
-      description: Query operation type.
-    CourseQueryCondition:
-      items:
-        anyOf:
-        - $ref: '#/components/schemas/CourseQueryCondition'
-        - $ref: '#/components/schemas/CourseCondition'
-        - $ref: '#/components/schemas/CourseQueryOperation'
-      type: array
-      title: CourseQueryCondition
-      description: Complex course query condition.

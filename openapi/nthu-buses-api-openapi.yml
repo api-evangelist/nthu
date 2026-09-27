@@ -241,31 +241,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    BusDetailedSchedule:
-      properties:
-        dep_info:
-          $ref: '#/components/schemas/BusSchedule'
-          description: 發車資訊
-        stops_time:
-          items:
-            $ref: '#/components/schemas/BusArriveTime'
-          type: array
-          title: Stops Time
-          description: 各站發車時間
-      type: object
-      required:
-      - dep_info
-      - stops_time
-      title: BusDetailedSchedule
-      description: Unified detailed bus schedule for both Main and Nanda campus.
-    BusType:
-      type: string
-      enum:
-      - route_83
-      - large-sized_bus
-      - middle-sized_bus
-      title: BusType
-      description: Bus vehicle type.
     BusInfo:
       properties:
         direction:
@@ -292,136 +267,6 @@ components:
       - routeEN
       title: BusInfo
       description: Bus route information.
-    BusStopsName:
-      type: string
-      enum:
-      - 北校門口
-      - 綜二館
-      - 楓林小徑
-      - 人社院&生科館
-      - 台積館
-      - 奕園停車場
-      - 教育學院大樓&南門停車場
-      - 南大校區校門口右側(食品路校牆邊)
-      title: BusStopsName
-      description: Bus stop names.
-    BusDirection:
-      type: string
-      enum:
-      - all
-      - up
-      - down
-      title: BusDirection
-      description: Bus direction.
-    BusRouteType:
-      type: string
-      enum:
-      - all
-      - main
-      - nanda
-      title: BusRouteType
-      description: Bus route type.
-    BusStopsQueryResult:
-      properties:
-        arrive_time:
-          type: string
-          title: Arrive Time
-          description: 預計到達時間
-        dep_time:
-          type: string
-          title: Dep Time
-          description: 發車時間
-        dep_stop:
-          type: string
-          title: Dep Stop
-          description: 發車站牌
-        description:
-          type: string
-          title: Description
-          description: 備註
-        bus_type:
-          $ref: '#/components/schemas/BusType'
-          description: 營運車輛類型
-      type: object
-      required:
-      - arrive_time
-      - dep_time
-      - dep_stop
-      - description
-      - bus_type
-      title: BusStopsQueryResult
-      description: Result of querying bus stops.
-    BusArriveTime:
-      properties:
-        stop:
-          type: string
-          title: Stop
-          description: 公車站牌名稱
-        arrive_time:
-          type: string
-          title: Arrive Time
-          description: 預計到達時間
-      type: object
-      required:
-      - stop
-      - arrive_time
-      title: BusArriveTime
-      description: Bus arrival time at a stop.
-    BusDayWithCurrent:
-      type: string
-      enum:
-      - weekday
-      - weekend
-      - current
-      title: BusDayWithCurrent
-      description: Day type including current day option.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    BusStopsInfo:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: 站牌中文名稱
-        name_en:
-          type: string
-          title: Name En
-          description: 站牌英文名稱
-        latitude:
-          type: string
-          title: Latitude
-          description: 站牌所在地緯度
-        longitude:
-          type: string
-          title: Longitude
-          description: 站牌所在地經度
-      type: object
-      required:
-      - name
-      - name_en
-      - latitude
-      - longitude
-      title: BusStopsInfo
-      description: Bus stop information.
     BusSchedule:
       properties:
         time:
@@ -452,3 +297,158 @@ components:
       - bus_type
       title: BusSchedule
       description: Unified bus schedule entry for both Main and Nanda campus.
+    BusArriveTime:
+      properties:
+        stop:
+          type: string
+          title: Stop
+          description: 公車站牌名稱
+        arrive_time:
+          type: string
+          title: Arrive Time
+          description: 預計到達時間
+      type: object
+      required:
+      - stop
+      - arrive_time
+      title: BusArriveTime
+      description: Bus arrival time at a stop.
+    BusRouteType:
+      type: string
+      enum:
+      - all
+      - main
+      - nanda
+      title: BusRouteType
+      description: Bus route type.
+    BusDayWithCurrent:
+      type: string
+      enum:
+      - weekday
+      - weekend
+      - current
+      title: BusDayWithCurrent
+      description: Day type including current day option.
+    BusStopsName:
+      type: string
+      enum:
+      - 北校門口
+      - 綜二館
+      - 楓林小徑
+      - 人社院&生科館
+      - 台積館
+      - 奕園停車場
+      - 教育學院大樓&南門停車場
+      - 南大校區校門口右側(食品路校牆邊)
+      title: BusStopsName
+      description: Bus stop names.
+    BusDetailedSchedule:
+      properties:
+        dep_info:
+          $ref: '#/components/schemas/BusSchedule'
+          description: 發車資訊
+        stops_time:
+          items:
+            $ref: '#/components/schemas/BusArriveTime'
+          type: array
+          title: Stops Time
+          description: 各站發車時間
+      type: object
+      required:
+      - dep_info
+      - stops_time
+      title: BusDetailedSchedule
+      description: Unified detailed bus schedule for both Main and Nanda campus.
+    BusStopsQueryResult:
+      properties:
+        arrive_time:
+          type: string
+          title: Arrive Time
+          description: 預計到達時間
+        dep_time:
+          type: string
+          title: Dep Time
+          description: 發車時間
+        dep_stop:
+          type: string
+          title: Dep Stop
+          description: 發車站牌
+        description:
+          type: string
+          title: Description
+          description: 備註
+        bus_type:
+          $ref: '#/components/schemas/BusType'
+          description: 營運車輛類型
+      type: object
+      required:
+      - arrive_time
+      - dep_time
+      - dep_stop
+      - description
+      - bus_type
+      title: BusStopsQueryResult
+      description: Result of querying bus stops.
+    BusStopsInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 站牌中文名稱
+        name_en:
+          type: string
+          title: Name En
+          description: 站牌英文名稱
+        latitude:
+          type: string
+          title: Latitude
+          description: 站牌所在地緯度
+        longitude:
+          type: string
+          title: Longitude
+          description: 站牌所在地經度
+      type: object
+      required:
+      - name
+      - name_en
+      - latitude
+      - longitude
+      title: BusStopsInfo
+      description: Bus stop information.
+    BusType:
+      type: string
+      enum:
+      - route_83
+      - large-sized_bus
+      - middle-sized_bus
+      title: BusType
+      description: Bus vehicle type.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    BusDirection:
+      type: string
+      enum:
+      - all
+      - up
+      - down
+      title: BusDirection
+      description: Bus direction.

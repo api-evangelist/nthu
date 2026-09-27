@@ -82,6 +82,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     LibraryRssImage:
       properties:
         url:
@@ -110,45 +119,6 @@ components:
       - title
       - link
       title: LibraryRssImage
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    LibrarySpace:
-      properties:
-        spacetype:
-          type: integer
-          title: Spacetype
-          description: 空間類型
-        spacetypename:
-          type: string
-          title: Spacetypename
-          description: 空間類型名稱
-        zoneid:
-          type: string
-          title: Zoneid
-          description: 區域代號
-        zonename:
-          type: string
-          title: Zonename
-          description: 區域名稱
-        count:
-          type: integer
-          title: Count
-          description: 空間剩餘數量
-      type: object
-      required:
-      - spacetype
-      - spacetypename
-      - zoneid
-      - zonename
-      - count
-      title: LibrarySpace
     LibraryRssItem:
       properties:
         guid:
@@ -206,27 +176,6 @@ components:
       - exhibit
       - branches
       title: LibraryRssType
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     LibraryLostAndFound:
       properties:
         序號:
@@ -252,3 +201,54 @@ components:
       - 拾獲地點
       - 描述
       title: LibraryLostAndFound
+    LibrarySpace:
+      properties:
+        spacetype:
+          type: integer
+          title: Spacetype
+          description: 空間類型
+        spacetypename:
+          type: string
+          title: Spacetypename
+          description: 空間類型名稱
+        zoneid:
+          type: string
+          title: Zoneid
+          description: 區域代號
+        zonename:
+          type: string
+          title: Zonename
+          description: 區域名稱
+        count:
+          type: integer
+          title: Count
+          description: 空間剩餘數量
+      type: object
+      required:
+      - spacetype
+      - spacetypename
+      - zoneid
+      - zonename
+      - count
+      title: LibrarySpace
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

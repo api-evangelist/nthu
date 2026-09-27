@@ -2,7 +2,7 @@
   "provider": "nthu",
   "sources": [
     "_original/nthu-data-api.yaml",
-    "nthu-o-auth-api-openapi.yml"
+    "nthu-oauth-api-openapi.yml"
   ],
   "outputs": [
     "nthu-announcements-api-openapi.yml",
@@ -14,12 +14,12 @@
     "nthu-libraries-api-openapi.yml",
     "nthu-locations-api-openapi.yml",
     "nthu-newsletters-api-openapi.yml",
-    "nthu-o-auth-api-openapi.yml"
+    "nthu-oauth-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [
-    "nthu-o-auth-api-openapi.yml: previously refined output kept for 4 operation(s) no archived document covers (e.g. /authorize.php get, /resource.php get, /resource.php post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+    "nthu-oauth-api-openapi.yml: previously refined output kept for 4 operation(s) no archived document covers (e.g. /authorize.php get, /resource.php get, /resource.php post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
   ],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",

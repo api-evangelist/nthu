@@ -65,6 +65,86 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    NewsletterInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 該電子報名稱
+        link:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Link
+          description: 該電子報網址
+        details:
+          additionalProperties: true
+          type: object
+          title: Details
+          description: 該電子報詳細資訊
+        articles:
+          items:
+            $ref: '#/components/schemas/NewsletterArticle'
+          type: array
+          title: Articles
+          description: 該電子報文章列表
+      type: object
+      required:
+      - name
+      - link
+      - details
+      - articles
+      title: NewsletterInfo
+    NewsletterArticle:
+      properties:
+        title:
+          title: Title
+          description: 電子報標題
+          type:
+          - string
+          - 'null'
+        link:
+          title: Link
+          description: 電子報網址
+          type:
+          - string
+          - 'null'
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        date:
+          title: Date
+          description: 發布日期
+          type:
+          - string
+          - 'null'
+      type: object
+      required:
+      - title
+      - link
+      title: NewsletterArticle
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     NewsletterName:
       type: string
       enum:
@@ -108,83 +188,3 @@ components:
       - 清華簡訊
       - 計中-教育訓練
       title: NewsletterName
-    NewsletterArticle:
-      properties:
-        title:
-          title: Title
-          description: 電子報標題
-          type:
-          - string
-          - 'null'
-        link:
-          title: Link
-          description: 電子報網址
-          type:
-          - string
-          - 'null'
-          maxLength: 2083
-          minLength: 1
-          format: uri
-        date:
-          title: Date
-          description: 發布日期
-          type:
-          - string
-          - 'null'
-      type: object
-      required:
-      - title
-      - link
-      title: NewsletterArticle
-    NewsletterInfo:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: 該電子報名稱
-        link:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Link
-          description: 該電子報網址
-        details:
-          additionalProperties: true
-          type: object
-          title: Details
-          description: 該電子報詳細資訊
-        articles:
-          items:
-            $ref: '#/components/schemas/NewsletterArticle'
-          type: array
-          title: Articles
-          description: 該電子報文章列表
-      type: object
-      required:
-      - name
-      - link
-      - details
-      - articles
-      title: NewsletterInfo
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError

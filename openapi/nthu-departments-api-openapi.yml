@@ -68,15 +68,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     DepartmentContact:
       properties:
         extension:
@@ -109,6 +100,15 @@ components:
           format: uri
       type: object
       title: DepartmentContact
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     DepartmentPerson:
       properties:
         name:
@@ -146,6 +146,44 @@ components:
       - extension
       - email
       title: DepartmentPerson
+    DepartmentDetails:
+      properties:
+        departments:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Departments
+        contact:
+          $ref: '#/components/schemas/DepartmentContact'
+        people:
+          items:
+            $ref: '#/components/schemas/DepartmentPerson'
+          type: array
+          title: People
+      type: object
+      title: DepartmentDetails
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     Department:
       properties:
         index:
@@ -178,41 +216,3 @@ components:
       - index
       - name
       title: Department
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    DepartmentDetails:
-      properties:
-        departments:
-          items:
-            additionalProperties: true
-            type: object
-          type: array
-          title: Departments
-        contact:
-          $ref: '#/components/schemas/DepartmentContact'
-        people:
-          items:
-            $ref: '#/components/schemas/DepartmentPerson'
-          type: array
-          title: People
-      type: object
-      title: DepartmentDetails
