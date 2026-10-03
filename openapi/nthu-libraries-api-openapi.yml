@@ -91,34 +91,31 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    LibraryRssImage:
+    LibraryLostAndFound:
       properties:
-        url:
+        序號:
           type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Url
-          description: 圖片網址
-        title:
+          title: 序號
+          description: 序號
+        拾獲時間:
           type: string
-          title: Title
-          description: 圖片標題
-        link:
-          title: Link
-          description: 連結
-          type:
-          - string
-          - 'null'
-          maxLength: 2083
-          minLength: 1
-          format: uri
+          title: 拾獲時間
+          description: 拾獲日期
+        拾獲地點:
+          type: string
+          title: 拾獲地點
+          description: 拾獲地點
+        描述:
+          type: string
+          title: 描述
+          description: 物品描述
       type: object
       required:
-      - url
-      - title
-      - link
-      title: LibraryRssImage
+      - 序號
+      - 拾獲時間
+      - 拾獲地點
+      - 描述
+      title: LibraryLostAndFound
     LibraryRssItem:
       properties:
         guid:
@@ -176,31 +173,6 @@ components:
       - exhibit
       - branches
       title: LibraryRssType
-    LibraryLostAndFound:
-      properties:
-        序號:
-          type: string
-          title: 序號
-          description: 序號
-        拾獲時間:
-          type: string
-          title: 拾獲時間
-          description: 拾獲日期
-        拾獲地點:
-          type: string
-          title: 拾獲地點
-          description: 拾獲地點
-        描述:
-          type: string
-          title: 描述
-          description: 物品描述
-      type: object
-      required:
-      - 序號
-      - 拾獲時間
-      - 拾獲地點
-      - 描述
-      title: LibraryLostAndFound
     LibrarySpace:
       properties:
         spacetype:
@@ -252,3 +224,31 @@ components:
       - msg
       - type
       title: ValidationError
+    LibraryRssImage:
+      properties:
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+          description: 圖片網址
+        title:
+          type: string
+          title: Title
+          description: 圖片標題
+        link:
+          title: Link
+          description: 連結
+          type:
+          - string
+          - 'null'
+          maxLength: 2083
+          minLength: 1
+          format: uri
+      type: object
+      required:
+      - url
+      - title
+      - link
+      title: LibraryRssImage

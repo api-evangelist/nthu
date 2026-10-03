@@ -241,32 +241,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    BusInfo:
-      properties:
-        direction:
-          type: string
-          title: Direction
-          description: 方向
-        duration:
-          type: string
-          title: Duration
-          description: 時刻表有效期間
-        route:
-          type: string
-          title: Route
-          description: 路線
-        routeEN:
-          type: string
-          title: Routeen
-          description: 英文路線
-      type: object
-      required:
-      - direction
-      - duration
-      - route
-      - routeEN
-      title: BusInfo
-      description: Bus route information.
     BusSchedule:
       properties:
         time:
@@ -297,6 +271,14 @@ components:
       - bus_type
       title: BusSchedule
       description: Unified bus schedule entry for both Main and Nanda campus.
+    BusDirection:
+      type: string
+      enum:
+      - all
+      - up
+      - down
+      title: BusDirection
+      description: Bus direction.
     BusArriveTime:
       properties:
         stop:
@@ -313,14 +295,32 @@ components:
       - arrive_time
       title: BusArriveTime
       description: Bus arrival time at a stop.
-    BusRouteType:
-      type: string
-      enum:
-      - all
-      - main
-      - nanda
-      title: BusRouteType
-      description: Bus route type.
+    BusStopsInfo:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: 站牌中文名稱
+        name_en:
+          type: string
+          title: Name En
+          description: 站牌英文名稱
+        latitude:
+          type: string
+          title: Latitude
+          description: 站牌所在地緯度
+        longitude:
+          type: string
+          title: Longitude
+          description: 站牌所在地經度
+      type: object
+      required:
+      - name
+      - name_en
+      - latitude
+      - longitude
+      title: BusStopsInfo
+      description: Bus stop information.
     BusDayWithCurrent:
       type: string
       enum:
@@ -329,36 +329,14 @@ components:
       - current
       title: BusDayWithCurrent
       description: Day type including current day option.
-    BusStopsName:
+    BusRouteType:
       type: string
       enum:
-      - 北校門口
-      - 綜二館
-      - 楓林小徑
-      - 人社院&生科館
-      - 台積館
-      - 奕園停車場
-      - 教育學院大樓&南門停車場
-      - 南大校區校門口右側(食品路校牆邊)
-      title: BusStopsName
-      description: Bus stop names.
-    BusDetailedSchedule:
-      properties:
-        dep_info:
-          $ref: '#/components/schemas/BusSchedule'
-          description: 發車資訊
-        stops_time:
-          items:
-            $ref: '#/components/schemas/BusArriveTime'
-          type: array
-          title: Stops Time
-          description: 各站發車時間
-      type: object
-      required:
-      - dep_info
-      - stops_time
-      title: BusDetailedSchedule
-      description: Unified detailed bus schedule for both Main and Nanda campus.
+      - all
+      - main
+      - nanda
+      title: BusRouteType
+      description: Bus route type.
     BusStopsQueryResult:
       properties:
         arrive_time:
@@ -389,32 +367,36 @@ components:
       - bus_type
       title: BusStopsQueryResult
       description: Result of querying bus stops.
-    BusStopsInfo:
+    BusDetailedSchedule:
       properties:
-        name:
-          type: string
-          title: Name
-          description: 站牌中文名稱
-        name_en:
-          type: string
-          title: Name En
-          description: 站牌英文名稱
-        latitude:
-          type: string
-          title: Latitude
-          description: 站牌所在地緯度
-        longitude:
-          type: string
-          title: Longitude
-          description: 站牌所在地經度
+        dep_info:
+          $ref: '#/components/schemas/BusSchedule'
+          description: 發車資訊
+        stops_time:
+          items:
+            $ref: '#/components/schemas/BusArriveTime'
+          type: array
+          title: Stops Time
+          description: 各站發車時間
       type: object
       required:
-      - name
-      - name_en
-      - latitude
-      - longitude
-      title: BusStopsInfo
-      description: Bus stop information.
+      - dep_info
+      - stops_time
+      title: BusDetailedSchedule
+      description: Unified detailed bus schedule for both Main and Nanda campus.
+    BusStopsName:
+      type: string
+      enum:
+      - 北校門口
+      - 綜二館
+      - 楓林小徑
+      - 人社院&生科館
+      - 台積館
+      - 奕園停車場
+      - 教育學院大樓&南門停車場
+      - 南大校區校門口右側(食品路校牆邊)
+      title: BusStopsName
+      description: Bus stop names.
     BusType:
       type: string
       enum:
@@ -423,6 +405,32 @@ components:
       - middle-sized_bus
       title: BusType
       description: Bus vehicle type.
+    BusInfo:
+      properties:
+        direction:
+          type: string
+          title: Direction
+          description: 方向
+        duration:
+          type: string
+          title: Duration
+          description: 時刻表有效期間
+        route:
+          type: string
+          title: Route
+          description: 路線
+        routeEN:
+          type: string
+          title: Routeen
+          description: 英文路線
+      type: object
+      required:
+      - direction
+      - duration
+      - route
+      - routeEN
+      title: BusInfo
+      description: Bus route information.
     ValidationError:
       properties:
         loc:
@@ -444,11 +452,3 @@ components:
       - msg
       - type
       title: ValidationError
-    BusDirection:
-      type: string
-      enum:
-      - all
-      - up
-      - down
-      title: BusDirection
-      description: Bus direction.

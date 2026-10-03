@@ -286,31 +286,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    CourseLanguage:
-      type: string
-      enum:
-      - 中
-      - 英
-      title: CourseLanguage
-      description: Course language options.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    CourseQueryCondition:
-      items:
-        anyOf:
-        - $ref: '#/components/schemas/CourseQueryCondition'
-        - $ref: '#/components/schemas/CourseCondition'
-        - $ref: '#/components/schemas/CourseQueryOperation'
-      type: array
-      title: CourseQueryCondition
-      description: Complex course query condition.
     CourseCondition:
       properties:
         row_field:
@@ -331,30 +306,22 @@ components:
       - matcher
       title: CourseCondition
       description: Single course query condition.
-    CourseFieldName:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CourseQueryOperation:
       type: string
       enum:
-      - id
-      - chinese_title
-      - english_title
-      - credit
-      - size_limit
-      - freshman_reservation
-      - object
-      - ge_type
-      - language
-      - note
-      - suspend
-      - class_room_and_time
-      - teacher
-      - prerequisite
-      - limit_note
-      - expertise
-      - program
-      - no_extra_selection
-      - required_optional_note
-      title: CourseFieldName
-      description: Course field names for querying.
+      - and
+      - or
+      title: CourseQueryOperation
+      description: Query operation type.
     CourseData:
       properties:
         id:
@@ -455,20 +422,37 @@ components:
       - required_optional_note
       title: CourseData
       description: Course data schema.
-    CourseListName:
+    CourseLanguage:
       type: string
       enum:
-      - microcredits
-      - xclass
-      title: CourseListName
-      description: Predefined course lists.
-    CourseQueryOperation:
+      - 中
+      - 英
+      title: CourseLanguage
+      description: Course language options.
+    CourseFieldName:
       type: string
       enum:
-      - and
-      - or
-      title: CourseQueryOperation
-      description: Query operation type.
+      - id
+      - chinese_title
+      - english_title
+      - credit
+      - size_limit
+      - freshman_reservation
+      - object
+      - ge_type
+      - language
+      - note
+      - suspend
+      - class_room_and_time
+      - teacher
+      - prerequisite
+      - limit_note
+      - expertise
+      - program
+      - no_extra_selection
+      - required_optional_note
+      title: CourseFieldName
+      description: Course field names for querying.
     ValidationError:
       properties:
         loc:
@@ -490,3 +474,19 @@ components:
       - msg
       - type
       title: ValidationError
+    CourseQueryCondition:
+      items:
+        anyOf:
+        - $ref: '#/components/schemas/CourseQueryCondition'
+        - $ref: '#/components/schemas/CourseCondition'
+        - $ref: '#/components/schemas/CourseQueryOperation'
+      type: array
+      title: CourseQueryCondition
+      description: Complex course query condition.
+    CourseListName:
+      type: string
+      enum:
+      - microcredits
+      - xclass
+      title: CourseListName
+      description: Predefined course lists.
