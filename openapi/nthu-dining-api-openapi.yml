@@ -92,24 +92,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    DiningScheduleName:
-      type: string
-      enum:
-      - today
-      - weekday
-      - saturday
-      - sunday
-      title: DiningScheduleName
-      description: Schedule names for dining queries.
     DiningRestaurant:
       properties:
         area:
@@ -152,6 +134,25 @@ components:
       - schedule
       title: DiningRestaurant
       description: Restaurant information.
+    DiningBuildingName:
+      type: string
+      enum:
+      - 小吃部
+      - 水木生活中心
+      - 風雲樓
+      - 綜合教學大樓(南大校區)
+      - 其他餐廳
+      title: DiningBuildingName
+      description: Dining building names.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     DiningBuilding:
       properties:
         building:
@@ -170,16 +171,6 @@ components:
       - restaurants
       title: DiningBuilding
       description: Building with restaurants.
-    DiningBuildingName:
-      type: string
-      enum:
-      - 小吃部
-      - 水木生活中心
-      - 風雲樓
-      - 綜合教學大樓(南大校區)
-      - 其他餐廳
-      title: DiningBuildingName
-      description: Dining building names.
     ValidationError:
       properties:
         loc:
@@ -201,3 +192,12 @@ components:
       - msg
       - type
       title: ValidationError
+    DiningScheduleName:
+      type: string
+      enum:
+      - today
+      - weekday
+      - saturday
+      - sunday
+      title: DiningScheduleName
+      description: Schedule names for dining queries.

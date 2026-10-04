@@ -286,26 +286,20 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    CourseCondition:
-      properties:
-        row_field:
-          $ref: '#/components/schemas/CourseFieldName'
-          description: 搜尋的欄位名稱
-        matcher:
-          type: string
-          title: Matcher
-          description: 搜尋的值
-        regex_match:
-          type: boolean
-          title: Regex Match
-          description: 是否使用正則表達式
-          default: false
-      type: object
-      required:
-      - row_field
-      - matcher
-      title: CourseCondition
-      description: Single course query condition.
+    CourseLanguage:
+      type: string
+      enum:
+      - 中
+      - 英
+      title: CourseLanguage
+      description: Course language options.
+    CourseListName:
+      type: string
+      enum:
+      - microcredits
+      - xclass
+      title: CourseListName
+      description: Predefined course lists.
     HTTPValidationError:
       properties:
         detail:
@@ -315,6 +309,15 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    CourseQueryCondition:
+      items:
+        anyOf:
+        - $ref: '#/components/schemas/CourseQueryCondition'
+        - $ref: '#/components/schemas/CourseCondition'
+        - $ref: '#/components/schemas/CourseQueryOperation'
+      type: array
+      title: CourseQueryCondition
+      description: Complex course query condition.
     CourseQueryOperation:
       type: string
       enum:
@@ -422,13 +425,27 @@ components:
       - required_optional_note
       title: CourseData
       description: Course data schema.
-    CourseLanguage:
-      type: string
-      enum:
-      - 中
-      - 英
-      title: CourseLanguage
-      description: Course language options.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     CourseFieldName:
       type: string
       enum:
@@ -453,40 +470,23 @@ components:
       - required_optional_note
       title: CourseFieldName
       description: Course field names for querying.
-    ValidationError:
+    CourseCondition:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        row_field:
+          $ref: '#/components/schemas/CourseFieldName'
+          description: 搜尋的欄位名稱
+        matcher:
           type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Matcher
+          description: 搜尋的值
+        regex_match:
+          type: boolean
+          title: Regex Match
+          description: 是否使用正則表達式
+          default: false
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    CourseQueryCondition:
-      items:
-        anyOf:
-        - $ref: '#/components/schemas/CourseQueryCondition'
-        - $ref: '#/components/schemas/CourseCondition'
-        - $ref: '#/components/schemas/CourseQueryOperation'
-      type: array
-      title: CourseQueryCondition
-      description: Complex course query condition.
-    CourseListName:
-      type: string
-      enum:
-      - microcredits
-      - xclass
-      title: CourseListName
-      description: Predefined course lists.
+      - row_field
+      - matcher
+      title: CourseCondition
+      description: Single course query condition.

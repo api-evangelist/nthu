@@ -82,6 +82,64 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    LibrarySpace:
+      properties:
+        spacetype:
+          type: integer
+          title: Spacetype
+          description: 空間類型
+        spacetypename:
+          type: string
+          title: Spacetypename
+          description: 空間類型名稱
+        zoneid:
+          type: string
+          title: Zoneid
+          description: 區域代號
+        zonename:
+          type: string
+          title: Zonename
+          description: 區域名稱
+        count:
+          type: integer
+          title: Count
+          description: 空間剩餘數量
+      type: object
+      required:
+      - spacetype
+      - spacetypename
+      - zoneid
+      - zonename
+      - count
+      title: LibrarySpace
+    LibraryRssImage:
+      properties:
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+          description: 圖片網址
+        title:
+          type: string
+          title: Title
+          description: 圖片標題
+        link:
+          title: Link
+          description: 連結
+          type:
+          - string
+          - 'null'
+          maxLength: 2083
+          minLength: 1
+          format: uri
+      type: object
+      required:
+      - url
+      - title
+      - link
+      title: LibraryRssImage
     HTTPValidationError:
       properties:
         detail:
@@ -173,36 +231,6 @@ components:
       - exhibit
       - branches
       title: LibraryRssType
-    LibrarySpace:
-      properties:
-        spacetype:
-          type: integer
-          title: Spacetype
-          description: 空間類型
-        spacetypename:
-          type: string
-          title: Spacetypename
-          description: 空間類型名稱
-        zoneid:
-          type: string
-          title: Zoneid
-          description: 區域代號
-        zonename:
-          type: string
-          title: Zonename
-          description: 區域名稱
-        count:
-          type: integer
-          title: Count
-          description: 空間剩餘數量
-      type: object
-      required:
-      - spacetype
-      - spacetypename
-      - zoneid
-      - zonename
-      - count
-      title: LibrarySpace
     ValidationError:
       properties:
         loc:
@@ -224,31 +252,3 @@ components:
       - msg
       - type
       title: ValidationError
-    LibraryRssImage:
-      properties:
-        url:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Url
-          description: 圖片網址
-        title:
-          type: string
-          title: Title
-          description: 圖片標題
-        link:
-          title: Link
-          description: 連結
-          type:
-          - string
-          - 'null'
-          maxLength: 2083
-          minLength: 1
-          format: uri
-      type: object
-      required:
-      - url
-      - title
-      - link
-      title: LibraryRssImage

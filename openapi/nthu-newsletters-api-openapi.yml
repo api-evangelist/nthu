@@ -56,43 +56,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    NewsletterArticle:
-      properties:
-        title:
-          title: Title
-          description: 電子報標題
-          type:
-          - string
-          - 'null'
-        link:
-          title: Link
-          description: 電子報網址
-          type:
-          - string
-          - 'null'
-          maxLength: 2083
-          minLength: 1
-          format: uri
-        date:
-          title: Date
-          description: 發布日期
-          type:
-          - string
-          - 'null'
-      type: object
-      required:
-      - title
-      - link
-      title: NewsletterArticle
     NewsletterName:
       type: string
       enum:
@@ -167,6 +130,43 @@ components:
       - details
       - articles
       title: NewsletterInfo
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    NewsletterArticle:
+      properties:
+        title:
+          title: Title
+          description: 電子報標題
+          type:
+          - string
+          - 'null'
+        link:
+          title: Link
+          description: 電子報網址
+          type:
+          - string
+          - 'null'
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        date:
+          title: Date
+          description: 發布日期
+          type:
+          - string
+          - 'null'
+      type: object
+      required:
+      - title
+      - link
+      title: NewsletterArticle
     ValidationError:
       properties:
         loc:

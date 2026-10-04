@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: NTHU Academic Information System 2.0 Service O Auth … OAuth…
+  title: NTHU Academic Information System 2.0 Service O Auth … ……
   description: Institution-operated OAuth 2.0 authorization and identity service run by National Tsing Hua University's Computer and Communication Center (計算機與通訊中心).
   version: '1.1'
   termsOfService: https://law.site.nthu.edu.tw/p/406-1326-197509,r6923.php
@@ -211,6 +211,15 @@ components:
         cid:
           type: string
           description: National identification number. Personally identifiable; release is gated on approval by the data-owning unit under Taiwan's Personal Data Protection Act.
+    OAuthError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: invalid_client
+        error_description:
+          type: string
+          example: The client_id is invalid
     TokenResponse:
       type: object
       properties:
@@ -228,15 +237,6 @@ components:
           description: Space-separated granted scopes.
         refresh_token:
           type: string
-    OAuthError:
-      type: object
-      properties:
-        error:
-          type: string
-          example: invalid_client
-        error_description:
-          type: string
-          example: The client_id is invalid
   securitySchemes:
     nthuOAuth:
       type: oauth2

@@ -130,6 +130,35 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    AnnouncementArticle:
+      properties:
+        title:
+          title: Title
+          description: 公告標題
+          type:
+          - string
+          - 'null'
+        link:
+          title: Link
+          description: 公告連結
+          type:
+          - string
+          - 'null'
+          maxLength: 2083
+          minLength: 1
+          format: uri
+        date:
+          title: Date
+          description: 公告日期 (YYYY-MM-DD)
+          type:
+          - string
+          - 'null'
+      type: object
+      required:
+      - title
+      - link
+      title: AnnouncementArticle
+      description: Individual announcement article.
     AnnouncementLanguageOption:
       type: string
       enum:
@@ -193,32 +222,3 @@ components:
       - msg
       - type
       title: ValidationError
-    AnnouncementArticle:
-      properties:
-        title:
-          title: Title
-          description: 公告標題
-          type:
-          - string
-          - 'null'
-        link:
-          title: Link
-          description: 公告連結
-          type:
-          - string
-          - 'null'
-          maxLength: 2083
-          minLength: 1
-          format: uri
-        date:
-          title: Date
-          description: 公告日期 (YYYY-MM-DD)
-          type:
-          - string
-          - 'null'
-      type: object
-      required:
-      - title
-      - link
-      title: AnnouncementArticle
-      description: Individual announcement article.
