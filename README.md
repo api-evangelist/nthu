@@ -1,4 +1,4 @@
-# National Tsing Hua University (nthu)
+# National Tsing Hua University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,60 +64,193 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-National Tsing Hua University (NTHU) is a national public research university in Hsinchu, Taiwan, ranked #210 in the QS World University Rankings 2025. This repository catalogs NTHU's public developer/API footprint as an [APIs.json](http://apisjson.org) provider profile. NTHU has no official institution-wide developer portal; its confirmed public API surface centers on the community-maintained **NTHU Data API**.
+National Tsing Hua University (NTHU) is a national public research university in Hsinchu, Taiwan, founded in Beijing in 1911 and re-established in Taiwan in 1956. It has no central developer portal, no API catalog and no institution-wide API program, and this profile is deliberately small because the honest footprint is small. It does, however, hold something most of this cohort does not: one genuinely institution-operated, institution-governed API. NTHU's Computer and Communication Center runs an OAuth 2.0 authorization and identity service at oauth.ccxp.nthu.edu.tw, fronting the Academic Information System (CCXP), documented by the university in its own interface manual, governed by a regulation passed by the Computer and Communication Committee in December 2020, and carrying a published scheduled repeal date of 2027-07-31. It is not self-service — a request needs a unit head's signature, Computer and Communication Center review, and sign-off from every unit that owns a requested data field — but it is NTHU's own engineering on NTHU's own host. Everything else programmable that carries NTHU's name is operated by someone else. The widely cited NTHU Data API, a live FastAPI service with an OpenAPI 3.1.0 description and 22 keyless public paths over campus announcements, buses, courses, departments, dining, energy, library spaces, locations and newsletters, is built and hosted by the NTHU Student Association on nthusa.tw, not by the university on nthu.edu.tw. The research portal at scholars.nthu.edu.tw is an Ex Libris Esploro tenant, and the library discovery service is an Ex Libris Primo VE tenant shared through the University System of Taiwan consortium. Those are real institutional facts and they are recorded as tenant relationships, but they are not NTHU's contracts and are not scored as such.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/nthu/refs/heads/main/apis.yml
-- Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=nthu-api-evangelist&utm_content=repo
+**Areas:** Education · Higher Education · University · Taiwan · Public Research University · Identity · Authentication · Open Data · Campus · Course Catalog · Research Repository · Library
 
-## Type
+## National Tsing Hua University on APIs.io
 
-- Index / Consumer / 3rd-Party
+Everything profiled for National Tsing Hua University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/nthu/](https://apis.io/providers/nthu/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (4)
 
-Education, Higher Education, University, Taiwan, Open Data, Campus
+- [NTHU Data API](https://apis.io/apis/nthu/nthu-data-api/) — A live, keyless, MIT-licensed FastAPI service publishing 22 paths over NTHU campus data — announcements by unit, campus bus routes and schedules, the course…
+- [NTHU Research Portal (Esploro tenant)](https://apis.io/apis/nthu/nthu-research-portal/) — NTHU's institutional research repository and researcher-profile portal, running on Ex Libris Esploro. The former institutional repository host…
+- [NTHU Library Discovery (Primo VE tenant)](https://apis.io/apis/nthu/nthu-library-discovery/) — NTHU Library's discovery service on Ex Libris Primo VE. Notable for what it reveals rather than what it offers: its sign-in link declares…
+- [National Tsing Hua University O Auth API](https://apis.io/apis/nthu/nthu-oauth-api/) — Authorization-code flow against NTHU Academic Information System accounts.
 
-## APIs
+### Published properties
 
-- **NTHU Data API** — Public REST API (v2.0.0, FastAPI/OpenAPI) aggregating campus data: announcements, buses, courses, departments, dining, energy usage, libraries, locations, and newsletters.
-  - Docs: https://api.nthusa.tw/docs
-  - OpenAPI: https://api.nthusa.tw/openapi.json
-  - Source: https://github.com/NTHU-SA/NTHU-Data-API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Plans
+#### Agentic access (1)
 
-- [plans/nthu-plans-pricing.yml](plans/nthu-plans-pricing.yml)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Rate Limits
+- [Nthu Agentic Access](https://apis.io/agentic-access/nthu/nthu-agentic-access/)
 
-- [rate-limits/nthu-rate-limits.yml](rate-limits/nthu-rate-limits.yml)
+#### JSON Schema (15)
 
-## FinOps
+The data models the API reads and writes.
 
-- [finops/nthu-finops.yml](finops/nthu-finops.yml)
+- [AnnouncementDetail](https://apis.io/schemas/nthu/nthu-announcement/)
+- [AnnouncementDetail](https://apis.io/schemas/nthu/nthu-announcement-detail/)
+- [BusInfo](https://apis.io/schemas/nthu/nthu-bus/)
+- [BusSchedule](https://apis.io/schemas/nthu/nthu-bus-schedule/)
+- [BusStopsQueryResult](https://apis.io/schemas/nthu/nthu-bus-stops-query-result/)
+- [CourseData](https://apis.io/schemas/nthu/nthu-course/)
+- [CourseData](https://apis.io/schemas/nthu/nthu-course-data/)
+- [Department](https://apis.io/schemas/nthu/nthu-department/)
+- [DiningRestaurant](https://apis.io/schemas/nthu/nthu-dining-restaurant/)
+- [EnergyElectricityInfo](https://apis.io/schemas/nthu/nthu-energy/)
+- [IdentityResource](https://apis.io/schemas/nthu/nthu-identity-resource/)
+- [LibraryRssItem](https://apis.io/schemas/nthu/nthu-library-rss-item/)
+- [LibrarySpace](https://apis.io/schemas/nthu/nthu-library-space/)
+- [LocationDetail](https://apis.io/schemas/nthu/nthu-location/)
+- [TokenResponse](https://apis.io/schemas/nthu/nthu-token-response/)
 
-## Timestamps
+#### JSON Structure (5)
 
-- Created: 2026-06-03
-- Modified: 2026-06-03
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [Nthu Bus Structure](https://apis.io/json-structure/nthu/nthu-bus-structure/)
+- [Nthu Course Structure](https://apis.io/json-structure/nthu/nthu-course-structure/)
+- [Nthu Energy Structure](https://apis.io/json-structure/nthu/nthu-energy-structure/)
+- [Nthu Library Space Structure](https://apis.io/json-structure/nthu/nthu-library-space-structure/)
+- [Nthu Location Structure](https://apis.io/json-structure/nthu/nthu-location-structure/)
 
-- Website: https://www.nthu.edu.tw/
-- GitHub: https://github.com/NTHU-SA
-- LinkedIn: https://www.linkedin.com/school/national-tsing-hua-university/
-- Plans: plans/nthu-plans-pricing.yml
-- Rate Limits: rate-limits/nthu-rate-limits.yml
-- FinOps: finops/nthu-finops.yml
-- Review: review.yml
+#### JSON-LD (1)
 
-## Notes
+Linked-data contexts for the provider's vocabulary.
 
-- The NTHU Data API is community/student-maintained (NTHU-SA, "NTHUSA 32nd"), not an official university service; endpoints were verified live (200) at /docs and /openapi.json on 2026-06-03.
-- No official institution-wide developer portal, open-data portal, or documented authentication/SSO API was confirmed for NTHU.
-- The institutional repository host (nthur.lib.nthu.edu.tw) did not resolve over TLS during review and is not cataloged as an API.
-- No endpoints were fabricated; only verified URLs are recorded.
+- [Nthu Context](https://apis.io/jsonld/nthu/nthu-context/)
 
-## Maintainers
+#### Vocabulary (1)
 
-- Kin Lane — kin@apievangelist.com
+The provider's domain terms, defined.
+
+- [NTHU Data API Vocabulary](https://apis.io/vocabularies/nthu/nthu-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Nthu Getbusroutedata Example](https://apis.io/examples/nthu/nthu-getBusRouteData-example/)
+- [Nthu Searchcoursesbycondition_Request Example](https://apis.io/examples/nthu/nthu-searchCoursesByCondition_request-example/)
+
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [NTHU Data Announcements API](https://apis.io/collections/nthu/open-nthu-announcements-api/)
+- [NTHU Data Announcements Buses API](https://apis.io/collections/nthu/open-nthu-buses-api/)
+- [NTHU Data Announcements Courses API](https://apis.io/collections/nthu/open-nthu-courses-api/)
+- [NTHU Data Announcements Departments API](https://apis.io/collections/nthu/open-nthu-departments-api/)
+- [NTHU Data Announcements Dining API](https://apis.io/collections/nthu/open-nthu-dining-api/)
+- [NTHU Data Announcements Energy API](https://apis.io/collections/nthu/open-nthu-energy-api/)
+- [NTHU Data Announcements Libraries API](https://apis.io/collections/nthu/open-nthu-libraries-api/)
+- [NTHU Data Announcements Locations API](https://apis.io/collections/nthu/open-nthu-locations-api/)
+- [NTHU Data Announcements Newsletters API](https://apis.io/collections/nthu/open-nthu-newsletters-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [National Tsing Hua University — jsonschema rules](https://apis.io/rules/nthu/nthu-jsonschema-spectral-rules/)
+- [National Tsing Hua University API Rules](https://apis.io/rules/nthu/nthu-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Nthu Authentication](https://apis.io/security/nthu/nthu-authentication/)
+- [Nthu Domain Security](https://apis.io/security/nthu/nthu-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Nthu Scopes](https://apis.io/scopes/nthu/nthu-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Nthu Plans Pricing](https://apis.io/plans/nthu/nthu-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Nthu Rate Limits](https://apis.io/rate-limits/nthu/nthu-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Nthu Finops](https://apis.io/finops/nthu/nthu-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.nthu.edu.tw/)
+- [Documentation](https://oauth.ccxp.nthu.edu.tw/v1.1/doc/)
+- [API reference](https://api.nthusa.tw/docs)
+- [Support](https://ccc.site.nthu.edu.tw/)
+- [Terms of service](https://law.site.nthu.edu.tw/p/406-1326-197509,r6923.php)
+
+## API Evangelist rating
+
+**Kin Score 35.0** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 55.5 |
+| Contract governance | 18.2 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 15.8 |
+
+**Agent readiness 25.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 30.4** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/nthu/](https://apis.io/providers/nthu/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for National Tsing Hua University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/nthu/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
